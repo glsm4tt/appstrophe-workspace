@@ -1,0 +1,7 @@
+div.article_page {
+    @apply p-4 pt-12 md:pt-16 md:px-16
+}
+
+div.article_page .article_page__body {
+    @apply mt-8
+}

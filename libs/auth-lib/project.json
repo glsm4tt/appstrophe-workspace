@@ -1,0 +1,22 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/auth-lib/src",
+  "prefix": "appstroph-workspace",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/auth-lib"],
+      "options": {
+        "jestConfig": "libs/auth-lib/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/auth-lib/**/*.ts", "libs/auth-lib/**/*.html"]
+      }
+    }
+  },
+  "tags": []
+}

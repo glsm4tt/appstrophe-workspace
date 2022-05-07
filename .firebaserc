@@ -1,0 +1,20 @@
+{
+  "projects": {
+    "default": "appstrophe-test"
+  },
+  "targets": {
+    "appstrophe-test": {
+      "hosting": {
+        "blog": [
+          "appstrophe-blog"
+        ],
+        "shell": [
+          "appstrophe-shell"
+        ],
+        "auth": [
+          "appstrophe-auth"
+        ]
+      }
+    }
+  }
+}

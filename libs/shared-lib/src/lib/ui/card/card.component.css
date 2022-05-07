@@ -1,0 +1,48 @@
+div.card {
+    @apply w-full max-h-full py-4 px-8 bg-white dark:bg-zinc-900 shadow-xl rounded-lg my-20 cursor-pointer
+}
+
+div.card div.card_avatar {
+    @apply flex justify-center md:justify-end -mt-16
+}
+
+div.card div.card_avatar img {
+    @apply w-20 h-20 object-cover rounded-full border-2 border-orange-500
+}
+
+
+div.card h2.card_title {
+    @apply text-gray-800 dark:text-gray-300 text-2xl font-semibold
+}
+
+div.card div.card_body {
+    @apply mt-2 text-gray-600 flex flex-row items-center
+}
+
+div.card div.card_body div.card_body__img {
+    @apply basis-1/3
+}
+
+div.card div.card_body div.card_body__img img {
+    @apply h-28 m-auto
+}
+
+div.card div.card_body p.card_body__text {
+    @apply basis-2/3 h-32
+}
+
+div.card div.card_body p.card_body__text.text-fade {
+    -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent);
+}
+
+div.card div.card_footer {
+    @apply flex justify-between mt-4
+}
+
+div.card div.card_footer span.card_footer__badges {
+    @apply rounded-full bg-green-100 text-green-500 dark:bg-green-900 px-3 py-1
+}
+
+div.card div.card_footer span.card_footer__infos {
+    @apply text-base justify-self-end font-medium text-orange-500
+}
