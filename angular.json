@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "projects": {
+    "auth": "apps/auth",
+    "auth-e2e": "apps/auth-e2e",
+    "auth-lib": "libs/auth-lib",
+    "blog": "apps/blog",
+    "blog-e2e": "apps/blog-e2e",
+    "blog-lib": "libs/blog-lib",
+    "shared-lib": "libs/shared-lib",
+    "shell": "apps/shell",
+    "shell-e2e": "apps/shell-e2e",
+    "shell-frame-lib": "libs/shell-frame-lib"
+  }
+}
