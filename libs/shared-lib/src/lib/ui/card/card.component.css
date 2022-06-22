@@ -1,5 +1,5 @@
 div.card {
-    @apply w-full max-h-full py-4 px-8 bg-white dark:bg-zinc-900 shadow-xl rounded-lg my-20 cursor-pointer
+    @apply py-4 px-8 bg-white dark:bg-zinc-900 shadow-xl rounded-lg mt-16 cursor-pointer
 }
 
 div.card div.card_avatar {
