@@ -1,4 +1,4 @@
-<header class="bg-zinc-50 dark:bg-zinc-800 shadow px-0 py-2 text-gray-700 dark:text-gray-300 sticky top-0 md:flex md:items-center md:space-x-4 md:px-3" 
+<header class="z-50 bg-zinc-50 dark:bg-zinc-800 shadow px-0 py-2 text-gray-700 dark:text-gray-300 sticky top-0 md:flex md:items-center md:space-x-4 md:px-3" 
 (outsideClick)="isOpen = false" appstropheWorkspaceOutsideClick #menu>
     <div class="px-4 flex items-center cursor-pointer md:px-0"
     [class.text-orange-500]="isOpen"
@@ -9,7 +9,7 @@
     <ul class="mt-2 transition-all transform delay-75 duration-500 opacity-0 h-0 ease-in-out md:h-content md:opacity-100 md:mt-0 md:space-y-0 md:flex md:items-center md:justify-between md:flex-grow"
         [class.h-40]="isOpen && innerWidth < 768" [class.opacity-100]="isOpen && innerWidth < 768">
         <li *ngFor="let link of routerLinks" [routerLink]="[link.route]" routerLinkActive="active"
-            class="py-2 px-4 cursor-pointer md:px-8">
+            class="py-2 px-4 transform duration-300 ease-in-out cursor-pointer md:px-8 md:border-b-2 border-transparent">
             {{link.label}}
         </li>
     </ul>
