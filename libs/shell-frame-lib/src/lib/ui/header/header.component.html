@@ -12,5 +12,9 @@
             class="py-2 px-4 transform duration-300 ease-in-out cursor-pointer md:px-8 md:border-b-2 border-transparent">
             {{link.label}}
         </li>
+        <li [routerLink]="['/auth']" routerLinkActive="active"
+        class="py-2 px-4 transform duration-300 ease-in-out cursor-pointer md:px-8 md:border-b-2 border-transparent">
+        <fa-icon [icon]="faUser"></fa-icon>
+    </li>
     </ul>
 </header>
