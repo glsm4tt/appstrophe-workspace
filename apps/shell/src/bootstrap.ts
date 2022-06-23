@@ -4,12 +4,10 @@ import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { RouterModule } from '@angular/router';
+
 import { AppRoutingModule } from './app/app-routing.module';
 import { AppComponent } from './app/app.component';
 
-import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
 if (environment.production) {
@@ -18,10 +16,10 @@ if (environment.production) {
 
  bootstrapApplication(AppComponent, {
   providers: [
-    ...importProvidersFrom(AppRoutingModule),
-    ...importProvidersFrom(provideFirebaseApp(() => initializeApp(environment.firebase))),
-    ...importProvidersFrom(provideFirestore(() => getFirestore())),
-    ...importProvidersFrom(provideAuth(() => getAuth()))
+    importProvidersFrom(AppRoutingModule),
+    importProvidersFrom(provideFirebaseApp(() => initializeApp(environment.firebase))),
+    importProvidersFrom(provideFirestore(() => getFirestore())),
+    importProvidersFrom(provideAuth(() => getAuth()))
   ]});
   
 /*
