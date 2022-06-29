@@ -4,6 +4,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { PasswordRetrieveComponent } from './password-retrieve/password-retrieve.component';
 import { AuthRoutingModule } from './auth-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { provideAuth, getAuth } from '@angular/fire/auth';
 
 
 
@@ -11,7 +13,9 @@ import { AuthRoutingModule } from './auth-routing.module';
   declarations: [LoginComponent, RegisterComponent, PasswordRetrieveComponent],
   imports: [
     CommonModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    ReactiveFormsModule,
+    provideAuth(() => getAuth()),
   ]
 })
 export class AuthModule { }

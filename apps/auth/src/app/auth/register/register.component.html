@@ -1,1 +1,33 @@
-<p>register works!</p>
+<div class="register-page">
+
+    <div class="register-container">
+        <div class="logo">
+            <img />
+        </div>
+        <h3 class="title">Register</h3>
+        <form class="sign-in_form" [formGroup]="registerForm" (ngSubmit)="register()">
+            <div class="form-group">
+                <label for="email" class="form-group__label required">Email address</label>
+                <input type="text" class="form-group__control" formControlName="email" id="email" aria-describedby="emailHelp"
+                    placeholder="Enter your email">
+                <small id="emailHelp" class="form-group__help">We'll never share your email with anyone
+                    else.</small>
+            </div>
+            <div class="form-group">
+                <label for="password" class="form-group__label required">Password</label>
+                <input type="password" class="form-group__control" formControlName="password" id="password"
+                    aria-describedby="passwordHelp" placeholder="Enter your password">
+                <small id="passwordHelp" class="form-group__help">We'll never share your email with anyone
+                    else.</small>
+            </div>
+            <div class="form-group">
+                <label for="passwordConfirmation" class="form-group__label required">Password Confirmation</label>
+                <input type="password" class="form-group__control" formControlName="passwordConfirmation" id="passwordConfirmation"
+                    aria-describedby="passwordConfirmationHelp" placeholder="Enter your password again">
+                <small id="passwordConfirmationHelp" class="form-group__help">We'll never share your email with anyone
+                    else.</small>
+            </div>
+            <button [disabled]="registerForm.invalid" type="submit" class="btn sign-in_form__btn">Register</button>
+        </form>
+    </div>
+</div>

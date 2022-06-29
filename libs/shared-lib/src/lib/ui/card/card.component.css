@@ -32,7 +32,7 @@ div.card div.card_body p.card_body__text {
 }
 
 div.card div.card_body p.card_body__text.text-fade {
-    -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent);
+    @apply bg-clip-text text-transparent bg-gradient-to-b from-gray-600 
 }
 
 div.card div.card_footer {

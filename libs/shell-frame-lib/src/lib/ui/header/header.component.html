@@ -2,12 +2,13 @@
 (outsideClick)="isOpen = false" appstropheWorkspaceOutsideClick #menu>
     <div class="px-4 flex items-center cursor-pointer md:px-0"
     [class.text-orange-500]="isOpen"
-    (click)="$event.stopPropagation(); isOpen  = innerWidth < 768 ? !isOpen : isOpen">
+    (click)="$event.stopPropagation(); isOpen = innerWidth < 768 ? !isOpen : isOpen">
         <fa-icon class="font-bold block mr-4 md:cursor-default md:hidden" [icon]="faBars"></fa-icon>
         <h1 class="font-bold md:mr-12 md:cursor-default md:block">{{title | titlecase}}</h1>
     </div>
-    <ul class="mt-2 transition-all transform delay-75 duration-500 opacity-0 h-0 ease-in-out md:h-content md:opacity-100 md:mt-0 md:space-y-0 md:flex md:items-center md:justify-between md:flex-grow"
-        [class.h-40]="isOpen && innerWidth < 768" [class.opacity-100]="isOpen && innerWidth < 768">
+    <ul class="mt-2 transition-all transform delay-75 opacity-0 h-0 duration-300 ease-in-out md:h-content md:opacity-100 md:mt-0 md:space-y-0 md:flex md:items-center md:justify-between md:flex-grow"
+          [class.opacity-100]="isOpen && innerWidth < 768" [class.h-40]="isOpen && innerWidth < 768"
+          [@openClose]="innerWidth < 768 ? isOpen ? 'open' : 'closed' : 'large'">
         <li *ngFor="let link of routerLinks" [routerLink]="[link.route]" routerLinkActive="active"
             class="py-2 px-4 transform duration-300 ease-in-out cursor-pointer md:px-8 md:border-b-2 border-transparent">
             {{link.label}}
