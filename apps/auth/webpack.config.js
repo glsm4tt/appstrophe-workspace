@@ -32,7 +32,7 @@ module.exports = {
         name: "auth",
         filename: "remoteEntry.js",
         exposes: {
-          './module': './apps/auth/src/app/auth/auth.module.ts',
+          './routes': './apps/auth/src/app/auth/auth-routes.ts',
         },
 
         shared: share({

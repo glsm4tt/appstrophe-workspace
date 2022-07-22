@@ -9,8 +9,15 @@ import { RouterModule } from '@angular/router';
   imports: [
     BrowserModule,
     RouterModule.forRoot([
-      {path: '',
-    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)}
+      {
+        path: 'auth',
+        loadChildren: () => import('./auth/auth-routes').then(m => m.AUTH_ROUTES)
+      },
+      {
+        path: '',
+        redirectTo: 'auth',
+        pathMatch: 'full'
+      }
     ], { initialNavigation: 'enabledBlocking' }),
   ],
   providers: [],

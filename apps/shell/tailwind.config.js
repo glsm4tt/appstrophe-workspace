@@ -1,8 +1,6 @@
 const { createGlobPatternsForDependencies } = require('@nrwl/angular/tailwind');
 const { join } = require('path');
 
-console.log('DIR', __dirname, ...createGlobPatternsForDependencies(__dirname));
-
 module.exports = {
   // purge: [],
   content: [
@@ -10,7 +8,11 @@ module.exports = {
     ...createGlobPatternsForDependencies(__dirname),
   ],
   theme: {
-    extend: {},
+      extend: {
+        boxShadow: {
+          'inner-xl': '0 0 0px  1000px inset',
+        }
+      }
   },
   plugins: [
     require('@tailwindcss/typography')

@@ -14,7 +14,10 @@
         "polyfills": "apps/auth/src/polyfills.ts",
         "tsConfig": "apps/auth/tsconfig.app.json",
         "assets": ["apps/auth/src/favicon.ico", "apps/auth/src/assets"],
-        "styles": ["apps/auth/src/styles.css"],
+        "styles": [
+          "apps/auth/src/styles.css",
+          "libs/shared-lib/src/assets/styles/ui.css"
+        ],
         "scripts": [],
         "customWebpackConfig": {
           "path": "apps/auth/webpack.config.js"
