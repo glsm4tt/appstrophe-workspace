@@ -1,13 +1,15 @@
-import { getGreeting } from '../support/app.po';
+Cypress.on('uuncaught:exception', (err, runnable) => {
+  // returning false here prevents Cypress from
+  // failing the test
+  console.log('here', err)
+  return false
+})
 
 describe('auth', () => {
   beforeEach(() => cy.visit('/'));
 
-  it('should display welcome message', () => {
-    // Custom command example, see `../support/commands.ts` file
-    cy.login('my-email@something.com', 'myPassword');
-
-    // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains('Welcome auth');
+  it('should redirect to the login page', () => {
+    // the url should be the login page url: <root>/auth/login
+    cy.url().should('include', '/auth/login')
   });
 });

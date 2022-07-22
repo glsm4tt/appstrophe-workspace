@@ -9,6 +9,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+        boxShadow: {
+          'inner-xl': '0 0 0px 1000px inset',
+        },
       fontSize: {
         '4xs': '.125rem',
         '3xs': '.25rem',

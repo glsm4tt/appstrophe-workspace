@@ -16,7 +16,8 @@
         "assets": ["apps/blog/src/favicon.ico", "apps/blog/src/assets"],
         "styles": [
           "apps/blog/src/styles.css",
-          "node_modules/prismjs/themes/prism-okaidia.css"
+          "node_modules/prismjs/themes/prism-okaidia.css",
+          "libs/shared-lib/src/assets/styles/ui.css"
         ],
         "scripts": [
           "node_modules/marked/marked.min.js",

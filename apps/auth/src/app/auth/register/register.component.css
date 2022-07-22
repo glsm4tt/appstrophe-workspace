@@ -18,10 +18,10 @@ div.register-page > div.register-container > h3 {
     @apply text-gray-700 dark:text-gray-300 text-3xl font-semibold
 }
 
-div.register-page > div.register-container > form.sign-in_form {
+div.register-page > div.register-container > form.register_form {
     @apply flex flex-col items-center justify-center bg-zinc-100 dark:bg-zinc-900 shadow-xl rounded-md border-solid border-gray-200 px-12 py-8
 }
 
-div.register-page > div.register-container > form.sign-in_form button.sign-in_form__btn {
+div.register-page > div.register-container > form.register_form button.register_form__btn {
     @apply px-8 mt-4 self-stretch
 }

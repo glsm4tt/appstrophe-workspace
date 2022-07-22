@@ -17,7 +17,15 @@
     "paths": {
       "@appstrophe-workspace/auth-lib": ["libs/auth-lib/src/index.ts"],
       "@appstrophe-workspace/blog-lib": ["libs/blog-lib/src/index.ts"],
-      "@appstrophe-workspace/shared": ["libs/shared/src/index.ts"],
+      "@appstrophe-workspace/reading/domain": [
+        "libs/reading/domain/src/index.ts"
+      ],
+      "@appstrophe-workspace/reading/feature-article": [
+        "libs/reading/feature-article/src/index.ts"
+      ],
+      "@appstrophe-workspace/reading/feature-video": [
+        "libs/reading/feature-video/src/index.ts"
+      ],
       "@appstrophe-workspace/shared-lib": ["libs/shared-lib/src/index.ts"],
       "@appstrophe-workspace/shell-frame-lib": [
         "libs/shell-frame-lib/src/index.ts"
