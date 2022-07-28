@@ -81,6 +81,17 @@
         "publicHost": "http://localhost:4200"
       }
     },
+    "serve-all": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          "nx serve auth",
+          "nx serve blog",
+          "nx serve shell"
+        ],
+        "readyWhen": "Angular Live Development Server is listening on localhost:4202" 
+      }
+    },
     "extract-i18n": {
       "executor": "ngx-build-plus:extract-i18n",
       "options": {

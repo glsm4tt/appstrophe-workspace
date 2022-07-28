@@ -15,3 +15,6 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands';
+
+// Inport error-handler.ts using ES2015 syntax:
+import './error-handler';

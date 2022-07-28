@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap, switchMap } from 'rxjs/operators';
-import { Observable, EMPTY, of } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 import * as ArticleActions from './actions';
-import { Article } from '@appstrophe-workspace/reading/domain';
 import { ArticleService } from '../services/article.service';
+import { Article } from '../entities/article';
 
 
 

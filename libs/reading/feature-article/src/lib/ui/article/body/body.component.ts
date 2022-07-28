@@ -1,23 +1,23 @@
+import { CommonModule } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
-import { LIB_CONFIG, Config } from '../../../config/config';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MarkdownModule } from 'ngx-markdown';
 
 @Component({
   selector: 'article-body',
   templateUrl: './body.component.html',
   styleUrls: ['./body.component.css'],
+  standalone: true,
+  imports: [CommonModule, MarkdownModule, FontAwesomeModule]
 })
-export class BodyComponent implements OnInit {
+export class ArticleBodyComponent implements OnInit {
   articleUrl: string;
 
-  constructor(@Inject(LIB_CONFIG) private config: Config) {
-    this.articleUrl = this.getAssetPrefix() + 'assets/article.md'
+  constructor() {
+    this.articleUrl = 'assets/article.md'
   }
 
   ngOnInit() {
     // empty
-  }
-
-  private getAssetPrefix(): string {
-    return this.config.hostUrl;
   }
 }

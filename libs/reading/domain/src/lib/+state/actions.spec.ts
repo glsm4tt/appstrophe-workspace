@@ -2,6 +2,6 @@ import * as fromArticle from './actions';
 
 describe('loadArticles', () => {
   it('should return an action', () => {
-    expect(fromArticle.loadArticles().type).toBe('[Article] Load Articles');
+    expect(fromArticle.loadArticles().type).toBe('[Article] Load articles');
   });
 });

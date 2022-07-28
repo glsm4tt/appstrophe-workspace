@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Article } from '@appstrophe-workspace/reading/domain';
 
 @Component({
@@ -12,6 +12,8 @@ import { Article } from '@appstrophe-workspace/reading/domain';
 export class ArticleCardComponent implements OnInit {
   @Input() article!: Partial<Article>;
 
+  @Output() clicked = new EventEmitter<Partial<Article>>();
+
 
   constructor() {
     // empty
@@ -19,5 +21,9 @@ export class ArticleCardComponent implements OnInit {
 
   ngOnInit(): void { 
     // empty
+  }
+
+  onClick(article: Partial<Article>) {
+    this.clicked.emit(article);
   }
 }
