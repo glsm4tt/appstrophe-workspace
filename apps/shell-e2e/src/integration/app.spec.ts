@@ -1,13 +1,8 @@
-import { getGreeting } from '../support/app.po';
-
 describe('shell', () => {
-  beforeEach(() => cy.visit('/'));
+  beforeEach(() => cy.visit('http://localhost:4200'));
 
-  it('should display welcome message', () => {
-    // Custom command example, see `../support/commands.ts` file
-    cy.login('my-email@something.com', 'myPassword');
-
-    // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains('Welcome shell');
+  it('should redirect to the blog page', () => {
+   // the url should be the blog page url: <root>/blog/articles
+   cy.url().should('include', '/blog/articles')
   });
 });

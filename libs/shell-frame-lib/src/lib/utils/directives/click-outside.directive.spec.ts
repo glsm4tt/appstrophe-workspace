@@ -1,8 +1,10 @@
-import { ClickOutsideDirective } from './click-outside.directive';
+import { ElementRef } from '@angular/core';
+import { OutsideClickDirective } from './click-outside.directive';
 
 describe('ClickOutsideDirective', () => {
   it('should create an instance', () => {
-    const directive = new ClickOutsideDirective();
+    const elementRef = new ElementRef({});
+    const directive = new OutsideClickDirective(elementRef);
     expect(directive).toBeTruthy();
   });
 });

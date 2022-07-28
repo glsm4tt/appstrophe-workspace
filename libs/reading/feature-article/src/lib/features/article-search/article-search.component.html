@@ -1,0 +1,13 @@
+<form class="search-section" [formState]="formState$ | async" [formGroup]="searchForm">
+    <div class="search-fields">
+    <div class="form-group">
+        <div class="form-group-content">
+        <fa-icon
+        class="form-group__icon start"
+        [icon]="faSearch"></fa-icon>
+       <input data-cy="input-search" type="text" class="form-group__control" formControlName="search" id="search"
+            placeholder="Filter by name">
+        </div>
+    </div>
+    </div>
+</form>

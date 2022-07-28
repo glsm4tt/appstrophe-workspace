@@ -9,11 +9,18 @@ import { RouterModule } from '@angular/router';
   imports: [
     BrowserModule,
     RouterModule.forRoot([
-      {path: '',
-    loadChildren: () => import('./blog/blog.module').then(m => m.BlogModule)}
+      {
+        path: 'blog',
+        loadChildren: () => import('./blog/blog.module').then(m => m.BlogModule)
+      },
+      {
+        path: '',
+        redirectTo: 'blog',
+        pathMatch: 'full'
+      }
     ], { initialNavigation: 'enabledBlocking' }),
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

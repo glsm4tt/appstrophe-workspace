@@ -1,19 +1,21 @@
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MarkdownModule } from 'ngx-markdown';
 
-import { BodyComponent } from './body.component';
+import { ArticleBodyComponent } from './body.component';
 
-describe('BodyComponent', () => {
-  let component: BodyComponent;
-  let fixture: ComponentFixture<BodyComponent>;
+describe('ArticleBodyComponent', () => {
+  let component: ArticleBodyComponent;
+  let fixture: ComponentFixture<ArticleBodyComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [BodyComponent],
+      imports: [ArticleBodyComponent, HttpClientModule, MarkdownModule.forRoot( { loader: HttpClient })],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BodyComponent);
+    fixture = TestBed.createComponent(ArticleBodyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

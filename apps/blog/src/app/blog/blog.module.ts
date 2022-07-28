@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { BlogComponent } from './blog.component';
 import { SharedLibModule } from '@appstrophe-workspace/shared-lib';
 import { BLOG_ROUTES } from './blog-routes';
 import { RouterModule } from '@angular/router';
@@ -13,7 +12,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
-  declarations: [BlogComponent],
   imports: [
     CommonModule, 
     SharedLibModule,

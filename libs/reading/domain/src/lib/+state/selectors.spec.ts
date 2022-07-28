@@ -7,6 +7,6 @@ describe('Article Selectors', () => {
       [fromArticle.ARTICLE_FEATURE_KEY]: {}
     });
 
-    expect(result).toEqual({});
+    expect(result).toEqual(undefined);
   });
 });

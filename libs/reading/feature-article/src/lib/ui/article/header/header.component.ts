@@ -5,14 +5,17 @@ import {
   faTwitter,
   faLinkedin,
 } from '@fortawesome/free-brands-svg-icons';
-import { Config, LIB_CONFIG } from '../../../config/config';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'article-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
+  standalone: true,
+  imports: [CommonModule, FontAwesomeModule]
 })
-export class BlogHeaderComponent implements OnInit {
+export class ArticleHeaderComponent implements OnInit {
   readonly faCircle = faCircle;
   readonly faYoutube = faYoutube;
   readonly faTwitter = faTwitter;
@@ -20,15 +23,11 @@ export class BlogHeaderComponent implements OnInit {
   readonly faLink = faLink;
   photoUrl!: string;
 
-  constructor(@Inject(LIB_CONFIG) private config: Config) {
-    this.photoUrl = this.getAssetPrefix() + 'assets/img/W9aoBmrb_400x400.jpeg';
+  constructor() {
+    this.photoUrl = 'assets/img/W9aoBmrb_400x400.jpeg';
   }
 
   ngOnInit() {
     // empty
-  }
-
-  private getAssetPrefix(): string {
-    return this.config.hostUrl;
   }
 }
