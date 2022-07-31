@@ -22,6 +22,7 @@ export const ARTICLE_READING_ROUTES: Route[] = [
                 loadComponent: () => import('./pages/article-details/article-details.component').then(m => m.ArticleDetailsComponent),
                 providers: [
                     importProvidersFrom(MarkdownModule.forRoot( { loader: HttpClient })),
+                    importProvidersFrom(HttpClientModule),
                     importProvidersFrom(HttpClientModule)
                 ]
             },

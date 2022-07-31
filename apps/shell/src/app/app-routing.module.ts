@@ -10,17 +10,16 @@ const routes: Routes = [
         type: 'module',
         remoteEntry: 'http://localhost:4201/remoteEntry.js', //'https://appstrophe-auth.web.app/remoteEntry.js',
         exposedModule: './routes'
-      }).then(m => m.AUTH_ROUTES)
+      }).then(m => m.AUTH_ROUTES),
   },
   {
     path: 'blog',
-  //  loadChildren: () => import('@appstrophe-workspace/reading/feature-article').then(m => m.ARTICLE_READING_ROUTES)
     loadChildren: () =>
       loadRemoteModule({
         type: 'module',
         remoteEntry: 'http://localhost:4202/remoteEntry.js', //'https://appstrophe-blog.web.app/remoteEntry.js',
-        exposedModule: './module'
-      }).then(m => m.BlogModule),
+        exposedModule: './routes'
+      }).then(m => m.BLOG_ROUTES),
   },
   {
     path: '',

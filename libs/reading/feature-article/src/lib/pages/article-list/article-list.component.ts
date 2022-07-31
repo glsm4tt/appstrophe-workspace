@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, EMPTY, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Observable, EMPTY } from 'rxjs';
 import * as fromArticle from '@appstrophe-workspace/reading/domain';
 import { Router, RouterModule } from '@angular/router';
 import { Article } from '@appstrophe-workspace/reading/domain';

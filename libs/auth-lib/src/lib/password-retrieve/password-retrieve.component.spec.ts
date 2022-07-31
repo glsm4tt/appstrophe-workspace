@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule, ValidationErrors } from '@angular/forms';
+import { AngularFireModule } from '@angular/fire/compat';
+import { ValidationErrors } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { PasswordRetrieveComponent } from './password-retrieve.component';
 
@@ -9,7 +11,11 @@ describe('PasswordRetrieveComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PasswordRetrieveComponent],
+      imports: [
+        PasswordRetrieveComponent,
+        AngularFireModule.initializeApp({}),
+        RouterTestingModule
+      ],
     }).compileComponents();
   });
 

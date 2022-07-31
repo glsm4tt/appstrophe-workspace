@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { RouterModule } from '@angular/router';
+import { PreloadAllModules, RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [AppComponent],
@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
     RouterModule.forRoot([
       {
         path: 'blog',
-        loadChildren: () => import('./blog/blog.module').then(m => m.BlogModule)
+        loadChildren: () => import('./blog/blog-routes').then(m => m.BLOG_ROUTES)
       },
       {
         path: '',

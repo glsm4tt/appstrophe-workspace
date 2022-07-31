@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
-import { Firestore, collectionData, collection, FirestoreModule } from '@angular/fire/firestore';
 import { ShellFrameLibModule } from '@appstrophe-workspace/shell-frame-lib';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
-import { environment } from '../environments/environment';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'appstrophe-workspace-app-root',
@@ -15,15 +12,13 @@ import { environment } from '../environments/environment';
   imports: [
     CommonModule,
     RouterModule,
-    ShellFrameLibModule,
-    FirestoreModule
+    ShellFrameLibModule
   ] 
 })
 export class AppComponent {
 
   title = 'shell';
-  constructor(private firestore: Firestore) {
-    const mycollection = collection(this.firestore, 'items');
-    collectionData(mycollection).subscribe(console.log);
+  constructor(/*private firestore: AngularFirestore*/) {
+   // this.firestore.collection('items').valueChanges().subscribe(console.log);
   }
 }

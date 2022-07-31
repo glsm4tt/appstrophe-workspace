@@ -42,21 +42,27 @@ div.form-group > div.form-group-content > .end {
     @apply absolute right-2 ml-auto
 } 
 
-div.form-group input.form-group__control {
+
+div.form-group input.form-group__control,
+div.form-group textarea.form-group__control {
     @apply block w-full px-3 py-1.5 text-base font-normal text-gray-700 dark:text-gray-300 bg-white dark:bg-zinc-800 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-800 focus:dark:text-gray-200 focus:ring-1 active:bg-white focus:bg-white dark:focus:bg-zinc-800 dark:active:bg-zinc-800 focus:border-orange-600 focus:ring-orange-600 focus:outline-none autofill:shadow-inner-xl autofill:shadow-white autofill:dark:shadow-zinc-800
 }
 
-div.form-group input.form-group__control:autofill {
+div.form-group input.form-group__control:autofill,
+div.form-group textarea.form-group__control:autofill {
     -webkit-text-fill-color: rgb(55 65 81);
  }
 
  div.form-group div.form-group-content > .start+input.form-group__control,
- div.form-group div.form-group-content > .end+input.form-group__control {
- @apply indent-4
+ div.form-group div.form-group-content > .end+input.form-group__control, 
+ div.form-group div.form-group-content > .start+textarea.form-group__control,
+ div.form-group div.form-group-content > .end+textarea.form-group__control {
+ @apply indent-5
  }
 
 @media (prefers-color-scheme: dark){
-    div.form-group input.form-group__control:autofill {
+    div.form-group input.form-group__control:autofill,
+    div.form-group textarea.form-group__control:autofill {
         -webkit-text-fill-color: rgb(209 213 219);
     }
 }
@@ -67,5 +73,9 @@ div.form-group > small.form-group__help {
 }
 
 button.btn {
-    @apply flex items-center py-1 justify-center bg-orange-500 rounded-sm text-white hover:bg-orange-600 active:bg-orange-700 disabled:bg-orange-400 disabled:hover:bg-orange-400 
+    @apply flex items-center py-1 justify-center bg-orange-500 rounded-sm text-white hover:bg-orange-600 active:bg-orange-700 disabled:text-gray-500 disabled:bg-zinc-200 disabled:hover:bg-zinc-200 dark:disabled:bg-zinc-700 dark:disabled:hover:bg-zinc-700 
+}
+
+button.btn.cancel {
+    @apply bg-transparent text-gray-600 dark:text-gray-300
 }
