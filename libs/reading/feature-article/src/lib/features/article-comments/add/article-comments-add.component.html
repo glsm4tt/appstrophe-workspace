@@ -1,0 +1,17 @@
+<form class="comment-section" [formGroup]="commentForm" (ngSubmit)="submitComment()">
+    <div class="comment-fields">
+    <div class="form-group">
+        <div class="form-group-content">
+        <fa-icon
+        class="form-group__icon start"
+        [icon]="faPen"></fa-icon>
+       <textarea (focus)="checkIfConected()" data-cy="input-comment" class="form-group__control" formControlName="comment" id="comment"
+            placeholder="Add a comment..."></textarea>
+        </div>
+    </div>
+    </div>
+    <div class="actions-subsection" *ngIf="commentForm.controls['comment'].value"> 
+        <button data-cy="cancel" (click)="commentForm.reset()" id="commentForm-cancel-btn" type="button" class="btn cancel">Cancel</button>
+        <button data-cy="submit" [disabled]="commentForm.invalid" id="commentForm-submit-btn" type="submit" class="btn">Comment</button>
+    </div>
+</form>

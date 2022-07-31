@@ -1,17 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AngularFireModule } from '@angular/fire/compat';
 import { RouterTestingModule } from '@angular/router/testing';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 
-import { RegisterComponent } from './register.component';
+import { ArticleCommentsComponent } from './article-comments.component';
 
-describe('RegisterComponent', () => {
-  let component: RegisterComponent;
-  let fixture: ComponentFixture<RegisterComponent>;
+describe('ArticleCommentsComponent', () => {
+  let component: ArticleCommentsComponent;
+  let fixture: ComponentFixture<ArticleCommentsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RegisterComponent, 
+        ArticleCommentsComponent,
+        StoreModule.forRoot({}),
+        EffectsModule.forRoot([]),
         AngularFireModule.initializeApp({}),
         RouterTestingModule
       ],
@@ -19,7 +23,7 @@ describe('RegisterComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RegisterComponent);
+    fixture = TestBed.createComponent(ArticleCommentsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

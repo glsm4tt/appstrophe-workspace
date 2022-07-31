@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, Validators, FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { PasswordConfirmation } from '../validators/password-confirmation.validator';
 
@@ -17,7 +18,10 @@ export class RegisterComponent {
 
   readonly registerForm: FormGroup;
 
-  constructor(private authService: AuthService) {
+  constructor(
+    private authService: AuthService,
+    private route: ActivatedRoute,
+    private router: Router) {
     this.registerForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
@@ -29,6 +33,9 @@ export class RegisterComponent {
     if (this.registerForm.valid) {
       try {
         await this.authService.register(this.registerForm.get('email')?.value, this.registerForm.get('password')?.value);
+        const previous = this.route.snapshot.queryParams['previous'];
+        const route = `/auth/login${previous ? '?previous=' + previous : ''}`;
+        this.router.navigateByUrl(route);
       } catch (e) {
         console.error(e);
       }

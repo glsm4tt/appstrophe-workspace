@@ -32,7 +32,7 @@ module.exports = {
          name: "blog",
          filename: "remoteEntry.js",
          exposes: {
-             './module': './apps/blog/src/app/blog/blog.module.ts',
+             './routes': './apps/blog/src/app/blog/blog-routes.ts',
          },
 
         shared: share({
@@ -40,6 +40,7 @@ module.exports = {
           "@angular/common": { singleton: true, strictVersion: true, requiredVersion: 'auto' }, 
           "@angular/common/http": { singleton: true, strictVersion: true, requiredVersion: 'auto' }, 
           "@angular/router": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+          "@angular/fire": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
 
           ...sharedMappings.getDescriptors()
         })
