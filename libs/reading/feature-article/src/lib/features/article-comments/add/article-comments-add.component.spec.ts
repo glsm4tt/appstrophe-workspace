@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AngularFireModule } from '@angular/fire/compat';
 import { RouterTestingModule } from '@angular/router/testing';
+import { AuthService } from '@appstrophe-workspace/auth-lib';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
@@ -16,9 +16,11 @@ describe('ArticleCommentsAddComponent', () => {
         ArticleCommentsAddComponent,
         StoreModule.forRoot({}),
         EffectsModule.forRoot([]),
-        AngularFireModule.initializeApp({}),
         RouterTestingModule
       ],
+      providers: [
+        {provide: AuthService, useValue: {}}
+      ]
     }).compileComponents();
   });
 

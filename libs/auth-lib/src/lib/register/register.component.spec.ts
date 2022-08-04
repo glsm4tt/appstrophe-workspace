@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AngularFireModule } from '@angular/fire/compat';
 import { RouterTestingModule } from '@angular/router/testing';
+import { AuthService } from '../services/auth.service';
 
 import { RegisterComponent } from './register.component';
 
@@ -12,9 +12,11 @@ describe('RegisterComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         RegisterComponent, 
-        AngularFireModule.initializeApp({}),
         RouterTestingModule
       ],
+      providers: [
+        {provide: AuthService, useValue: {}}
+      ]
     }).compileComponents();
   });
 
