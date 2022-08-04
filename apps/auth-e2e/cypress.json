@@ -1,5 +1,5 @@
 {
-  "defaultCommandTimeout": 30000,
+  "defaultCommandTimeout": 5000,
   "fileServerFolder": ".",
   "fixturesFolder": "./src/fixtures",
   "integrationFolder": "./src/integration",
