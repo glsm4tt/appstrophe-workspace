@@ -1,5 +1,7 @@
 import { TestBed } from '@angular/core/testing';
-import { AngularFireModule } from '@angular/fire/compat';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { Auth, provideAuth } from '@angular/fire/auth';
+import { getAuth } from '@firebase/auth';
 
 import { AuthService } from './auth.service';
 
@@ -8,7 +10,10 @@ describe('AuthService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [AngularFireModule.initializeApp({})]
+      imports: [],
+      providers: [
+        { provide: Auth, useValue: {} }
+      ]
     });
     service = TestBed.inject(AuthService);
   });
