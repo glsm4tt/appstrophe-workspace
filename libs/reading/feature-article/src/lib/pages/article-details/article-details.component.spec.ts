@@ -7,6 +7,8 @@ import { MarkdownModule } from 'ngx-markdown';
 
 import { ArticleDetailsComponent } from './article-details.component';
 import { AuthService } from '@appstrophe-workspace/auth-lib';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 
 describe('ArticleDetailsComponent', () => {
   let component: ArticleDetailsComponent;
@@ -18,7 +20,9 @@ describe('ArticleDetailsComponent', () => {
         ArticleDetailsComponent, 
         HttpClientModule, 
         MarkdownModule.forRoot({loader: HttpClient}),
-        RouterTestingModule
+        RouterTestingModule,
+        StoreModule.forRoot({}),
+        EffectsModule.forRoot([])
       ],
       providers: [
         {provide: AuthService, useValue: {}}

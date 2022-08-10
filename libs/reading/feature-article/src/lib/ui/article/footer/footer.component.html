@@ -1,1 +1,21 @@
-<p>footer works!</p>
+<div class="card_footer">
+    <div class="card_footer__start">
+        <span class="card_footer__likes">
+            <ng-container *ngIf="article$ | async as article">
+                <fa-icon [tooltip]="article?.likes?.length + ' Likes'" class="clap__icon" [icon]="faHandsClapping">
+                </fa-icon>{{article?.likes?.length}}
+            </ng-container>
+        </span>
+        <span class="card_footer__comments">
+            <ng-container *ngIf="article$ | async as article">
+                <fa-icon [tooltip]="article?.comments + ' Comments'" class="comment__icon" [icon]="faComment">
+                </fa-icon>{{article?.comments}}
+            </ng-container>
+        </span>
+    </div>
+    <div class="card_footer__end">
+        <span class="card_footer__share">
+            <fa-icon tooltip="Share" class="share__icon" [icon]="faArrowUpFromBracket"></fa-icon>
+        </span>
+    </div>
+</div>
