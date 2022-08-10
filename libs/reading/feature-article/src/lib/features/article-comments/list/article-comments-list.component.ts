@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Comment } from '@appstrophe-workspace/reading/domain';
 import { Store } from '@ngrx/store';
 import { EMPTY, Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
 import { ArticleCommentCardComponent } from '../../../ui/article-comment-card/article-comment-card.component';
 import * as fromArticle from '@appstrophe-workspace/reading/domain';
 

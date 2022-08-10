@@ -7,7 +7,7 @@ import * as fromArticle from '@appstrophe-workspace/reading/domain';
 import { FilterArticlesFormState } from '@appstrophe-workspace/reading/domain';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { SharedLibModule } from '@appstrophe-workspace/shared-lib';
 
 @Component({
@@ -21,21 +21,24 @@ export class ArticleSearchComponent implements OnInit, OnDestroy {
   readonly faSearch = faSearch;
 
   d$ = new Subject<void>();
-  
+
   formState$: Observable<FilterArticlesFormState> = EMPTY;
 
   searchForm: FormGroup;
 
   constructor(
     private store: Store<fromArticle.ArticleRootState>) {
-      this.searchForm = new FormGroup({
-        search: new FormControl('')
-      })
+    this.searchForm = new FormGroup({
+      search: new FormControl(''),
+      tags: new FormArray([])
+    })
   }
 
   ngOnInit(): void {
     this.searchForm.valueChanges.pipe(takeUntil(this.d$)).subscribe({
-      next: value => this.store.dispatch(fromArticle.filterArticlesFormStateChange({ filterArticlesFormState: value })),
+      next: filterArticlesFormState => this.store.dispatch(fromArticle.filterArticlesFormStateChange({
+        filterArticlesFormState
+      })),
     });
   }
 
