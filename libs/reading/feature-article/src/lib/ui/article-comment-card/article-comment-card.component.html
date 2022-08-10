@@ -1,0 +1,22 @@
+<div class="card">
+    <div class="card_avatar">
+        <img [src]="comment?.author?.photoUrl" alt="Photo de l'auteur de l'article">
+    </div>
+    <div class="card_body">
+        <p>
+            {{comment?.text}}
+        </p>
+    </div>
+    <div class="card_footer">
+        <div class="card_footer__start">
+            <span class="card_footer__likes">
+                <fa-icon [tooltip]="comment?.likes?.length + ' Likes'" class="clap__icon" [icon]="faHandsClapping">
+                </fa-icon>{{comment?.likes?.length}}
+            </span>
+            <span class="card_footer__comments">
+                <fa-icon [tooltip]="comment?.replies?.length + ' Replies'" class="comment__icon" [icon]="faComment">
+                </fa-icon>{{comment?.replies?.length}}
+            </span>
+        </div>
+    </div>
+</div>

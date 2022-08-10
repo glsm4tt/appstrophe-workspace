@@ -1,9 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Article } from '@appstrophe-workspace/reading/domain';
+import { Store } from '@ngrx/store';
+import { Observable, EMPTY } from 'rxjs';
 import { ArticleCommentsComponent } from '../../features/article-comments/article-comments.component';
 import { ArticleBodyComponent } from '../../ui/article/body/body.component';
 import { ArticleFooterComponent } from '../../ui/article/footer/footer.component';
 import { ArticleHeaderComponent } from '../../ui/article/header/header.component';
+import * as fromArticle from '@appstrophe-workspace/reading/domain';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'article-details',
@@ -14,11 +19,13 @@ import { ArticleHeaderComponent } from '../../ui/article/header/header.component
 })
 export class ArticleDetailsComponent implements OnInit {
 
-  constructor() {
+  constructor(
+    private store: Store<fromArticle.ArticleRootState>,
+    private route: ActivatedRoute) {
     // empty
   }
 
   ngOnInit() {
-    // empty
+    this.store.dispatch(fromArticle.loadArticle({ articleId: this.route.snapshot.params['articleId'] }))
   }
 }

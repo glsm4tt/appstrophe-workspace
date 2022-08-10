@@ -7,13 +7,14 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CommonModule } from '@angular/common';
+import { SharedLibModule } from '@appstrophe-workspace/shared-lib';
 
 @Component({
   selector: 'article-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule]
+  imports: [CommonModule, FontAwesomeModule, SharedLibModule]
 })
 export class ArticleHeaderComponent implements OnInit {
   readonly faCircle = faCircle;
