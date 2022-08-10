@@ -3,7 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AuthService } from '@appstrophe-workspace/auth-lib';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { ArticleServiceMock } from '@appstrophe-workspace/reading/domain';
+import { ArticleServiceMock, Mock } from '@appstrophe-workspace/reading/domain';
 import { of } from 'rxjs';
 
 import { ArticleCommentsAddComponent } from './article-comments-add.component';
@@ -42,7 +42,7 @@ describe('ArticleCommentsAddComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should check is the user is connected on textarea enter', () => {
+  it('should redirect to the login page if the user isn\'t logged on textarea enter', () => {
     const articleCommentsAddComponentElement: HTMLElement = fixture.nativeElement;
     const textareaElement: HTMLTextAreaElement = articleCommentsAddComponentElement.querySelector('#comment');
     const checkIfConnectedSpy = jest.spyOn(component, 'checkIfConnected');
@@ -55,5 +55,21 @@ describe('ArticleCommentsAddComponent', () => {
     expect(checkIfConnectedSpy).toBeCalledTimes(1);
     expect(navigateSpy).toBeCalledTimes(1);
     expect(navigateSpy).toBeCalledWith(`/auth/login?previous=/`);
+  });
+
+
+
+  it('should not redirect to the login page if the user is logged on textarea enter', () => {
+    const articleCommentsAddComponentElement: HTMLElement = fixture.nativeElement;
+    const textareaElement: HTMLTextAreaElement = articleCommentsAddComponentElement.querySelector('#comment');
+    const checkIfConnectedSpy = jest.spyOn(component, 'checkIfConnected');
+    const navigateSpy = jest.spyOn(router, 'navigateByUrl');
+    authService.user$ = of(Mock.user);
+
+    const event = new Event('focus');
+    textareaElement.dispatchEvent(event);
+
+    expect(checkIfConnectedSpy).toBeCalledTimes(1);
+    expect(navigateSpy).not.toHaveBeenCalled();
   });
 });
