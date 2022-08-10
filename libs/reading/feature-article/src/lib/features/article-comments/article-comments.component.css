@@ -1,15 +1,7 @@
-form.comment-section {
-    @apply flex flex-col items-stretch
+div.commments_section > div.commments_section__add {
+    @apply pt-4 pb-2 border-t-2 border-gray-700 dark:border-gray-300
 }
 
-div.form-group .form-group__icon {
-    @apply text-orange-500
+div.commments_section > div.commments_section__list {
+    @apply pt-4 pb-2 border-t-2 border-gray-700 dark:border-gray-300
 }
-
-form.comment-section > div.actions-subsection {
-@apply flex items-center justify-end
-}
-
-form.comment-section > div.actions-subsection > button.btn {
-    @apply p-2 ml-2
-    }

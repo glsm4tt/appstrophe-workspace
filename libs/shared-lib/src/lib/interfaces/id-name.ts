@@ -1,4 +1,5 @@
-export interface IdName {
-    id: number;
+import { Id } from "./id";
+
+export interface IdName extends Id {
     name: string;
 }
