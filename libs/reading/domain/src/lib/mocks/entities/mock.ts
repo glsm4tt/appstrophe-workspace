@@ -1,3 +1,4 @@
+import { IdTokenResult, User } from '@angular/fire/auth';
 import { Like } from '../../entities';
 import { Article } from '../../entities/article';
 import { Comment } from '../../entities/comment';
@@ -91,5 +92,35 @@ export class Mock {
         comments: 3,
         likes: [Mock.like]
     };
+
+    static readonly user: User = {
+        emailVerified: false,
+        isAnonymous: false,
+        metadata: undefined,
+        providerData: [],
+        refreshToken: '',
+        tenantId: '',
+        delete: function (): Promise<void> {
+            throw new Error('Function not implemented.');
+        },
+        getIdToken: function (forceRefresh?: boolean): Promise<string> {
+            throw new Error('Function not implemented.');
+        },
+        getIdTokenResult: function (forceRefresh?: boolean): Promise<IdTokenResult> {
+            throw new Error('Function not implemented.');
+        },
+        reload: function (): Promise<void> {
+            throw new Error('Function not implemented.');
+        },
+        toJSON: function (): object {
+            throw new Error('Function not implemented.');
+        },
+        displayName: '',
+        email: '',
+        phoneNumber: '',
+        photoURL: '',
+        providerId: '',
+        uid: ''
+    }
 
 }
