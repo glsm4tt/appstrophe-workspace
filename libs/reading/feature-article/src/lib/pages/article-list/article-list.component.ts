@@ -27,7 +27,7 @@ export class ArticleListComponent implements OnInit {
   ngOnInit(): void {
     this.articles$ = this.store.select(fromArticle.selectFilteredArticles);
 
-    this.isLoading$ = this.store.select(fromArticle.selectIsLoading);
+    this.isLoading$ = this.store.select(fromArticle.selectAreArticlesLoading);
 
     this.store.dispatch(fromArticle.loadArticles())
   }
