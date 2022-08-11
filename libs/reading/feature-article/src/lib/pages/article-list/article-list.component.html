@@ -5,6 +5,6 @@
     </ng-container>
     <ng-template #articles>
         <article-card data-cy="article-card" class="card" *ngFor="let article of articles$ | async" [article]="article"
-             (clicked)="goToArticleDetail($event)"></article-card>
+             [routerLink]="['/blog/article/' + article.id]"></article-card>
     </ng-template>
 </div>
