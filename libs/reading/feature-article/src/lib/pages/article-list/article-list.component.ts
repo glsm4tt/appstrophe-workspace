@@ -31,8 +31,4 @@ export class ArticleListComponent implements OnInit {
 
     this.store.dispatch(fromArticle.loadArticles())
   }
-
-  goToArticleDetail(article: Partial<Article>) {
-    this.router.navigateByUrl(`/blog/article/${article.id}`)
-  }
 }

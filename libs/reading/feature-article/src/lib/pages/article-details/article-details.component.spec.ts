@@ -17,7 +17,6 @@ describe('ArticleDetailsComponent', () => {
   let component: ArticleDetailsComponent;
   let fixture: ComponentFixture<ArticleDetailsComponent>;
   let store: Store;
-  let route: ActivatedRoute;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -47,7 +46,6 @@ describe('ArticleDetailsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ArticleDetailsComponent);
     store = TestBed.inject(Store);
-    route = TestBed.inject(ActivatedRoute);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
