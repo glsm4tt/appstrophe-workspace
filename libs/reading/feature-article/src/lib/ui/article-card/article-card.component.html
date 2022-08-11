@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card_avatar">
-        <img [src]="article?.author?.photoUrl" alt="Photo de l'auteur de l'article" (click)="onClick(article)">
+        <img class="card_avatar__img" [src]="article?.author?.photoUrl" alt="Photo de l'auteur de l'article" (click)="onClick(article)">
     </div>
     <div class="card_body" (click)="onClick(article)">
         <h2 class="card_title">{{article?.title}}</h2>
