@@ -1,3 +1,4 @@
+/* eslint-disable */
 export default {
   displayName: 'auth-lib',
   preset: '../../jest.preset.js',

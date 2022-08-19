@@ -40,10 +40,10 @@ describe('TooltipDirective', () => {
   });
 
   it('should create a inner div element when a mouseenter event is triggered', done => {
-    const h2 = elems[0].nativeElement;
+    const div = elems[0].nativeElement;
 
     const event = new Event('mouseenter');
-    h2.dispatchEvent(event);
+    div.dispatchEvent(event);
 
     setTimeout(() => {
       const tooltipContainer: HTMLInputElement | null = document.querySelector('.tooltip-container');

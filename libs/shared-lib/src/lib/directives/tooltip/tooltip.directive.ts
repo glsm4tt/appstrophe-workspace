@@ -30,9 +30,15 @@ export class TooltipDirective implements OnDestroy {
     if (this.myPopup) { this.myPopup.remove() }
   }
 
+  @HostListener('click') onClick() {
+    if (this.timer) clearTimeout(this.timer);
+    if (this.myPopup) { this.myPopup.remove() }
+  }
+
   private createTooltipPopup(x: number, y: number) {
     const popup = document.createElement('div');
     popup.innerHTML = this.tooltip;
+    popup.setAttribute('data-cy', 'tooltip');
     popup.setAttribute('class', 'tooltip-container');
     popup.style.top = y.toString() + "px";
     popup.style.left = x.toString() + "px";
