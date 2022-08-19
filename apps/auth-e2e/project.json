@@ -6,8 +6,9 @@
     "e2e": {
       "executor": "@nrwl/cypress:cypress",
       "options": {
-        "cypressConfig": "apps/auth-e2e/cypress.json",
-        "devServerTarget": "auth:serve:development"
+        "cypressConfig": "apps/auth-e2e/cypress.config.ts",
+        "devServerTarget": "auth:serve:development",
+        "testingType": "e2e"
       },
       "configurations": {
         "production": {

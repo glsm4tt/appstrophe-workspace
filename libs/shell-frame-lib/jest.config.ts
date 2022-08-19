@@ -1,3 +1,4 @@
+/* eslint-disable */
 export default {
   displayName: 'shell-frame-lib',
   preset: '../../jest.preset.js',
