@@ -15,7 +15,7 @@ div.article_header div.article_header__infos div.article_header__infos_top {
 }
 
 div.article_header div.article_header__infos div.article_header__infos_top h2 {
-    @apply text-lg font-normal text-gray-300
+    @apply text-lg font-normal
 }
 
 div.article_header div.article_header__infos div.article_header__infos_top div.social_media {
@@ -23,7 +23,7 @@ div.article_header div.article_header__infos div.article_header__infos_top div.s
 }
 
 div.article_header div.article_header__infos div.article_header__infos_top div.social_media .social_media__icon {
-    @apply cursor-pointer transition-all ease-in-out duration-300 hover:text-zinc-800 hover:dark:text-zinc-400 hover:scale-125
+    @apply cursor-pointer transition-all ease-in-out duration-300 text-zinc-600 dark:text-zinc-500 hover:text-zinc-800 hover:dark:text-zinc-300 hover:scale-125
 }
 
 div.article_header div.article_header__infos div.article_header__infos_top div.social_media .social_media__icon.linkedin {
