@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Comment } from '@appstrophe-workspace/reading/domain';
 import { SharedLibModule } from '@appstrophe-workspace/shared-lib';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faHandsClapping, faComment } from '@fortawesome/free-solid-svg-icons';
+import { faHandsClapping, faComment, faThumbsUp, faThumbsDown, faChampagneGlasses } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'article-comment-card',
@@ -17,6 +17,9 @@ export class ArticleCommentCardComponent implements OnInit {
 
   faHandsClapping = faHandsClapping;
   faComment = faComment;
+  faThumbsUp = faThumbsUp;
+  faThumbsDown = faThumbsDown;
+  faChampagneGlasses = faChampagneGlasses;
 
   constructor() {
     // empty

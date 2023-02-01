@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { Comment } from '@appstrophe-workspace/reading/domain';
 import { Store } from '@ngrx/store';
 import { EMPTY, Observable } from 'rxjs';
@@ -11,18 +11,14 @@ import * as fromArticle from '@appstrophe-workspace/reading/domain';
   templateUrl: './article-comments-list.component.html',
   styleUrls: ['./article-comments-list.component.css'],
   standalone: true,
-  imports: [CommonModule, ArticleCommentCardComponent]
+  imports: [CommonModule, ArticleCommentCardComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ArticleCommentsListComponent implements OnInit {
 
-  comments$: Observable<Partial<Comment>[]> = EMPTY;
-
-  constructor(
-    private store: Store<fromArticle.ArticleRootState>) {
-    // empty
-  }
+  @Input() comments: Comment[] = [];
 
   ngOnInit(): void {
-    this.comments$ = this.store.select(fromArticle.selectComments);
+    // empty
   }
 }

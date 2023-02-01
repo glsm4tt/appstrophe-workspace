@@ -1,7 +1,7 @@
 <article-search></article-search>
 <div class="card-list">
     <ng-container *ngIf="isLoading$ | async; else articles">
-
+        
     </ng-container>
     <ng-template #articles>
         <article-card data-cy="article-card" [id]="'article-card-' + article.id" class="card" *ngFor="let article of articles$ | async" [article]="article"

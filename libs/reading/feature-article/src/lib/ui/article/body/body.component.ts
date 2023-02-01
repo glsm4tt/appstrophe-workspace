@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MarkdownModule } from 'ngx-markdown';
 
@@ -11,13 +11,10 @@ import { MarkdownModule } from 'ngx-markdown';
   imports: [CommonModule, MarkdownModule, FontAwesomeModule]
 })
 export class ArticleBodyComponent implements OnInit {
-  articleUrl: string;
-
-  constructor() {
-    this.articleUrl = 'assets/article.md'
-  }
+  @Input() articleUrl: string;
 
   ngOnInit() {
+    setTimeout(() => console.log(this.articleUrl), 300)
     // empty
   }
 }
