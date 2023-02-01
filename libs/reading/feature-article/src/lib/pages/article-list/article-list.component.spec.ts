@@ -37,7 +37,7 @@ describe('ArticleListComponent', () => {
 
   it('should get articles and the isLoading information from the store during the init', done => {
     const selectSpy = jest.spyOn(store, 'select')
-      .mockImplementation(select => select === fromArticle.selectFilteredArticles ? of(Mock.articles) : of(false));
+      .mockImplementation(select => select === fromArticle.selectFilteredArticles ? of(Mock.articleList) : of(false));
 
     component.ngOnInit();
 
@@ -47,7 +47,7 @@ describe('ArticleListComponent', () => {
       .pipe(first())
       .subscribe({
         next: ([articles, isLoading]) => {
-          expect(articles).toEqual(Mock.articles);
+          expect(articles).toEqual(Mock.articleList);
           expect(isLoading).toEqual(false);
           done();
         }

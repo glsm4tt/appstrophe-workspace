@@ -2,8 +2,8 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable, of } from 'rxjs';
 import { ArticleService } from '../services';
-
 import { ArticleEffects } from './effects';
+import { ArticleServiceStub } from '../testing/services/article.service.stub';
 
 describe('ArticleEffects', () => {
   let actions$: Observable<any>;
@@ -13,11 +13,7 @@ describe('ArticleEffects', () => {
     TestBed.configureTestingModule({
       providers: [
         ArticleEffects,
-        { provide: ArticleService, useValue: {
-          getAll: () => of([]),
-          getOne: () => of(null),
-          getComments: () => of([]),
-        }},
+        { provide: ArticleService, useValue: ArticleServiceStub },
         provideMockActions(() => actions$)
       ]
     });
