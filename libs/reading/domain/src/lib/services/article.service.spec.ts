@@ -1,26 +1,20 @@
 import { TestBed } from '@angular/core/testing';
-import { Firestore } from '@angular/fire/firestore';
 import { BehaviorSubject, first, of } from 'rxjs';
-import { Mock } from '../mocks/entities/mock';
+import { Mock } from '../testing/entities/mock';
+import * as AngularFire from '@angular/fire/firestore';
 
 import { ArticleService } from './article.service';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 
-describe('ArticleService', () => {
+fdescribe('ArticleService', () => {
   let service: ArticleService;
 
-  const FirestoreStub = {
-    collection: (name: string) => ({
-      doc: (_id: string) => ({
-        valueChanges: () => new BehaviorSubject({ foo: 'bar' }),
-        set: (_d: any) => new Promise<void>((resolve, _reject) => resolve()),
-      }),
-    })
-  };
-
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [
-        { provide: Firestore, useValue: FirestoreStub },
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [
+        provideFirebaseApp(() => initializeApp({ projectId: 'fake_test_id' })),
+        provideFirestore(() => getFirestore())
       ]
     });
     service = TestBed.inject(ArticleService);
@@ -36,19 +30,19 @@ describe('ArticleService', () => {
   });
 
   it('should get all articles when getAll is called', done => {
-    const spy = jest.spyOn(service, 'getAll').mockReturnValue(of(Mock.articles));
+    const spy = jest.spyOn(AngularFire, 'collectionData').mockReturnValue(of(Mock.articleDtoList));
     const articles$ = service.getAll();
     articles$.pipe(first()).subscribe({
       next: articles => {
         expect(spy).toHaveBeenCalled();
-        expect(articles).toEqual(Mock.articles);
+        expect(articles).toEqual(Mock.articleList);
         done();
       }
     })
   });
 
   it('should get one article when getOne is called', done => {
-    const spy = jest.spyOn(service, 'getOne').mockReturnValue(of(Mock.article));
+    const spy = jest.spyOn(AngularFire, 'docData').mockReturnValue(of(Mock.articleDto));
     const article$ = service.getOne('1');
     article$.pipe(first()).subscribe({
       next: article => {
@@ -60,8 +54,8 @@ describe('ArticleService', () => {
   });
 
   it('should get all comments of an article when getComments is called', done => {
-    const comments = [Mock.comment]
-    const spy = jest.spyOn(service, 'getComments').mockReturnValue(of(comments));
+    const comments = [Mock.comment];
+    const spy = jest.spyOn(AngularFire, 'collectionData').mockReturnValue(of(comments));
     const comments$ = service.getComments('1');
     comments$.pipe(first()).subscribe({
       next: _comments => {
