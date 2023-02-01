@@ -1,18 +1,35 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Article } from '../entities/article';
 import { Comment } from '../entities/comment';
+import { Firestore, collectionData, collection, docData, doc, DocumentReference, CollectionReference, DocumentData } from '@angular/fire/firestore';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArticleService {
 
-  constructor() {
+  constructor(private firestore: Firestore) {
     // empty
   }
 
-  getAll(): Observable<Partial<Article>[]> {
+  getAll(): Observable<Article[]> {
+    const articlesCollection: CollectionReference<Article> = collection(this.firestore, 'articles') as CollectionReference<Article>;
+    return collectionData<Article>(articlesCollection, { idField: 'id' }).pipe(
+      map(articles => articles.map(article => ({
+        ...article,
+        imageUrl: 'assets/img/logo-search-grid-2x.png',
+        author: {
+          ...article?.author,
+          photoUrl: 'assets/img/W9aoBmrb_400x400.jpeg'
+        }
+      })))
+    );
+
+
+    /*
     const articles = [1, 2, 3, 4, 5, 6, 7, 8].map(i => ({
       id: i.toString(),
       title: 'Design Tools',
@@ -33,9 +50,13 @@ export class ArticleService {
       }
     }));
     return of(articles);
+    */
   }
 
-  getOne(id: string): Observable<Partial<Article>> {
+  getOne(id: string): Observable<Article> {
+    const articleDoc: DocumentReference<Article> = doc(this.firestore, `articles/${id}`) as DocumentReference<Article>;
+    return docData(articleDoc);
+    /*
     const article = {
       id: id,
       title: 'Design Tools',
@@ -56,9 +77,14 @@ export class ArticleService {
       }
     };
     return of(article);
+    */
   }
 
   getComments(articleId: string): Observable<Comment[]> {
+    const articleCommentsCollection: CollectionReference<Comment> = collection(this.firestore, `articles/${articleId}/comments`) as CollectionReference<Comment>;
+    return collectionData(articleCommentsCollection);
+
+    /*
     const comment: Comment = {
       id: '1',
       replies: [{
@@ -95,5 +121,6 @@ export class ArticleService {
     };
 
     return of([comment]);
+    */
   }
 }
