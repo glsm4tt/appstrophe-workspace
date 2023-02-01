@@ -14,8 +14,7 @@ describe('/blog/articles', () => {
       .first()
       .invoke('attr', 'id')
       .then(id => {
-        const splitted = id.split('-');
-        const articleId = splitted[splitted.length - 1]
+        const articleId = id.split('-').at(-1);
         getArticleCards().first().click();
         cy.url().should('include', `/blog/article/${articleId}`);
     });
