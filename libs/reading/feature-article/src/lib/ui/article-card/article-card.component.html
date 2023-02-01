@@ -12,7 +12,7 @@
         </div>
     </div>
     <div class="card_footer" (click)="onClick(article)">
-        <span class="card_footer__badges" *ngFor="let tag of article?.tags">{{tag?.name}}</span>
+        <span  class="card_footer__badges-container"><span class="card_footer__badges" *ngFor="let tag of article?.tags">{{tag}}</span></span>
         <span class="card_footer__infos">{{article?.time}} min read</span>
     </div>
 </div>

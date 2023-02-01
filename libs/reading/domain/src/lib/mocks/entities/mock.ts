@@ -60,7 +60,7 @@ export class Mock {
       ea doloremque natus error, rerum quas odio quaerat nam ex commodi hic, suscipit in a veritatis pariatur
       minus consequuntur!`,
         time: 5,
-        tags: [{ id: '1', name: 'Angular' }],
+        tags: ['Angular'],
         imageUrl: 'assets/img/logo-search-grid-2x.png',
         author: {
             id: '1',
@@ -82,7 +82,7 @@ export class Mock {
   ea doloremque natus error, rerum quas odio quaerat nam ex commodi hic, suscipit in a veritatis pariatur
   minus consequuntur!`,
         time: 5,
-        tags: [{ id: '1', name: 'Angular' }],
+        tags: ['Angular'],
         imageUrl: 'assets/img/logo-search-grid-2x.png',
         author: {
             id: '1',

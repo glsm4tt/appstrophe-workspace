@@ -8,7 +8,7 @@ export const ARTICLE_FEATURE_KEY = 'article';
 
 export interface FilterArticlesFormState {
   search: string;
-  tags: IdName[];
+  tags: string[];
 }
 
 export interface ArticlState {

@@ -11,7 +11,7 @@ div.card > div.card_avatar > img {
 }
 
 div.card > div.card_body {
-    @apply py-4 px-8 cursor-pointer
+    @apply pt-4 px-8 cursor-pointer
 }
 
 div.card > div.card_body > h2.card_title {
@@ -39,11 +39,15 @@ div.card > div.card_body > div.card_content > p.card_content__text.text-fade {
 }
 
 div.card div.card_footer {
-    @apply flex py-4 px-8 justify-between mt-4 cursor-pointer
+    @apply flex py-4 px-8 justify-between items-center mt-1 cursor-pointer
 }
 
-div.card div.card_footer span.card_footer__badges {
-    @apply rounded-full bg-green-100 text-green-500 dark:bg-green-900 px-3 py-1
+div.card div.card_footer span.card_footer__badges-container {
+    @apply flex items-center
+}
+
+div.card div.card_footer  span.card_footer__badges-container span.card_footer__badges {
+    @apply mr-1 text-xs rounded-full bg-green-100 text-green-500 dark:bg-green-900 px-3 py-1
 }
 
 div.card div.card_footer span.card_footer__infos {
