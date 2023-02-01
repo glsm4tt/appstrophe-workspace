@@ -27,7 +27,8 @@ div.card div.card_footer__start {
 }
 
 div.card div.card_footer > div.card_footer__start > .card_footer__likes .clap__icon,
-div.card div.card_footer > div.card_footer__start > .card_footer__comments .comment__icon,
+div.card div.card_footer > div.card_footer__start > .card_footer__dislikes .dislikes__icon,
+div.card div.card_footer > div.card_footer__start > .card_footer__champain .champain__icon,
 div.card div.card_footer > div.card_footer__end > .card_footer__share .share__icon {
     @apply mx-2 cursor-pointer transition-all ease-in-out duration-300 hover:scale-125;
 }

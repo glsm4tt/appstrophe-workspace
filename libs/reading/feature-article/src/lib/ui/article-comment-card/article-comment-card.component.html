@@ -10,12 +10,16 @@
     <div class="card_footer">
         <div class="card_footer__start">
             <span class="card_footer__likes">
-                <fa-icon [tooltip]="comment?.likes?.length + ' Likes'" class="clap__icon" [icon]="faHandsClapping">
+                <fa-icon [tooltip]="comment?.likes?.length ? comment?.likes?.length + ' Liked' : 'Be the first one liking it !'" class="clap__icon" [icon]="faThumbsUp">
                 </fa-icon>{{comment?.likes?.length}}
             </span>
-            <span class="card_footer__comments">
-                <fa-icon [tooltip]="comment?.replies?.length + ' Replies'" class="comment__icon" [icon]="faComment">
-                </fa-icon>{{comment?.replies?.length}}
+            <span class="card_footer__dislikes">
+                <fa-icon tooltip="Disliked" class="dislikes__icon" [icon]="faThumbsDown">
+                </fa-icon>{{comment?.likes?.length}}
+            </span>
+            <span class="card_footer__champain">
+                <fa-icon tooltip="Loved it !" class="champain__icon" [icon]="faChampagneGlasses">
+                </fa-icon>{{comment?.likes?.length}}
             </span>
         </div>
     </div>

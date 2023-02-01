@@ -1,4 +1,5 @@
 import {
+  ARTICLE_TEST_ID,
   getTooltip,
   getArticleDetailAuthorAvatar,
   getArticleDetailAuthorFullname,
@@ -9,7 +10,7 @@ import {
 } from '../support/article.po';
 
 describe('/blog/articles', () => {
-  beforeEach(() => cy.visit('/blog/article/1'));
+  beforeEach(() => cy.visit(`/blog/article/${ARTICLE_TEST_ID}`));
 
   describe('The header section', () => {
     it('should display the name and the avatar of the author', () => {
@@ -66,7 +67,7 @@ describe('/blog/articles', () => {
 
     cy.window().then((win) => {
       win.navigator.clipboard.readText().then((text) => {
-        expect(text).to.include('/blog/article/1');
+        expect(text).to.include(`/blog/article/${ARTICLE_TEST_ID}`);
       });
     });
   });

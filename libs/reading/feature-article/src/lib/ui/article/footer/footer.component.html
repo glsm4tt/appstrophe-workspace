@@ -1,15 +1,15 @@
 <div class="card_footer">
     <div class="card_footer__start">
         <span class="card_footer__likes">
-            <ng-container *ngIf="article$ | async as article">
+            <ng-container *ngIf="article">
                 <fa-icon [tooltip]="article?.likes?.length ? article?.likes?.length + ' Likes' : 'Be the first one liking it !'" class="clap__icon" [icon]="faHandsClapping">
                 </fa-icon>{{article?.likes?.length}}
             </ng-container>
         </span>
         <span class="card_footer__comments">
-            <ng-container *ngIf="article$ | async as article">
-                <fa-icon [tooltip]="article?.comments + article?.comments ? ' Comments' : 'Be the first one commenting it !'" class="comment__icon" [icon]="faComment">
-                </fa-icon>{{article?.comments}}
+            <ng-container *ngIf="article">
+                <fa-icon [tooltip]="article?.comments?.length ? article?.comments?.length + ' comments' : 'Be the first one commenting it !'" class="comment__icon" [icon]="faComment">
+                </fa-icon>{{article?.comments?.length}}
             </ng-container>
         </span>
     </div>

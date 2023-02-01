@@ -9,6 +9,7 @@ import { environment } from './environments/environment';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideAuth, getAuth } from '@angular/fire/auth';
+import { getStorage, provideStorage } from '@angular/fire/storage';
 
 if (environment.production) {
   enableProdMode();
@@ -16,10 +17,13 @@ if (environment.production) {
 
 bootstrapApplication(AppComponent, {
   providers: [
-    importProvidersFrom(BrowserAnimationsModule),
-    importProvidersFrom(AppRoutingModule),
-    importProvidersFrom(provideFirebaseApp(() => initializeApp(environment.firebase))),
-    importProvidersFrom(provideFirestore(() => getFirestore())),
-    importProvidersFrom(provideAuth(() => getAuth())),
+    importProvidersFrom(
+      BrowserAnimationsModule,
+      AppRoutingModule,
+      provideFirebaseApp(() => initializeApp(environment.firebase)),
+      provideFirestore(() => getFirestore()),
+      provideStorage(() => getStorage()),
+      provideAuth(() => getAuth())
+    )
   ]
 });

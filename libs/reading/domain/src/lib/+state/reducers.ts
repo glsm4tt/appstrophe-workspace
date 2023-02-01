@@ -1,5 +1,6 @@
 import { IdName } from '@appstrophe-workspace/shared-lib';
 import { createReducer, on, createFeature } from '@ngrx/store';
+import { ArticleDetailed } from '../entities';
 import { Article } from '../entities/article';
 import { Comment } from '../entities/comment';
 import * as ArticleActions from './actions';
@@ -15,7 +16,7 @@ export interface ArticlState {
     articles: Partial<Article>[];
     articlesAreLoading: boolean;
     filterArticlesFormState: FilterArticlesFormState;
-    article: Partial<Article>;
+    article: Partial<ArticleDetailed>;
     articleIsLoading: boolean;
     comments: Comment[];
     commentsAreLoading: boolean;

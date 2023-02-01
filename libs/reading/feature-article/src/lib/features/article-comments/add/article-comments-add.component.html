@@ -1,11 +1,11 @@
 <form class="comment-section" [formGroup]="commentForm" (ngSubmit)="submitComment()">
     <div class="comment-fields">
     <div class="form-group">
+        <label class="form-group__label" for="comment">Comment: </label>
         <div class="form-group-content">
         <fa-icon
         class="form-group__icon start"
         [icon]="faPen"></fa-icon>
-       <label for="comment">Comment: </label>
        <textarea (focus)="checkIfConnected()" data-cy="input-comment" class="form-group__control" formControlName="comment" id="comment"
             placeholder="Add a comment..."></textarea>
         </div>

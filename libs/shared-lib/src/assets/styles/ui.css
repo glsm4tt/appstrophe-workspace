@@ -92,7 +92,7 @@ div.form-group textarea.form-group__control:autofill {
  div.form-group div.form-group-content > .end+input.form-group__control, 
  div.form-group div.form-group-content > .start+textarea.form-group__control,
  div.form-group div.form-group-content > .end+textarea.form-group__control {
- @apply indent-5
+    @apply indent-5
  }
 
 @media (prefers-color-scheme: dark){
