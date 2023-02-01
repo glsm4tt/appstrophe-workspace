@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { ArticleDetailed } from '../entities';
 import { Article } from '../entities/article';
 import { Comment } from '../entities/comment';
 import { FilterArticlesFormState } from './reducers';
@@ -28,7 +29,7 @@ export const loadArticle = createAction(
 
 export const articleLoaded = createAction(
   '[Article] Article loaded',
-  props<{ article: Partial<Article> }>()
+  props<{ article: Partial<ArticleDetailed> }>()
 );
 
 export const loadArticleFailure = createAction(

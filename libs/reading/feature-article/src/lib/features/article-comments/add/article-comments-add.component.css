@@ -7,9 +7,9 @@ div.form-group .form-group__icon {
 }
 
 form.comment-section > div.actions-subsection {
-@apply flex items-center justify-end
+    @apply flex items-center justify-end
 }
 
 form.comment-section > div.actions-subsection > button.btn {
     @apply p-2 ml-2
-    }
+}

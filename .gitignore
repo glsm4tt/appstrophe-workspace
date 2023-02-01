@@ -12,6 +12,7 @@ node_modules
 apps/shell/src/environments/*.ts
 apps/blog/src/environments/*.ts
 apps/auth/src/environments/*.ts
+cors.json
 
 # IDEs and editors
 /.idea

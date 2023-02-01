@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SharedLibModule } from '@appstrophe-workspace/shared-lib';
-import { Article } from '@appstrophe-workspace/reading/domain';
+import { Article, ArticleDetailed } from '@appstrophe-workspace/reading/domain';
 import { faHandsClapping, faComment, faArrowUpFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { EMPTY, Observable, shareReplay } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -17,17 +17,13 @@ import * as fromArticle from '@appstrophe-workspace/reading/domain';
 })
 export class ArticleFooterComponent implements OnInit {
 
-  article$: Observable<Partial<Article>> = EMPTY;
+  @Input() article: Partial<ArticleDetailed>;
 
   faHandsClapping = faHandsClapping;
   faComment = faComment;
   faArrowUpFromBracket = faArrowUpFromBracket;
 
-  constructor(private store: Store<fromArticle.ArticleRootState>) {
-    // empty
-  }
-
   ngOnInit() {
-    this.article$ = this.store.select(fromArticle.selectArticle).pipe(shareReplay(1))
+    // empty
   }
 }

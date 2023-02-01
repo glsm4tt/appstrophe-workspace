@@ -1,11 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '@appstrophe-workspace/auth-lib';
 import { Router } from '@angular/router';
 import { ArticleCommentsAddComponent } from './add/article-comments-add.component';
 import { ArticleCommentsListComponent } from './list/article-comments-list.component';
+import { Observable, EMPTY } from 'rxjs';
+import * as fromArticle from '@appstrophe-workspace/reading/domain';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'article-comments',
@@ -15,19 +18,14 @@ import { ArticleCommentsListComponent } from './list/article-comments-list.compo
   imports: [CommonModule, ArticleCommentsListComponent, ArticleCommentsAddComponent]
 })
 export class ArticleCommentsComponent implements OnInit {
+
+  comments$: Observable<fromArticle.Comment[]> = EMPTY;
+
+  private _store = inject(Store<fromArticle.ArticleRootState>);
+  
   readonly faPen = faPen;
 
-  commentForm: FormGroup;
-
-  constructor(
-    private authService: AuthService, 
-    private router: Router) {
-      this.commentForm = new FormGroup({
-        comment: new FormControl('', [Validators.required, Validators.minLength(0), Validators.maxLength(255)])
-      })
-  }
-
   ngOnInit(): void {
-    // empty
+    this.comments$ = this._store.select(fromArticle.selectComments);
   }
 }
