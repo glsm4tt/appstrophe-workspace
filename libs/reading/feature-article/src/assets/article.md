@@ -60,13 +60,13 @@ Some text to show that the reference links can follow later.
 Here's our logo (hover to see the title text):
 
 Inline-style:
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title
+![alt text](https://firebasestorage.googleapis.com/v0/b/appstrophe-test.appspot.com/o/articles%2F0JbH3xqwFblrniNu5mSM%2Fmetadata%2Ficon48.png?alt=media&token=16a91d65-4117-48b7-899a-de889e4fbcdd "Logo Title
 Text 1")
 
 Reference-style:
 ![alt text][logo]
 
-[logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text
+[logo]: https://firebasestorage.googleapis.com/v0/b/appstrophe-test.appspot.com/o/articles%2F0JbH3xqwFblrniNu5mSM%2Fmetadata%2Ficon48.png?alt=media&token=16a91d65-4117-48b7-899a-de889e4fbcdd "Logo Title Text
 2"
 
 Inline `code` has `back-ticks around` it.

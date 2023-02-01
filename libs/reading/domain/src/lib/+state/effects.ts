@@ -7,6 +7,7 @@ import * as ArticleActions from './actions';
 import { ArticleService } from '../services/article.service';
 import { Article } from '../entities/article';
 import { Comment } from '../entities/comment';
+import { ArticleDetailed } from '../entities';
 
 
 
@@ -28,7 +29,7 @@ export class ArticleEffects {
     this.actions$.pipe(
       ofType(ArticleActions.loadArticle),
       switchMap(action => this.articleService.getOne(action.articleId)),
-      map((article: Partial<Article>) => ArticleActions.articleLoaded({ article })),
+      map((article: Partial<ArticleDetailed>) => ArticleActions.articleLoaded({ article })),
       catchError(_ => of(ArticleActions.loadArticleFailure()))
     )
   );

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Article } from '@appstrophe-workspace/reading/domain';
+import { ArticleDetailed } from '@appstrophe-workspace/reading/domain';
 import { Store } from '@ngrx/store';
 import { Observable, EMPTY } from 'rxjs';
 import { ArticleCommentsComponent } from '../../features/article-comments/article-comments.component';
@@ -18,6 +18,8 @@ import { ActivatedRoute } from '@angular/router';
   imports: [CommonModule, ArticleHeaderComponent, ArticleBodyComponent, ArticleFooterComponent, ArticleCommentsComponent]
 })
 export class ArticleDetailsComponent implements OnInit {
+  article$: Observable<Partial<ArticleDetailed>> = EMPTY;
+  isLoading$: Observable<boolean> = EMPTY;
 
   constructor(
     private store: Store<fromArticle.ArticleRootState>,
@@ -26,6 +28,10 @@ export class ArticleDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.article$ = this.store.select(fromArticle.selectArticle);
+
+    this.isLoading$ = this.store.select(fromArticle.selectIsArticleLoading);
+
     this.store.dispatch(fromArticle.loadArticle({ articleId: this.route.snapshot.params['articleId'] }))
   }
 }

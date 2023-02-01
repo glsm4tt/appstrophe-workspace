@@ -5,9 +5,10 @@ import * as AngularFire from '@angular/fire/firestore';
 
 import { ArticleService } from './article.service';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
-import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { provideFirestore, getFirestore, DocumentReference, Query } from '@angular/fire/firestore';
+import { Article } from '../entities';
 
-fdescribe('ArticleService', () => {
+describe('ArticleService', () => {
   let service: ArticleService;
 
   beforeEach(async () => {
@@ -41,13 +42,30 @@ fdescribe('ArticleService', () => {
     })
   });
 
-  it('should get one article when getOne is called', done => {
-    const spy = jest.spyOn(AngularFire, 'docData').mockReturnValue(of(Mock.articleDto));
+  fit('should get one article when getOne is called', done => {
+    const docDataSpy = jest.spyOn(AngularFire, 'docData').mockImplementation((ref: DocumentReference<unknown>, options?: { idField?: string; }) => {
+      switch(ref.path) {
+        case 'articles/1':
+          return of(Mock.article);
+
+        case 'articles/1/metadata/1':
+          return of(Mock.articleMetadata);
+
+        default: 
+          return of(null);
+      }
+    });
+    const collectionDataSpy = jest.spyOn(AngularFire, 'collectionData').mockImplementation((ref: Query<unknown>, options?: { idField?: string; }) => {
+      return of([Mock.comment]);
+    });
+
     const article$ = service.getOne('1');
     article$.pipe(first()).subscribe({
       next: article => {
-        expect(spy).toHaveBeenCalled();
-        expect(article).toEqual(Mock.article);
+        console.log('article', article, Mock.articleDetailed)
+        expect(docDataSpy).toHaveBeenCalledTimes(2);
+        expect(collectionDataSpy).toHaveBeenCalledTimes(1);
+        expect(article).toEqual(Mock.articleDetailed);
         done();
       }
     })

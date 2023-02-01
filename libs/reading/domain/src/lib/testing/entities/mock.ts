@@ -1,6 +1,7 @@
 import { IdTokenResult, User } from '@angular/fire/auth';
-import { Like } from '../../entities';
+import { ArticleDetailed, Like } from '../../entities';
 import { Article, ArticleDto } from '../../entities/article';
+import { ArticleMetadata } from '../../entities/article-metadata';
 import { Comment } from '../../entities/comment';
 
 export class Mock {
@@ -16,23 +17,6 @@ export class Mock {
 
     static readonly comment: Comment = {
         id: '1',
-        replies: [{
-            id: '1',
-            author: {
-                id: '1',
-                name: 'Sylvain DEDIEU',
-                photoUrl: 'assets/img/W9aoBmrb_400x400.jpeg'
-            },
-            date: new Date(),
-            text: 'reply',
-            likes: [1, 2, 3].map(i => ({
-                id: i.toString(), name: '', author: {
-                    id: '1',
-                    name: 'Sylvain DEDIEU',
-                    photoUrl: 'assets/img/W9aoBmrb_400x400.jpeg'
-                }
-            }))
-        }],
         author: {
             id: '1',
             name: 'Sylvain DEDIEU',
@@ -105,6 +89,16 @@ export class Mock {
             ...Mock.articleDto.author,
             photoUrl: 'assets/img/W9aoBmrb_400x400.jpeg'
         }
+    };
+
+    static readonly articleMetadata: ArticleMetadata = {
+        articleUrl: 'fake_test_storage_url'
+    };
+
+    static readonly articleDetailed: ArticleDetailed = {
+        ...Mock.article,
+        comments: [{text: Mock.comment.text}],
+        articleUrl: Mock.articleMetadata.articleUrl 
     };
 
     static readonly user: User = {
