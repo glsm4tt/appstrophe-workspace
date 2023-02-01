@@ -1,6 +1,6 @@
 import { IdTokenResult, User } from '@angular/fire/auth';
 import { Like } from '../../entities';
-import { Article } from '../../entities/article';
+import { Article, ArticleDto } from '../../entities/article';
 import { Comment } from '../../entities/comment';
 
 export class Mock {
@@ -49,7 +49,7 @@ export class Mock {
         }))
     };
 
-    static readonly articles: Article[] = [1, 2, 3, 4, 5, 6, 7, 8].map(i => ({
+    static readonly articleDtoList: ArticleDto[] = [1, 2, 3, 4, 5, 6, 7, 8].map(i => ({
         id: i.toString(),
         title: 'Design Tools',
         description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae dolores
@@ -61,17 +61,24 @@ export class Mock {
       minus consequuntur!`,
         time: 5,
         tags: ['Angular'],
-        imageUrl: 'assets/img/logo-search-grid-2x.png',
         author: {
             id: '1',
             name: 'Sylvain DEDIEU',
-            photoUrl: 'assets/img/W9aoBmrb_400x400.jpeg'
         },
         comments: 5,
         likes: []
     }));
 
-    static readonly article: Article = {
+    static readonly articleList: Article[] = Mock.articleDtoList.map(a => ({
+        ...a,
+        imageUrl: 'assets/img/logo-search-grid-2x.png',
+        author: {
+            ...a.author,
+            photoUrl: 'assets/img/W9aoBmrb_400x400.jpeg'
+        }
+    }));
+
+    static readonly articleDto: ArticleDto = {
         id: '1',
         title: 'Design Tools',
         description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae dolores
@@ -83,14 +90,21 @@ export class Mock {
   minus consequuntur!`,
         time: 5,
         tags: ['Angular'],
-        imageUrl: 'assets/img/logo-search-grid-2x.png',
         author: {
             id: '1',
             name: 'Sylvain DEDIEU',
-            photoUrl: 'assets/img/W9aoBmrb_400x400.jpeg'
         },
         comments: 3,
         likes: [Mock.like]
+    };
+
+    static readonly article: Article = {
+        ...Mock.articleDto,
+        imageUrl: 'assets/img/logo-search-grid-2x.png',
+        author: {
+            ...Mock.articleDto.author,
+            photoUrl: 'assets/img/W9aoBmrb_400x400.jpeg'
+        }
     };
 
     static readonly user: User = {
