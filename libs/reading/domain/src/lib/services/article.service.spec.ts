@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { first, of } from 'rxjs';
+import { Firestore } from '@angular/fire/firestore';
+import { BehaviorSubject, first, of } from 'rxjs';
 import { Mock } from '../mocks/entities/mock';
 
 import { ArticleService } from './article.service';
@@ -7,8 +8,21 @@ import { ArticleService } from './article.service';
 describe('ArticleService', () => {
   let service: ArticleService;
 
+  const FirestoreStub = {
+    collection: (name: string) => ({
+      doc: (_id: string) => ({
+        valueChanges: () => new BehaviorSubject({ foo: 'bar' }),
+        set: (_d: any) => new Promise<void>((resolve, _reject) => resolve()),
+      }),
+    })
+  };
+
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [
+        { provide: Firestore, useValue: FirestoreStub },
+      ]
+    });
     service = TestBed.inject(ArticleService);
   });
 
