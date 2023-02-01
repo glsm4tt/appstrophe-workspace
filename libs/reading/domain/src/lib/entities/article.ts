@@ -1,5 +1,5 @@
 import { Author } from './author';
-import { Id, IdName } from "@appstrophe-workspace/shared-lib";
+import { Id } from "@appstrophe-workspace/shared-lib";
 import { Like } from './like';
 
 export interface Article extends Id {
@@ -7,7 +7,7 @@ export interface Article extends Id {
     description: string;
     imageUrl: string;
     author: Author;
-    tags: IdName[];
+    tags: string[];
     time: number;
     comments: number;
     likes: Like[];

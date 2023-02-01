@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, EMPTY } from 'rxjs';
+import { Observable, EMPTY, tap } from 'rxjs';
 import * as fromArticle from '@appstrophe-workspace/reading/domain';
 import { Router, RouterModule } from '@angular/router';
 import { Article } from '@appstrophe-workspace/reading/domain';
@@ -25,7 +25,7 @@ export class ArticleListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.articles$ = this.store.select(fromArticle.selectFilteredArticles);
+    this.articles$ = this.store.select(fromArticle.selectFilteredArticles).pipe(tap(console.log));
 
     this.isLoading$ = this.store.select(fromArticle.selectAreArticlesLoading);
 
