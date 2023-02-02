@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, EMPTY, Subject } from 'rxjs';
@@ -12,10 +12,44 @@ import { SharedLibModule } from '@appstrophe-workspace/shared-lib';
 
 @Component({
   selector: 'article-search',
-  templateUrl: './article-search.component.html',
-  styleUrls: ['./article-search.component.css'],
+  template: `
+  <form class="search-section" [formState]="formState$ | async" [formGroup]="searchForm">
+    <div class="search-fields">
+      <div class="form-group">
+          <div class="form-group-content">
+          <fa-icon
+          class="form-group__icon start"
+          [icon]="faSearch"></fa-icon>
+        <input data-cy="input-search" type="text" class="form-group__control" formControlName="search" id="search"
+              placeholder="Filter by name">
+          </div>
+      </div>
+    </div>
+  </form>
+  `,
+  styles: [`
+    div.form-group .form-group__icon {
+      @apply text-orange-500
+    }
+        
+    form.search-section {
+      @apply p-4 flex items-center justify-center
+    }
+
+    form.search-section > div.search-fields {
+      @apply w-full md:w-1/2 
+    }
+
+    div.card-list {
+      @apply grid grid-cols-1 gap-2 md:gap-8 md:grid-cols-2 m-1 
+    }
+
+    div.card-list .card {
+      @apply transition-all ease-in-out duration-300 hover:scale-105 hover:px-0;
+    }
+  `],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FontAwesomeModule, SharedLibModule]
+  imports: [AsyncPipe, ReactiveFormsModule, FontAwesomeModule, SharedLibModule]
 })
 export class ArticleSearchComponent implements OnInit, OnDestroy {
   readonly faSearch = faSearch;
