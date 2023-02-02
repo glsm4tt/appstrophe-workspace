@@ -1,7 +1,0 @@
-div.commments_section > div.commments_section__add {
-    @apply pt-4 pb-2 border-t-2 border-gray-700 dark:border-gray-300
-}
-
-div.commments_section > div.commments_section__list {
-    @apply pt-4 pb-2 border-t-2 border-gray-700 dark:border-gray-300
-}

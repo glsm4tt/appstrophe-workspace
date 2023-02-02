@@ -15,7 +15,7 @@ export const ARTICLE_READING_ROUTES: Route[] = [
         children: [
             {
                 path: 'articles',
-                loadComponent: () => import('./pages/article-list/article-list.component').then(m => m.ArticleListComponent)
+                loadComponent: () => import('./pages/article-catalog/article-catalog.component').then(m => m.ArticleCatalogComponent)
             },
             {
                 path: 'article/:articleId',

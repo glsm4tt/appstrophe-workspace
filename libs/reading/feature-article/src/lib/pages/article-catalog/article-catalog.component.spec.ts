@@ -4,19 +4,19 @@ import { EffectsModule } from '@ngrx/effects';
 import { Store, StoreModule } from '@ngrx/store';
 import * as fromArticle from '@appstrophe-workspace/reading/domain';
 
-import { ArticleListComponent } from './article-list.component';
+import { ArticleCatalogComponent } from './article-catalog.component';
 import { first, of, zip } from 'rxjs';
 import { Mock } from '@appstrophe-workspace/reading/domain';
 
-describe('ArticleListComponent', () => {
-  let component: ArticleListComponent;
-  let fixture: ComponentFixture<ArticleListComponent>;
+describe('ArticleCatalogComponent', () => {
+  let component: ArticleCatalogComponent;
+  let fixture: ComponentFixture<ArticleCatalogComponent>;
   let store: Store;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        ArticleListComponent,
+        ArticleCatalogComponent,
         RouterTestingModule,
         StoreModule.forRoot({}),
         EffectsModule.forRoot([])
@@ -25,7 +25,7 @@ describe('ArticleListComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ArticleListComponent);
+    fixture = TestBed.createComponent(ArticleCatalogComponent);
     store = TestBed.inject(Store);
     component = fixture.componentInstance;
     fixture.detectChanges();
