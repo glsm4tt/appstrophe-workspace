@@ -5,8 +5,15 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'appstrophe-workspace-app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  template: `
+    <appstrophe-workspace-header></appstrophe-workspace-header>
+    <div class="flex flex-col min-h-screen">
+        <div class="flex-grow">
+            <router-outlet class="h-full"></router-outlet>
+        </div>
+        <div class="h-32 bg-gray-100"></div>
+    </div>
+  `,
  standalone: true,
   imports: [
     CommonModule,
