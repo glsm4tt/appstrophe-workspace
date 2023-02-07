@@ -1,12 +1,13 @@
 import { NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SharedLibModule } from '@appstrophe-workspace/shared-lib';
 import { AuthService } from '@appstrophe-workspace/auth-lib';
-import { first } from 'rxjs';
+import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { ArticleDetailedWithComments, CommentService } from '@appstrophe-workspace/reading/domain';
 
 @Component({
   selector: 'article-comments-add',
@@ -51,13 +52,18 @@ import { Router } from '@angular/router';
   imports: [NgIf, ReactiveFormsModule, FontAwesomeModule, SharedLibModule]
 })
 export class ArticleCommentsAddComponent implements OnInit {
+
+  @Input() article: Partial<ArticleDetailedWithComments>;
+  
   readonly faPen = faPen;
 
   commentForm: FormGroup;
 
-  constructor(
-    private authService: AuthService, 
-    private router: Router) {
+  private _authService = inject(AuthService);
+  private _commentService = inject(CommentService);
+  private _router = inject(Router);
+
+  constructor() {
       this.commentForm = new FormGroup({
         comment: new FormControl('', [Validators.required, Validators.minLength(0), Validators.maxLength(255)])
       })
@@ -67,18 +73,19 @@ export class ArticleCommentsAddComponent implements OnInit {
     // empty
   }
 
-  submitComment(){
-    // empty
+  async submitComment(){
+    if(!this.commentForm.value.comment.trim().replace('\n', '')) 
+      return;
+    await this._commentService.addComment(this.article.id, this.commentForm.value.comment);
   }
 
   checkIfConnected(){
-    this.authService.user$.pipe(
+    this._authService.user$.pipe(
       first()
     ).subscribe(
       user => {
-        if(!user){
-          this.router.navigateByUrl(`/auth/login?previous=${this.router.url}`)
-        }
+        if(!user)
+          this._router.navigateByUrl(`/auth/login?previous=${this._router.url}`)
       }
     )
   }

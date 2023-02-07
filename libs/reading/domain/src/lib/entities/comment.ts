@@ -1,10 +1,12 @@
 import { Id } from '@appstrophe-workspace/shared-lib';
 import { Author } from './author';
-import { Like } from './like';
+import { Timestamp } from '@angular/fire/firestore';
+import { Reaction } from './reaction';
 
 export interface Comment extends Id {
     author: Author;
-    date: Date;
+    date: Timestamp;
     text: string;
-    likes: Like[];
+    reactions: Reaction[];
+    liked: boolean;
 }

@@ -1,7 +1,6 @@
 import { Id } from "@appstrophe-workspace/shared-lib";
 import { AuthorDto } from "./author";
-import { Like } from "./like";
-import { Comment } from './comment';
+import { Comment } from "./comment";
 
 export interface ArticleDetailed extends Id {
     title: string;
@@ -9,6 +8,8 @@ export interface ArticleDetailed extends Id {
     author: AuthorDto;
     tags: string[];
     time: number;
-    comments: Partial<Comment>[];
-    likes: Like[];
+    comments: number;
+    likesCount: number;
 }
+
+export type ArticleDetailedWithComments = ArticleDetailed & { comments: Comment[] }

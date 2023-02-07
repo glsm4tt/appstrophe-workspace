@@ -1,36 +1,31 @@
 import { IdTokenResult, User } from '@angular/fire/auth';
-import { ArticleDetailed, Like } from '../../entities';
+import { Timestamp } from '@angular/fire/firestore';
+import { ArticleDetailed, Reaction } from '../../entities';
 import { Article, ArticleDto } from '../../entities/article';
 import { ArticleMetadata } from '../../entities/article-metadata';
 import { Comment } from '../../entities/comment';
 
 export class Mock {
 
-    static readonly like: Like = {
+    static readonly reaction: Reaction = {
         id: '1',
-        author: {
-            id: '1',
-            name: 'Sylvain DEDIEU',
-            photoUrl: 'assets/img/W9aoBmrb_400x400.jpeg'
-        }
+        date: Timestamp.now(),
+        type: 'like'
     }
 
     static readonly comment: Comment = {
         id: '1',
         author: {
             id: '1',
-            name: 'Sylvain DEDIEU',
+            alias: '@sdedieu',
+            firstname: 'sylvain',
+            name: 'dedieu',
             photoUrl: 'assets/img/W9aoBmrb_400x400.jpeg'
         },
-        date: new Date(),
+        date: new Timestamp(1675409728, 2),
         text: `Ceci est un texte\n sur deux niveaux.\n  avec un tab.`,
-        likes: [1, 2, 3].map(i => ({
-            id: i.toString(), name: '', author: {
-                id: '1',
-                name: 'Sylvain DEDIEU',
-                photoUrl: 'assets/img/W9aoBmrb_400x400.jpeg'
-            }
-        }))
+        reactions: [Mock.reaction],
+        liked: false
     };
 
     static readonly articleDtoList: ArticleDto[] = [1, 2, 3, 4, 5, 6, 7, 8].map(i => ({
@@ -47,10 +42,12 @@ export class Mock {
         tags: ['Angular'],
         author: {
             id: '1',
-            name: 'Sylvain DEDIEU',
+            alias: '@sdedieu',
+            firstname: 'sylvain',
+            name: 'dedieu',
         },
         comments: 5,
-        likes: []
+        likesCount: i
     }));
 
     static readonly articleList: Article[] = Mock.articleDtoList.map(a => ({
@@ -76,10 +73,12 @@ export class Mock {
         tags: ['Angular'],
         author: {
             id: '1',
-            name: 'Sylvain DEDIEU',
+            alias: '@sdedieu',
+            firstname: 'sylvain',
+            name: 'dedieu',
         },
         comments: 3,
-        likes: [Mock.like]
+        likesCount: 2
     };
 
     static readonly article: Article = {
@@ -97,8 +96,7 @@ export class Mock {
 
     static readonly articleDetailed: ArticleDetailed = {
         ...Mock.article,
-        comments: [{text: Mock.comment.text}],
-        articleUrl: Mock.articleMetadata.articleUrl 
+        articleUrl: Mock.articleMetadata.articleUrl
     };
 
     static readonly user: User = {

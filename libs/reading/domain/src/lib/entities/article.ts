@@ -1,6 +1,5 @@
 import { Author, AuthorDto } from './author';
 import { Id } from "@appstrophe-workspace/shared-lib";
-import { Like } from './like';
 
 export interface ArticleDto extends Id {
     title: string;
@@ -9,7 +8,7 @@ export interface ArticleDto extends Id {
     tags: string[];
     time: number;
     comments: number;
-    likes: Like[];
+    likesCount: number;
 }
 
 export interface Article extends ArticleDto {
