@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AuthService } from '@appstrophe-workspace/auth-lib';
+import { AuthService, AuthServiceStub } from '@appstrophe-workspace/auth-lib';
 import { Mock } from '@appstrophe-workspace/reading/domain';
 import { EffectsModule } from '@ngrx/effects';
 import { Store, StoreModule } from '@ngrx/store';
@@ -23,7 +23,7 @@ describe('ArticleCommentsComponent', () => {
         RouterTestingModule
       ],
       providers: [
-        {provide: AuthService, useValue: {}}
+        { provide: AuthService, useValue: AuthServiceStub }
       ]
     }).compileComponents();
   });
@@ -43,17 +43,26 @@ describe('ArticleCommentsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  
+
   it('should get comments on init', done => {
-    const spy = jest.spyOn(store, 'select').mockReturnValue(of([Mock.comment]));
+    const spy = jest.spyOn(store, 'select').mockImplementation((mapFn: (state: unknown) => unknown) => {
+      switch (mapFn) {
+        case fromArticle.selectArticle:
+          return of(Mock.article);
+        case fromArticle.selectComments:
+          return of([Mock.comment]);
+        default:
+          return of(null)
+      }
+    });
 
     component.ngOnInit();
 
-    component.comments$.pipe(first()).subscribe({
-      next: comments => { 
-        expect(spy).toBeCalledWith(fromArticle.selectComments);
-        expect(spy).toBeCalledTimes(1);
-        expect(comments).toEqual([Mock.comment]);
+    component.articleWithComments$.pipe(first()).subscribe({
+      next: article => {
+        expect(spy).toHaveBeenNthCalledWith(1, fromArticle.selectArticle)
+        expect(spy).toHaveBeenNthCalledWith(2, fromArticle.selectComments);
+        expect(article.comments).toEqual([Mock.comment]);
         done();
       }
     })

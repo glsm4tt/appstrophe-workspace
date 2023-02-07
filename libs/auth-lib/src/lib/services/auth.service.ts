@@ -15,7 +15,7 @@ export class AuthService {
    */
   constructor(private auth: Auth) {
     this.user$ = new Observable(subscriber => {
-     this.auth.onAuthStateChanged(user => subscriber.next(user))
+      this.auth.onAuthStateChanged(user => subscriber.next(user))
     });
   }
 

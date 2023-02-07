@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthService } from '../services/auth.service';
+import { AuthServiceStub } from '../testing';
 
 import { RegisterComponent } from './register.component';
 
@@ -11,11 +12,11 @@ describe('RegisterComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RegisterComponent, 
+        RegisterComponent,
         RouterTestingModule
       ],
       providers: [
-        {provide: AuthService, useValue: {}}
+        { provide: AuthService, useValue: AuthServiceStub }
       ]
     }).compileComponents();
   });

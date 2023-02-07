@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ValidationErrors } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthService } from '../services/auth.service';
+import { AuthServiceStub } from '../testing';
 
 import { LoginComponent } from './login.component';
 
@@ -12,11 +13,11 @@ describe('LoginComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        LoginComponent, 
+        LoginComponent,
         RouterTestingModule
       ],
       providers: [
-        {provide: AuthService, useValue: {}}
+        { provide: AuthService, useValue: AuthServiceStub }
       ]
     }).compileComponents();
   });

@@ -1,9 +1,8 @@
 import { inject, Injectable } from '@angular/core';
-import { from, Observable } from 'rxjs';
-import { combineLatestWith, map, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { combineLatestWith, map } from 'rxjs/operators';
 import { Article } from '../entities/article';
-import { Comment } from '../entities/comment';
-import { Firestore, collectionData, collection, docData, doc, DocumentReference, CollectionReference, DocumentData } from '@angular/fire/firestore';
+import { Firestore, collectionData, collection, docData, doc, DocumentReference, CollectionReference } from '@angular/fire/firestore';
 import { ArticleDetailed, ArticleMetadata } from '../entities';
 
 
@@ -35,20 +34,15 @@ export class ArticleService {
   getOne(id: string): Observable<ArticleDetailed> {
     const articleDoc: DocumentReference<Article> = doc(this._firestore, `articles/${id}`) as DocumentReference<Article>;
     const articleDoc$: Observable<Article> = docData(articleDoc, { idField: 'id' });
-    
+
     const articleMetadataDoc: DocumentReference<ArticleMetadata> = doc(this._firestore, `articles/${id}/metadata/${id}`) as DocumentReference<ArticleMetadata>;
     const articleMetadataDoc$: Observable<ArticleMetadata> = docData(articleMetadataDoc);
-    
-    const articleComments: CollectionReference<Comment> = collection(this._firestore, `articles/${id}/comments`) as CollectionReference<Comment>;
-    const articleComments$: Observable<Partial<Comment>[]> = collectionData(articleComments, { idField: 'id' }).pipe(map(comments => comments.map(c => ({text: c.text}))));
 
     return articleDoc$.pipe(
-      combineLatestWith(articleMetadataDoc$, articleComments$),
-      tap(console.log),
-      map(([article, { articleUrl }, comments]) => ({
+      combineLatestWith(articleMetadataDoc$),
+      map(([article, { articleUrl }]) => ({
         ...article,
         articleUrl,
-        comments,
         imageUrl: 'assets/img/logo-search-grid-2x.png',
         author: {
           ...article?.author,
@@ -56,10 +50,5 @@ export class ArticleService {
         }
       }) as ArticleDetailed)
     );
-  }
-
-  getComments(articleId: string): Observable<Comment[]> {
-    const articleCommentsCollection: CollectionReference<Comment> = collection(this._firestore, `articles/${articleId}/comments`) as CollectionReference<Comment>;
-    return collectionData(articleCommentsCollection);
   }
 }
