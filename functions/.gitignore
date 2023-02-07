@@ -7,3 +7,10 @@ typings/
 
 # Node.js dependency directory
 node_modules/
+
+# Config and keys
+firebase.config.json
+serviceAccountKey.json
+
+# Test data
+test/ressources/**
