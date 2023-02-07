@@ -31,7 +31,5 @@ export class ArticleCatalogComponent implements OnInit {
     this.articles$ = this._store.select(fromArticle.selectFilteredArticles);
 
     this.isLoading$ = this._store.select(fromArticle.selectAreArticlesLoading);
-
-    this._store.dispatch(fromArticle.loadArticles())
   }
 }

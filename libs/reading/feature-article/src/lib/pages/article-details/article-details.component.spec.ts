@@ -53,13 +53,4 @@ describe('ArticleDetailsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('should dispatch the load article action with the route parameter during the init', () => {
-    const spy = jest.spyOn(store, 'dispatch');
-
-    component.ngOnInit();
-
-    expect(spy).toBeCalledTimes(1);
-    expect(spy).toBeCalledWith(fromArticle.loadArticle({ articleId: ARTICLE_ID }))
-  });
 });

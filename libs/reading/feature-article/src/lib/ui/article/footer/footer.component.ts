@@ -12,14 +12,16 @@ import { faHandsClapping, faComment, faArrowUpFromBracket } from '@fortawesome/f
       <div class="card_footer__start">
           <span class="card_footer__likes">
               <ng-container *ngIf="article">
-                  <fa-icon [tooltip]="article?.likes?.length ? article?.likes?.length + ' Likes' : 'Be the first one liking it !'" class="clap__icon" [icon]="faHandsClapping">
-                  </fa-icon>{{article?.likes?.length}}
+                  <fa-icon [tooltip]="article?.likesCount ? article?.likesCount + ' Reactions' : 'Be the first one liking it !'" class="clap__icon" [icon]="faHandsClapping">
+                  </fa-icon>
+                  <span *ngIf="article?.likesCount">{{article?.likesCount}}</span>
               </ng-container>
           </span>
           <span class="card_footer__comments">
               <ng-container *ngIf="article">
-                  <fa-icon [tooltip]="article?.comments?.length ? article?.comments?.length + ' comments' : 'Be the first one commenting it !'" class="comment__icon" [icon]="faComment">
-                  </fa-icon>{{article?.comments?.length}}
+                  <fa-icon [tooltip]="article?.comments ? article?.comments + ' comments' : 'Be the first one commenting it !'" class="comment__icon" [icon]="faComment">
+                  </fa-icon>
+                  <span *ngIf="article?.comments">{{article?.comments}}</span>
               </ng-container>
           </span>
       </div>

@@ -5,7 +5,8 @@ import { Store, StoreModule } from '@ngrx/store';
 import * as fromArticle from '@appstrophe-workspace/reading/domain';
 
 import { ArticleCatalogComponent } from './article-catalog.component';
-import { first, of, zip } from 'rxjs';
+import { of, zip } from 'rxjs';
+import { first } from 'rxjs/operators';
 import { Mock } from '@appstrophe-workspace/reading/domain';
 
 describe('ArticleCatalogComponent', () => {
@@ -52,14 +53,5 @@ describe('ArticleCatalogComponent', () => {
           done();
         }
       })
-  })
-
-  it('should dispatch the loadArticle action during the init', () => { 
-    const dispatchSpy = jest.spyOn(store, 'dispatch');
-
-    component.ngOnInit();
-
-    expect(dispatchSpy).toBeCalledTimes(1);
-    expect(dispatchSpy).toHaveBeenCalledWith(fromArticle.loadArticles());
   })
 });

@@ -1,7 +1,10 @@
 import { IdName } from "@appstrophe-workspace/shared-lib";
 
-export type AuthorDto = IdName;
+export interface AuthorDto extends IdName {
+    alias: string;
+    firstname: string;
+}
 
-export interface Author extends IdName {
+export interface Author extends AuthorDto {
     photoUrl: string;
 }
