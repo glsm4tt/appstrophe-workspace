@@ -26,8 +26,12 @@ h4 {
     @apply text-gray-500
 }
 
-p, ul, li, a, th, td, span {
+p, ul, li, a, th, td, span, img {
     @apply text-gray-700 dark:text-gray-300
+}
+
+img {
+    @apply text-xs
 }
 
 .article-markdown {

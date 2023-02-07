@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ValidationErrors } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthService } from '../services/auth.service';
+import { AuthServiceStub } from '../testing';
 
 import { PasswordRetrieveComponent } from './password-retrieve.component';
 
@@ -16,7 +17,7 @@ describe('PasswordRetrieveComponent', () => {
         RouterTestingModule
       ],
       providers: [
-        {provide: AuthService, useValue: {}}
+        { provide: AuthService, useValue: AuthServiceStub }
       ]
     }).compileComponents();
   });

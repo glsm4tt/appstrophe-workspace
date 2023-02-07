@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AuthService } from '@appstrophe-workspace/auth-lib';
+import { AuthService, AuthServiceStub } from '@appstrophe-workspace/auth-lib';
+import { CommentService, CommentServiceStub } from '@appstrophe-workspace/reading/domain';
 
 import { ArticleCommentsListComponent } from './article-comments-list.component';
 
@@ -13,7 +14,8 @@ describe('ArticleCommentsListComponent', () => {
         ArticleCommentsListComponent
       ],
       providers: [
-        {provide: AuthService, useValue: {}}
+        { provide: AuthService, useValue: AuthServiceStub },
+        { provide: CommentService, useValue: CommentServiceStub }
       ]
     }).compileComponents();
   });

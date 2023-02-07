@@ -3,7 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AuthService } from '@appstrophe-workspace/auth-lib';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { ArticleServiceStub, Mock } from '@appstrophe-workspace/reading/domain';
+import { ArticleServiceStub, CommentService, Mock } from '@appstrophe-workspace/reading/domain';
 import { of } from 'rxjs';
 
 import { ArticleCommentsAddComponent } from './article-comments-add.component';
@@ -25,7 +25,8 @@ describe('ArticleCommentsAddComponent', () => {
         RouterTestingModule
       ],
       providers: [
-        { provide: AuthService, useValue: ArticleServiceStub }
+        { provide: AuthService, useValue: {} },
+        { provide: CommentService, useValue: {} }
       ]
     }).compileComponents();
   });

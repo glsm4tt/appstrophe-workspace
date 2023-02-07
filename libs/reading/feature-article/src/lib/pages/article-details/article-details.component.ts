@@ -19,12 +19,12 @@ import { ActivatedRoute } from '@angular/router';
       </ng-container>
       <ng-template #article_content>
           <ng-container *ngIf="article$ | async as article">
-              <article-header></article-header>
-              <div class="article_page__body">
-                  <article-body [articleUrl]="article.articleUrl"></article-body>
-              </div>
-              <article-footer [article]="article"></article-footer>
-              <article-comments></article-comments>
+            <article-header></article-header>
+            <div class="article_page__body">
+                <article-body [articleUrl]="article.articleUrl"></article-body>
+            </div>
+            <article-footer [article]="article"></article-footer>-->
+            <article-comments></article-comments>
           </ng-container>
       </ng-template>
     </div>
@@ -52,7 +52,5 @@ export class ArticleDetailsComponent implements OnInit {
     this.article$ = this._store.select(fromArticle.selectArticle);
 
     this.isLoading$ = this._store.select(fromArticle.selectIsArticleLoading);
-
-    this._store.dispatch(fromArticle.loadArticle({ articleId: this._route.snapshot.params['articleId'] }))
   }
 }
