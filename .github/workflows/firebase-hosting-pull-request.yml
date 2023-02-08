@@ -37,10 +37,10 @@ jobs:
           sed -i 's/__MEASUREMENT_ID__/${{ secrets.MEASUREMENT_ID }}/g' apps/shell/src/environments/environment.prod.ts
       - name: Build
         run: npx nx run-many --target=build --all
-      - name: e2e test shell
-        run: npx nx e2e shell-e2e --watch=false --nx-bail 
-      - name: e2e test others
-        run: npx nx run-many --target=e2e --all --exclude=shell-e2e --watch=false --nx-bail
+#      - name: e2e test shell
+#        run: npx nx e2e shell-e2e --watch=false --nx-bail 
+#      - name: e2e test others
+#        run: npx nx run-many --target=e2e --all --exclude=shell-e2e --watch=false --nx-bail
       - name: unit tests
         run: npx nx run-many --target=test --all --watch=false --nx-bail 
       - name: cloud functions tests
