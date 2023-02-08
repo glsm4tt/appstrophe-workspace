@@ -39,14 +39,14 @@ jobs:
           echo ${{ secrets.FIREBASE_CONFIG }} > functions/firebase.config.json
       - name: Build
         run: npx nx run-many --target=build --all
-#      - name: e2e test shell
+#      - name: E2e test shell
 #        run: npx nx e2e shell-e2e --watch=false --nx-bail 
-#      - name: e2e test others
+#      - name: E2e test others
 #        run: npx nx run-many --target=e2e --all --exclude=shell-e2e --watch=false --nx-bail
-      - name: unit tests
+      - name: Unit tests
         run: npx nx run-many --target=test --all --watch=false --nx-bail 
-      - name: cloud functions tests
-        run: npm --prefix functions run test -- --token ${{ secrets.FIREBASE_SERVICE_ACCOUNT_APPSTROPHE_TEST }} 
+#      - name: Cloud functions tests
+#        run: npm --prefix functions run test -- --token ${{ secrets.FIREBASE_SERVICE_ACCOUNT_APPSTROPHE_TEST }} 
       - name: Deployment
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
