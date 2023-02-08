@@ -48,4 +48,4 @@ jobs:
 #      - name: Cloud functions tests
 #        run: npm --prefix functions run test -- --token ${{ secrets.FIREBASE_SERVICE_ACCOUNT_APPSTROPHE_TEST }} 
       - name: Deployment
-        run: firebase deploy --token ${{ secrets.FIREBASE_SERVICE_ACCOUNT_APPSTROPHE_TEST }} 
+        run: npm run firebase:deploy -- --token ${{ secrets.FIREBASE_SERVICE_ACCOUNT_APPSTROPHE_TEST }} 
