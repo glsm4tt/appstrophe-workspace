@@ -4,6 +4,8 @@
   "license": "MIT",
   "scripts": {
     "ng": "nx",
+    "firebase": "firebase",
+    "firebase:deploy": "firebase deploy",
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2020 browser module main",
     "start": "nx serve",
     "build": "nx build",
@@ -64,6 +66,7 @@
     "eslint": "8.15.0",
     "eslint-config-prettier": "8.1.0",
     "eslint-plugin-cypress": "^2.10.3",
+    "firebase-tools": "^11.22.0",
     "husky": "^8.0.1",
     "jasmine-marbles": "~0.9.1",
     "jest": "27.5.1",
