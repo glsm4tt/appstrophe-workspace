@@ -1,22 +1,22 @@
-import * as firebaseConfig from '../firebase.config.json';
-import * as firebaseFunctionsTest from 'firebase-functions-test'
-import * as admin from 'firebase-admin';
-import { assert } from 'chai';
+import * as firebaseConfig from "../firebase.config.json";
+import * as firebaseFunctionsTest from "firebase-functions-test"
+import * as admin from "firebase-admin";
+import { assert } from "chai";
  
-process.env.FIREBASE_AUTH_EMULATOR_HOST = 'localhost:9099'
-process.env.FIRESTORE_EMULATOR_HOST = 'localhost:8080'
+process.env.FIREBASE_AUTH_EMULATOR_HOST = "localhost:9099"
+process.env.FIRESTORE_EMULATOR_HOST = "localhost:8080"
 
-const test = firebaseFunctionsTest({projectId: firebaseConfig.projectId}, './serviceAccountKey.json');
+const test = firebaseFunctionsTest({projectId: firebaseConfig.projectId}, "./serviceAccountKey.json");
 
-import * as functions from '../src/index';
+import * as functions from "../src/index";
 
 const db = admin.firestore();
 
-describe('test', () => {
-    const articleId = 'jlsyC5aJvhSdrKm0Yqxe';
-    const commentId = 'CtCwOlzckDTI0oMtHclg';
+describe("test", () => {
+    const articleId = "jlsyC5aJvhSdrKm0Yqxe";
+    const commentId = "CtCwOlzckDTI0oMtHclg";
 
-    it('test onCommentCreate function', async () => {
+    it("test onCommentCreate function", async () => {
         
         const expected = {
             author: {
@@ -30,7 +30,7 @@ describe('test', () => {
         };
 
         const wrapped = test.wrap(functions.onCommentCreate);
-        await wrapped({text: 'Some random text'}, {
+        await wrapped({text: "Some random text"}, {
             params: {
                 articleId, 
                 commentId
