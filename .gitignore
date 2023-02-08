@@ -42,4 +42,8 @@ testem.log
 .DS_Store
 Thumbs.db
 
+# Cache
 .angular
+
+# Log
+firestore-debug.log

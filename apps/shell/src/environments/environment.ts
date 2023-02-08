@@ -12,6 +12,10 @@ export const environment = {
     messagingSenderId: "__MASSAGING_SENDER_ID__",
     appId: "__APP_ID__",
     measurementId: "__MEASUREMENT_ID__"
+  },
+  host: {
+    auth: 'http://localhost:4201/remoteEntry.js',
+    blog: 'http://localhost:4202/remoteEntry.js'
   }
 };
 
