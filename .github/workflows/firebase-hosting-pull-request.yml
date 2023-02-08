@@ -35,8 +35,8 @@ jobs:
           sed -i 's/__MASSAGING_SENDER_ID__/${{ secrets.MASSAGING_SENDER_ID }}/g' apps/shell/src/environments/environment.prod.ts
           sed -i 's/__APP_ID__/${{ secrets.APP_ID }}/g' apps/shell/src/environments/environment.prod.ts
           sed -i 's/__MEASUREMENT_ID__/${{ secrets.MEASUREMENT_ID }}/g' apps/shell/src/environments/environment.prod.ts
-          echo ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }} > functions/serviceAccountKey.json
-          echo ${{ secrets.FIREBASE_CONFIG }} > functions/firebase.config.json
+          echo ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }} | base64 -d > functions/serviceAccountKey.json
+          echo ${{ secrets.FIREBASE_CONFIG }} | base64 -d > functions/firebase.config.json
 #      - name: Build
 #        run: npx nx run-many --target=build --all
 #      - name: e2e test shell
