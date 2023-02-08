@@ -11,27 +11,27 @@ jobs:
       - uses: actions/checkout@v2
       - run: npm ci --legacy-peer-deps && cd functions && npm ci && cd .. 
       - run: |
-        sed -i 's/__API_KEY__/${{ secrets.API_KEY }}/g' apps/auth/src/environments/environment.prod.ts
-        sed -i 's/__AUTH_DOMAIN__/${{ secrets.AUTH_DOMAIN }}/g' apps/auth/src/environments/environment.prod.ts
-        sed -i 's/__PROJECT_ID__/${{ secrets.PROJECT_ID }}/g' apps/auth/src/environments/environment.prod.ts
-        sed -i 's/__STORAGE_BUCKET__/${{ secrets.STORAGE_BUCKET }}/g' apps/auth/src/environments/environment.prod.ts
-        sed -i 's/__MASSAGING_SENDER_ID__/${{ secrets.MASSAGING_SENDER_ID }}/g' apps/auth/src/environments/environment.prod.ts
-        sed -i 's/__APP_ID__/${{ secrets.APP_ID }}/g' apps/auth/src/environments/environment.prod.ts
-        sed -i 's/__MEASUREMENT_ID__/${{ secrets.MEASUREMENT_ID }}/g' apps/auth/src/environments/environment.prod.ts
-        sed -i 's/__API_KEY__/${{ secrets.API_KEY }}/g' apps/blog/src/environments/environment.prod.ts
-        sed -i 's/__AUTH_DOMAIN__/${{ secrets.AUTH_DOMAIN }}/g' apps/blog/src/environments/environment.prod.ts
-        sed -i 's/__PROJECT_ID__/${{ secrets.PROJECT_ID }}/g' apps/auth/blog/environments/environment.prod.ts
-        sed -i 's/__STORAGE_BUCKET__/${{ secrets.STORAGE_BUCKET }}/g' apps/blog/src/environments/environment.prod.ts
-        sed -i 's/__MASSAGING_SENDER_ID__/${{ secrets.MASSAGING_SENDER_ID }}/g' apps/blog/src/environments/environment.prod.ts
-        sed -i 's/__APP_ID__/${{ secrets.APP_ID }}/g' apps/blog/src/environments/environment.prod.ts
-        sed -i 's/__MEASUREMENT_ID__/${{ secrets.MEASUREMENT_ID }}/g' apps/blog/src/environments/environment.prod.ts
-        sed -i 's/__API_KEY__/${{ secrets.API_KEY }}/g' apps/shell/src/environments/environment.prod.ts
-        sed -i 's/__AUTH_DOMAIN__/${{ secrets.AUTH_DOMAIN }}/g' apps/shell/src/environments/environment.prod.ts
-        sed -i 's/__PROJECT_ID__/${{ secrets.PROJECT_ID }}/g' apps/shell/src/environments/environment.prod.ts
-        sed -i 's/__STORAGE_BUCKET__/${{ secrets.STORAGE_BUCKET }}/g' apps/shell/src/environments/environment.prod.ts
-        sed -i 's/__MASSAGING_SENDER_ID__/${{ secrets.MASSAGING_SENDER_ID }}/g' apps/shell/src/environments/environment.prod.ts
-        sed -i 's/__APP_ID__/${{ secrets.APP_ID }}/g' apps/shell/src/environments/environment.prod.ts
-        sed -i 's/__MEASUREMENT_ID__/${{ secrets.MEASUREMENT_ID }}/g' apps/shell/src/environments/environment.prod.ts
+          sed -i 's/__API_KEY__/${{ secrets.API_KEY }}/g' apps/auth/src/environments/environment.prod.ts
+          sed -i 's/__AUTH_DOMAIN__/${{ secrets.AUTH_DOMAIN }}/g' apps/auth/src/environments/environment.prod.ts
+          sed -i 's/__PROJECT_ID__/${{ secrets.PROJECT_ID }}/g' apps/auth/src/environments/environment.prod.ts
+          sed -i 's/__STORAGE_BUCKET__/${{ secrets.STORAGE_BUCKET }}/g' apps/auth/src/environments/environment.prod.ts
+          sed -i 's/__MASSAGING_SENDER_ID__/${{ secrets.MASSAGING_SENDER_ID }}/g' apps/auth/src/environments/environment.prod.ts
+          sed -i 's/__APP_ID__/${{ secrets.APP_ID }}/g' apps/auth/src/environments/environment.prod.ts
+          sed -i 's/__MEASUREMENT_ID__/${{ secrets.MEASUREMENT_ID }}/g' apps/auth/src/environments/environment.prod.ts
+          sed -i 's/__API_KEY__/${{ secrets.API_KEY }}/g' apps/blog/src/environments/environment.prod.ts
+          sed -i 's/__AUTH_DOMAIN__/${{ secrets.AUTH_DOMAIN }}/g' apps/blog/src/environments/environment.prod.ts
+          sed -i 's/__PROJECT_ID__/${{ secrets.PROJECT_ID }}/g' apps/auth/blog/environments/environment.prod.ts
+          sed -i 's/__STORAGE_BUCKET__/${{ secrets.STORAGE_BUCKET }}/g' apps/blog/src/environments/environment.prod.ts
+          sed -i 's/__MASSAGING_SENDER_ID__/${{ secrets.MASSAGING_SENDER_ID }}/g' apps/blog/src/environments/environment.prod.ts
+          sed -i 's/__APP_ID__/${{ secrets.APP_ID }}/g' apps/blog/src/environments/environment.prod.ts
+          sed -i 's/__MEASUREMENT_ID__/${{ secrets.MEASUREMENT_ID }}/g' apps/blog/src/environments/environment.prod.ts
+          sed -i 's/__API_KEY__/${{ secrets.API_KEY }}/g' apps/shell/src/environments/environment.prod.ts
+          sed -i 's/__AUTH_DOMAIN__/${{ secrets.AUTH_DOMAIN }}/g' apps/shell/src/environments/environment.prod.ts
+          sed -i 's/__PROJECT_ID__/${{ secrets.PROJECT_ID }}/g' apps/shell/src/environments/environment.prod.ts
+          sed -i 's/__STORAGE_BUCKET__/${{ secrets.STORAGE_BUCKET }}/g' apps/shell/src/environments/environment.prod.ts
+          sed -i 's/__MASSAGING_SENDER_ID__/${{ secrets.MASSAGING_SENDER_ID }}/g' apps/shell/src/environments/environment.prod.ts
+          sed -i 's/__APP_ID__/${{ secrets.APP_ID }}/g' apps/shell/src/environments/environment.prod.ts
+          sed -i 's/__MEASUREMENT_ID__/${{ secrets.MEASUREMENT_ID }}/g' apps/shell/src/environments/environment.prod.ts
       - run: npx nx run-many --target=build --all
       - run: nx e2e shell-e2e --watch=false --nx-bail && nx run-many --target=e2e --all --exclude=shell-e2e --watch=false --nx-bail --parallel && nx run-many --target=test --all --watch=false --nx-bail --parallel && cd functions && npm run test && cd .. 
       - uses: FirebaseExtended/action-hosting-deploy@v0
