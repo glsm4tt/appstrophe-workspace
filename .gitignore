@@ -9,6 +9,9 @@
 node_modules
 
 # env files
+apps/auth/src/environments/**.ts
+apps/shell/src/environments/**.ts
+apps/blog/src/environments/**.ts
 cors.json
 
 # IDEs and editors
