@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-# nx e2e shell-e2e --watch=false --nx-bail && nx run-many --target=e2e --all --exclude=shell-e2e --watch=false --nx-bail --parallel && nx run-many --target=test --all --watch=false --nx-bail --parallel && cd functions && npm run test && cd ..
+nx e2e shell-e2e --watch=false --nx-bail && nx run-many --target=e2e --all --exclude=shell-e2e --watch=false --nx-bail --parallel && nx run-many --target=test --all --watch=false --nx-bail --parallel && cd functions && npm run test && cd ..
