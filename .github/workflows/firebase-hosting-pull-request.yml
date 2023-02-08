@@ -11,7 +11,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install
-        run: npm ci --legacy-peer-deps && cd functions && npm ci && cd ..
+        run: npm ci --legacy-peer-deps && npm --prefix functions ci
       - name: Setting environment
         run: |
           sed -i 's/__API_KEY__/${{ secrets.API_KEY }}/g' apps/auth/src/environments/environment.prod.ts
@@ -44,7 +44,7 @@ jobs:
 #      - name: unit tests
 #        run: npx nx run-many --target=test --all --watch=false --nx-bail 
       - name: cloud functions tests
-        run: cd functions && npm run test --token ${{ secrets.FIREBASE_SERVICE_ACCOUNT_APPSTROPHE_TEST }} && cd .. 
+        run: npm --prefix functions run test -- --token ${{ secrets.FIREBASE_SERVICE_ACCOUNT_APPSTROPHE_TEST }} 
       - name: Deployment
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
