@@ -44,7 +44,7 @@ jobs:
 #      - name: E2e test others
 #        run: npx nx run-many --target=e2e --all --exclude=shell-e2e --watch=false --nx-bail
       - name: Unit tests
-        run: npx nx run-many --target=test --all --watch=false --nx-bail 
+        run: npx nx run-many --target=test --all --watch=false --nx-bail
 #      - name: Cloud functions tests
 #        run: npm --prefix functions run test -- --token ${{ secrets.FIREBASE_TOKEN }} 
       - name: Deployment
