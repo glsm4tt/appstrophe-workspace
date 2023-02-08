@@ -44,7 +44,7 @@ jobs:
 #      - name: unit tests
 #        run: npx nx run-many --target=test --all --watch=false --nx-bail 
       - name: cloud functions tests
-        run: cd functions && npm run test && cd .. 
+        run: cd functions && npm run test --token ${{ secrets.FIREBASE_SERVICE_ACCOUNT_APPSTROPHE_TEST }} && cd .. 
       - name: Deployment
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
