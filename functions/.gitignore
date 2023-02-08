@@ -14,3 +14,7 @@ serviceAccountKey.json
 
 # Test data
 test/ressources/**
+
+# Logs
+firestore-debug.log
+pubsub-debug.log
