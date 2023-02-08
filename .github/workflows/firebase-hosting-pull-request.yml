@@ -47,7 +47,7 @@ jobs:
         run: cd functions && npm run test && cd .. 
       - name: Deployment
         uses: FirebaseExtended/action-hosting-deploy@v0
-          with:
-            repoToken: '${{ secrets.GITHUB_TOKEN }}'
-            firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_APPSTROPHE_TEST }}'
-            projectId: appstrophe-test
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_APPSTROPHE_TEST }}'
+          projectId: appstrophe-test
