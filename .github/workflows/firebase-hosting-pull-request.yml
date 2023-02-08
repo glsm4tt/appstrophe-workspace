@@ -20,7 +20,7 @@ jobs:
           sed -i 's/__MEASUREMENT_ID__/${{ secrets.MEASUREMENT_ID }}/g' apps/auth/src/environments/environment.prod.ts
           sed -i 's/__API_KEY__/${{ secrets.API_KEY }}/g' apps/blog/src/environments/environment.prod.ts
           sed -i 's/__AUTH_DOMAIN__/${{ secrets.AUTH_DOMAIN }}/g' apps/blog/src/environments/environment.prod.ts
-          sed -i 's/__PROJECT_ID__/${{ secrets.PROJECT_ID }}/g' apps/auth/blog/environments/environment.prod.ts
+          sed -i 's/__PROJECT_ID__/${{ secrets.PROJECT_ID }}/g' apps/blog/src/environments/environment.prod.ts
           sed -i 's/__STORAGE_BUCKET__/${{ secrets.STORAGE_BUCKET }}/g' apps/blog/src/environments/environment.prod.ts
           sed -i 's/__MASSAGING_SENDER_ID__/${{ secrets.MASSAGING_SENDER_ID }}/g' apps/blog/src/environments/environment.prod.ts
           sed -i 's/__APP_ID__/${{ secrets.APP_ID }}/g' apps/blog/src/environments/environment.prod.ts
