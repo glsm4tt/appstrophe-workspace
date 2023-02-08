@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: npm ci && cd functions && npm ci && cd .. && npx nx run-many --target=build --all
+      - run: npm ci --legacy-peer-deps && cd functions && npm ci && cd .. && npx nx run-many --target=build --all
       - run: nx e2e shell-e2e --watch=false --nx-bail && nx run-many --target=e2e --all --exclude=shell-e2e --watch=false --nx-bail --parallel && nx run-many --target=test --all --watch=false --nx-bail --parallel && cd functions && npm run test && cd .. 
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
