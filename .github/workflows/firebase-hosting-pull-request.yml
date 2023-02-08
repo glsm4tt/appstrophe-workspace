@@ -9,9 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-      - uses: actions/checkout@v2
-      - run: npm ci --legacy-peer-deps && cd functions && npm ci && cd ..
-      - run: |
+        uses: actions/checkout@v2
+      - name: Install
+        run: npm ci --legacy-peer-deps && cd functions && npm ci && cd ..
+      - name: Setting environment
+        run: |
           sed -i 's/__API_KEY__/${{ secrets.API_KEY }}/g' apps/auth/src/environments/environment.prod.ts
           sed -i 's/__AUTH_DOMAIN__/${{ secrets.AUTH_DOMAIN }}/g' apps/auth/src/environments/environment.prod.ts
           sed -i 's/__PROJECT_ID__/${{ secrets.PROJECT_ID }}/g' apps/auth/src/environments/environment.prod.ts
@@ -33,13 +35,19 @@ jobs:
           sed -i 's/__MASSAGING_SENDER_ID__/${{ secrets.MASSAGING_SENDER_ID }}/g' apps/shell/src/environments/environment.prod.ts
           sed -i 's/__APP_ID__/${{ secrets.APP_ID }}/g' apps/shell/src/environments/environment.prod.ts
           sed -i 's/__MEASUREMENT_ID__/${{ secrets.MEASUREMENT_ID }}/g' apps/shell/src/environments/environment.prod.ts
-      - run: npx nx run-many --target=build --all
-      - run: npx nx e2e shell-e2e --watch=false --nx-bail 
-      - run: npx nx run-many --target=e2e --all --exclude=shell-e2e --watch=false --nx-bail --parallel
-      - run: npx nx run-many --target=test --all --watch=false --nx-bail --parallel 
-      - run: cd functions && npm run test && cd .. 
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_APPSTROPHE_TEST }}'
-          projectId: appstrophe-test
+      - name: Build
+        run: npx nx run-many --target=build --all
+      - name: e2e test shell
+        run: npx nx e2e shell-e2e --watch=false --nx-bail 
+      - name: e2e test others
+        run: npx nx run-many --target=e2e --all --exclude=shell-e2e --watch=false --nx-bail --parallel
+      - name: unit tests
+        run: npx nx run-many --target=test --all --watch=false --nx-bail --parallel 
+      - name: cloud functions tests
+        run: cd functions && npm run test && cd .. 
+      - name: Deployment
+        uses: FirebaseExtended/action-hosting-deploy@v0
+          with:
+            repoToken: '${{ secrets.GITHUB_TOKEN }}'
+            firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_APPSTROPHE_TEST }}'
+            projectId: appstrophe-test
