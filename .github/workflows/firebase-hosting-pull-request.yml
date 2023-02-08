@@ -33,7 +33,7 @@ jobs:
           sed -i 's/__APP_ID__/${{ secrets.APP_ID }}/g' apps/shell/src/environments/environment.prod.ts
           sed -i 's/__MEASUREMENT_ID__/${{ secrets.MEASUREMENT_ID }}/g' apps/shell/src/environments/environment.prod.ts
       - run: npx nx run-many --target=build --all
-      - run: nx e2e shell-e2e --watch=false --nx-bail && nx run-many --target=e2e --all --exclude=shell-e2e --watch=false --nx-bail --parallel && nx run-many --target=test --all --watch=false --nx-bail --parallel && cd functions && npm run test && cd .. 
+      - run: npx nx e2e shell-e2e --watch=false --nx-bail && npx nx run-many --target=e2e --all --exclude=shell-e2e --watch=false --nx-bail --parallel && npx nx run-many --target=test --all --watch=false --nx-bail --parallel && cd functions && npm run test && cd .. 
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
