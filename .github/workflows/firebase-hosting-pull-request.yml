@@ -35,22 +35,19 @@ jobs:
           sed -i 's/__MASSAGING_SENDER_ID__/${{ secrets.MASSAGING_SENDER_ID }}/g' apps/shell/src/environments/environment.prod.ts
           sed -i 's/__APP_ID__/${{ secrets.APP_ID }}/g' apps/shell/src/environments/environment.prod.ts
           sed -i 's/__MEASUREMENT_ID__/${{ secrets.MEASUREMENT_ID }}/g' apps/shell/src/environments/environment.prod.ts
-          sed -i 's/__API_KEY__/${{ secrets.API_KEY }}/g' functions/firebase.config.json
-          sed -i 's/__AUTH_DOMAIN__/${{ secrets.AUTH_DOMAIN }}/g' functions/firebase.config.json
-          sed -i 's/__PROJECT_ID__/${{ secrets.PROJECT_ID }}/g' functions/firebase.config.json
-          sed -i 's/__STORAGE_BUCKET__/${{ secrets.STORAGE_BUCKET }}/g' functions/firebase.config.json
-          sed -i 's/__MASSAGING_SENDER_ID__/${{ secrets.MASSAGING_SENDER_ID }}/g' functions/firebase.config.json
-          sed -i 's/__APP_ID__/${{ secrets.APP_ID }}/g' functions/firebase.config.json
-          sed -i 's/__MEASUREMENT_ID__/${{ secrets.MEASUREMENT_ID }}/g' functions/firebase.config.json
-      - name: create-json
-        id: create-json
+      - name: Setting config
+        uses: jsdaniell/create-json@1.1.2
+        with:
+          name: "functions/firebase.config.json"
+          json: ${{ secrets.FIREBASE_CONFIG }}
+      - name: Setting account key
         uses: jsdaniell/create-json@1.1.2
         with:
           name: "functions/serviceAccountKey.json"
           json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
       - name: Build
         run: npx nx run-many --target=build --all
-      - name: E2e
+      - name: E2e tests
         run: npx nx run-many --target=e2e --all --nx-bail --parallel=false 
       - name: Unit tests
         run: npx nx run-many --target=test --all --watch=false --nx-bail
