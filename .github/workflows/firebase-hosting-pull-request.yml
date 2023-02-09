@@ -42,7 +42,12 @@ jobs:
           sed -i 's/__MASSAGING_SENDER_ID__/${{ secrets.MASSAGING_SENDER_ID }}/g' functions/firebase.config.json
           sed -i 's/__APP_ID__/${{ secrets.APP_ID }}/g' functions/firebase.config.json
           sed -i 's/__MEASUREMENT_ID__/${{ secrets.MEASUREMENT_ID }}/g' functions/firebase.config.json
-          echo ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }} > functions/serviceAccountKey.json
+      - name: create-json
+        id: create-json
+        uses: jsdaniell/create-json@1.1.2
+        with:
+          name: "functions/serviceAccountKey.json"
+          json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
       - name: Build
         run: npx nx run-many --target=build --all
       - name: E2e
