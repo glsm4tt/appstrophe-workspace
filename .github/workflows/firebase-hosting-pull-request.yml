@@ -45,12 +45,8 @@ jobs:
           echo ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }} > functions/serviceAccountKey.json
       - name: Build
         run: npx nx run-many --target=build --all
-      - name: E2e test shell
-        run: npx nx e2e shell-e2e --watch=false --nx-bail 
-      - name: E2e test auth
-        run: npx nx e2e auth-e2e --nx-bail --watch=false --nx-bail
-      - name: E2e test blog
-        run: npx nx e2e blog-e2e --nx-bail --watch=false --nx-bail
+      - name: E2e
+        run: npx nx run-many --target=e2e --all --nx-bail --parallel=false 
       - name: Unit tests
         run: npx nx run-many --target=test --all --watch=false --nx-bail
 #      - name: Cloud functions tests
