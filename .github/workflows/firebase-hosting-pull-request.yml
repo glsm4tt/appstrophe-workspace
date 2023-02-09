@@ -47,18 +47,13 @@ jobs:
         run: npx nx run-many --target=build --all
       - name: E2e test shell
         run: npx nx e2e shell-e2e --watch=false --nx-bail 
-#      - name: E2e test others
-#        run: npx nx run-many --target=e2e --all --exclude=shell-e2e --watch=false --nx-bail
+      - name: E2e test auth
+        run: npx nx e2e auth-e2e --watch=false --nx-bail --watch=false --nx-bail
+      - name: E2e test blog
+        run: npx nx e2e blog-e2e --watch=false --nx-bail --watch=false --nx-bail
       - name: Unit tests
         run: npx nx run-many --target=test --all --watch=false --nx-bail
 #      - name: Cloud functions tests
 #        run: npm --prefix functions run test -- --token ${{ secrets.FIREBASE_TOKEN }} 
-#      - name: Deployment
-#        run: npm --prefix functions run build && firebase deploy --token ${{ secrets.FIREBASE_TOKEN }} 
       - name: Deployment
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with: 
-          repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_APPSTROPHE_TEST }}"
-          expires: 30d
-          projectId: appstrophe-test
+        run: npm --prefix functions run build && firebase deploy --token ${{ secrets.FIREBASE_TOKEN }} 
