@@ -1,4 +1,4 @@
-import * as firebaseConfig from "../firebase2.config.json";
+import * as firebaseConfig from "../firebase.config.json";
 import * as firebaseFunctionsTest from "firebase-functions-test"
 import * as admin from "firebase-admin";
 import { assert } from "chai";
