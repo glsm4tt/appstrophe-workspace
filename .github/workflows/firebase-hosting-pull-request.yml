@@ -48,9 +48,9 @@ jobs:
       - name: E2e test shell
         run: npx nx e2e shell-e2e --watch=false --nx-bail 
       - name: E2e test auth
-        run: npx nx e2e auth-e2e --watch=false --nx-bail --watch=false --nx-bail
+        run: npx nx e2e auth-e2e --nx-bail --watch=false --nx-bail
       - name: E2e test blog
-        run: npx nx e2e blog-e2e --watch=false --nx-bail --watch=false --nx-bail
+        run: npx nx e2e blog-e2e --nx-bail --watch=false --nx-bail
       - name: Unit tests
         run: npx nx run-many --target=test --all --watch=false --nx-bail
 #      - name: Cloud functions tests
