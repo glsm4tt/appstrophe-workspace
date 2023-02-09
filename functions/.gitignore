@@ -10,6 +10,7 @@ node_modules/
 
 # Config and keys
 firebase.config.json
+firebase2.config.json
 serviceAccountKey.json
 
 # Test data
