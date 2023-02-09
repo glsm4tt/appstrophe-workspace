@@ -45,13 +45,13 @@ jobs:
           echo ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }} > functions/serviceAccountKey.json
       - name: Build
         run: npx nx run-many --target=build --all
-#      - name: E2e test shell
-#        run: npx nx e2e shell-e2e --watch=false --nx-bail 
+      - name: E2e test shell
+        run: npx nx e2e shell-e2e --watch=false --nx-bail 
 #      - name: E2e test others
 #        run: npx nx run-many --target=e2e --all --exclude=shell-e2e --watch=false --nx-bail
       - name: Unit tests
         run: npx nx run-many --target=test --all --watch=false --nx-bail
-#      - name: Cloud functions tests
-#        run: npm --prefix functions run test -- --token ${{ secrets.FIREBASE_TOKEN }} 
-      - name: Deployment
-        run: npm --prefix functions run build && firebase deploy --token ${{ secrets.FIREBASE_TOKEN }} 
+      - name: Cloud functions tests
+        run: npm --prefix functions run test -- --token ${{ secrets.FIREBASE_TOKEN }} 
+#      - name: Deployment
+#        run: npm --prefix functions run build && firebase deploy --token ${{ secrets.FIREBASE_TOKEN }} 
