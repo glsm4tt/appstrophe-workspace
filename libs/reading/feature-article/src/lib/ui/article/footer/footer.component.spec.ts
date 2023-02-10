@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 
 import { ArticleFooterComponent } from './footer.component';
 
@@ -8,7 +10,11 @@ describe('ArticleFooterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ArticleFooterComponent],
+      imports: [
+        ArticleFooterComponent,
+        StoreModule.forRoot({}),
+        EffectsModule.forRoot([])
+      ],
     }).compileComponents();
   });
 

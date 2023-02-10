@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AngularFireModule } from '@angular/fire/compat';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
+import { AuthService, AuthServiceStub } from '@appstrophe-workspace/auth-lib';
+import { CommentService, CommentServiceStub } from '@appstrophe-workspace/reading/domain';
 
 import { ArticleCommentsListComponent } from './article-comments-list.component';
 
@@ -12,11 +11,12 @@ describe('ArticleCommentsListComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        ArticleCommentsListComponent,
-        StoreModule.forRoot({}),
-        EffectsModule.forRoot([]),
-        AngularFireModule.initializeApp({})
+        ArticleCommentsListComponent
       ],
+      providers: [
+        { provide: AuthService, useValue: AuthServiceStub },
+        { provide: CommentService, useValue: CommentServiceStub }
+      ]
     }).compileComponents();
   });
 

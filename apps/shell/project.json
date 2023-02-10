@@ -13,12 +13,15 @@
         "main": "apps/shell/src/main.ts",
         "polyfills": "apps/shell/src/polyfills.ts",
         "tsConfig": "apps/shell/tsconfig.app.json",
-        "assets": ["apps/shell/src/favicon.ico", "apps/shell/src/assets",
+        "assets": [
+          "apps/shell/src/favicon.ico",
+          "apps/shell/src/assets",
           {
             "glob": "**",
             "input": "libs/reading/feature-article/src/assets/",
             "output": "/assets/"
-          }],
+          }
+        ],
         "styles": [
           "apps/shell/src/styles.css",
           "libs/shared-lib/src/assets/styles/ui.css"
@@ -84,12 +87,8 @@
     "serve-all": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "commands": [
-          "nx serve auth",
-          "nx serve blog",
-          "nx serve shell"
-        ],
-        "readyWhen": "Angular Live Development Server is listening on localhost:4202" 
+        "commands": ["nx serve auth", "nx serve blog", "nx serve shell"],
+        "readyWhen": "Angular Live Development Server is listening on localhost:4202"
       }
     },
     "extract-i18n": {

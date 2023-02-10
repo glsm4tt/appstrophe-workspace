@@ -11,8 +11,8 @@ import { reducer } from './+state/reducer';
 export const BLOG_ROUTES: Routes = [
   {
     path: '',
-     loadChildren: () =>
-    import('@appstrophe-workspace/reading/feature-article').then(m => m.ARTICLE_READING_ROUTES),
+    loadChildren: () =>
+      import('@appstrophe-workspace/reading/feature-article').then(m => m.ARTICLE_READING_ROUTES),
     providers: [
       importProvidersFrom(StoreModule.forRoot(reducer,
         {
@@ -22,9 +22,13 @@ export const BLOG_ROUTES: Routes = [
             strictStateImmutability: true,
           },
         })),
-        importProvidersFrom(EffectsModule.forRoot([])),
-        importProvidersFrom(!environment.production ? StoreDevtoolsModule.instrument() : []),
-        importProvidersFrom(StoreRouterConnectingModule.forRoot())
+      importProvidersFrom(EffectsModule.forRoot([])),
+      importProvidersFrom(!environment.production ? StoreDevtoolsModule.instrument({
+        maxAge: 25, // Retains last 25 states
+        logOnly: environment.production, // Restrict extension to log-only mode
+        autoPause: true,
+      }) : []),
+      importProvidersFrom(StoreRouterConnectingModule.forRoot())
     ]
   },
 

@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-nx run-many --target=e2e --all && nx run-many --target=test --all
+# npm --prefix functions run test

@@ -1,0 +1,17 @@
+# Compiled JavaScript files
+lib/**/*.js
+lib/**/*.js.map
+
+# TypeScript v1 declaration files
+typings/
+
+# Node.js dependency directory
+node_modules/
+
+# Config and keys
+firebase.config.json
+serviceAccountKey.json
+
+# Logs
+firestore-debug.log
+pubsub-debug.log

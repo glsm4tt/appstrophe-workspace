@@ -3,63 +3,75 @@
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
   },
-  "hosting": [{
-    "target": "shell",
-    "public": "dist/apps/shell",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
-  },{
-    "target": "auth",
-    "public": "dist/apps/auth",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "headers": [ {
-      "source": "remoteEntry.js",
-      "headers": [ {
-        "key": "Access-Control-Allow-Origin",
-        "value": "*"
-      } ]
-    } ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
-  },{
-    "target": "blog",
-    "public": "dist/apps/blog",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "headers": [ {
-      "source": "remoteEntry.js",
-      "headers": [ {
-        "key": "Access-Control-Allow-Origin",
-        "value": "*"
-      } ]
-    } ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
-  }],
+  "hosting": [
+    {
+      "target": "shell",
+      "public": "dist/apps/shell",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    },
+    {
+      "target": "auth",
+      "public": "dist/apps/auth",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "headers": [
+        {
+          "source": "**/*.js",
+          "headers": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            }
+          ]
+        }
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    },
+    {
+      "target": "blog",
+      "public": "dist/apps/blog",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "headers": [
+        {
+          "source": "**/*.js",
+          "headers": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            }
+          ]
+        }
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ],
   "storage": {
     "rules": "storage.rules"
   },
@@ -71,10 +83,10 @@
       "port": 8080
     },
     "hosting": {
-      "port": 5000
+      "port": 5002
     },
     "pubsub": {
-      "port": 8085
+      "port": 8090
     },
     "storage": {
       "port": 9199
@@ -85,5 +97,21 @@
   },
   "remoteconfig": {
     "template": "remoteconfig.template.json"
-  }
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log"
+      ],
+      "predeploy": [
+        "npm --prefix \"$RESOURCE_DIR\" run lint",
+        "npm --prefix \"$RESOURCE_DIR\" run build"
+      ]
+    }
+  ]
 }
