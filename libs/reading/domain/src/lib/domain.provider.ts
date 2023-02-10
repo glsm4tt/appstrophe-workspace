@@ -6,6 +6,6 @@ import { readingFeature, ArticleEffects } from "./+state";
 export function fromReadingDomain(){
     return [
         importProvidersFrom(StoreModule.forFeature(readingFeature)),
-    importProvidersFrom(EffectsModule.forFeature([ArticleEffects]))
+        importProvidersFrom(EffectsModule.forFeature([ArticleEffects]))
     ]
 }

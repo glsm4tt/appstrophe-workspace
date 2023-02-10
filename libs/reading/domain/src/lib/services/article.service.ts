@@ -1,36 +1,54 @@
-import { Injectable } from '@angular/core';
-import { Article } from '@appstrophe-workspace/reading/domain';
-import { Observable, of } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { combineLatestWith, map } from 'rxjs/operators';
+import { Article } from '../entities/article';
+import { Firestore, collectionData, collection, docData, doc, DocumentReference, CollectionReference } from '@angular/fire/firestore';
+import { ArticleDetailed, ArticleMetadata } from '../entities';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArticleService {
 
+  private _firestore = inject(Firestore);
+
   constructor() {
     // empty
   }
 
-  getAll(): Observable<Partial<Article>[]> {
-    const articles = [1, 2, 3, 4, 5, 6, 7, 8].map(i => ({
-      id: i,
-      title: 'Design Tools',
-      description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae dolores
-      deserunt
-      ea doloremque natus error, rerum quas odio quaerat nam ex commodi hic, suscipit in a veritatis pariatur
-      minus consequuntur!<br>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae dolores deserunt
-      ea doloremque natus error, rerum quas odio quaerat nam ex commodi hic, suscipit in a veritatis pariatur
-      minus consequuntur!`,
-      time: 5,
-      tags: [{id: 1, name: 'Angular'}],
-      imageUrl: 'assets/img/logo-search-grid-2x.png',
-      author: {
-        id: 1,
-        name: 'Sylvain DEDIEU',
-        photoUrl: 'assets/img/W9aoBmrb_400x400.jpeg'
-      }
-    }));
-    return of(articles);
+  getAll(): Observable<Article[]> {
+    const articlesCollection: CollectionReference<Article> = collection(this._firestore, 'articles') as CollectionReference<Article>;
+    return collectionData<Article>(articlesCollection, { idField: 'id' }).pipe(
+      map(articles => articles.map(article => ({
+        ...article,
+        imageUrl: 'assets/img/logo-search-grid-2x.png',
+        author: {
+          ...article?.author,
+          photoUrl: 'assets/img/W9aoBmrb_400x400.jpeg'
+        }
+      })))
+    );
+  }
+
+  getOne(id: string): Observable<ArticleDetailed> {
+    const articleDoc: DocumentReference<Article> = doc(this._firestore, `articles/${id}`) as DocumentReference<Article>;
+    const articleDoc$: Observable<Article> = docData(articleDoc, { idField: 'id' });
+
+    const articleMetadataDoc: DocumentReference<ArticleMetadata> = doc(this._firestore, `articles/${id}/metadata/${id}`) as DocumentReference<ArticleMetadata>;
+    const articleMetadataDoc$: Observable<ArticleMetadata> = docData(articleMetadataDoc);
+
+    return articleDoc$.pipe(
+      combineLatestWith(articleMetadataDoc$),
+      map(([article, { articleUrl }]) => ({
+        ...article,
+        articleUrl,
+        imageUrl: 'assets/img/logo-search-grid-2x.png',
+        author: {
+          ...article?.author,
+          photoUrl: 'assets/img/W9aoBmrb_400x400.jpeg'
+        }
+      }) as ArticleDetailed)
+    );
   }
 }

@@ -1,8 +1,26 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if false;
+    match /articles/{articleId} {
+      allow write: if false;
+      allow read: if true;
+      
+      match /metadata/{metadataId} {
+        allow write: if false;
+        allow read: if true;
+      }
+      
+      match /comments/{commentId} {
+        allow create, delete: if request.resource.data.keys().hasOnly(["text"]);
+        allow delete: if true;
+        allow read: if true;
+        
+        match /reactions/{reactionId} {
+          allow create: if request.resource.data.keys().hasOnly(["type"]) && request.resource.data.type == 'like';
+          allow delete: if true;
+          allow read: if true;
+        }
+      }
     }
   }
 }
