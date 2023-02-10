@@ -33,7 +33,7 @@
           "headers": [
             {
               "key": "Access-Control-Allow-Origin",
-              "value": "http://localhost:4201"
+              "value": "*"
             }
           ]
         }
@@ -59,7 +59,7 @@
           "headers": [
             {
               "key": "Access-Control-Allow-Origin",
-              "value": "http://localhost:4202"
+              "value": "*"
             }
           ]
         }

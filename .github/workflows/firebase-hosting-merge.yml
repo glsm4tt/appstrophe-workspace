@@ -38,8 +38,6 @@ jobs:
           sed -i 's/__MASSAGING_SENDER_ID__/${{ secrets.FIREBASE_MASSAGING_SENDER_ID_PROD }}/g' apps/shell/src/environments/environment.prod.ts
           sed -i 's/__APP_ID__/${{ secrets.FIREBASE_APP_ID_PROD }}/g' apps/shell/src/environments/environment.prod.ts
           sed -i 's/__MEASUREMENT_ID__/${{ secrets.FIREBASE_MEASUREMENT_ID_PROD }}/g' apps/shell/src/environments/environment.prod.ts
-          sed -i 's_http://localhost:4201_https://appstrophe-auth-f3e74_g' firebase.json
-          sed -i 's_http://localhost:4202_https://appstrophe-blog-46f62_g' firebase.json 
           sed -i 's/appstrophe-test-auth.web.app/appstrophe-auth-f3e74.web.app/g' apps/shell/src/environments/environment.prod.ts
           sed -i 's/appstrophe-test-blog.web.app/appstrophe-blog-46f62.web.app/g' apps/shell/src/environments/environment.prod.ts 
       - name: Setting config
