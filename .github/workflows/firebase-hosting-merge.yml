@@ -17,27 +17,27 @@ jobs:
       - name: Setting environment
         run: |
           firebase use appstrophe-a65a0 --token ${{ secrets.FIREBASE_TOKEN }}
-          sed -i 's/__API_KEY__/${{ secrets.API_KEY_PROD }}/g' apps/auth/src/environments/environment.prod.ts
-          sed -i 's/__AUTH_DOMAIN__/${{ secrets.AUTH_DOMAIN_PROD }}/g' apps/auth/src/environments/environment.prod.ts
-          sed -i 's/__PROJECT_ID__/${{ secrets.PROJECT_ID_PROD }}/g' apps/auth/src/environments/environment.prod.ts
-          sed -i 's/__STORAGE_BUCKET__/${{ secrets.STORAGE_BUCKET_PROD }}/g' apps/auth/src/environments/environment.prod.ts
-          sed -i 's/__MASSAGING_SENDER_ID__/${{ secrets.MASSAGING_SENDER_ID_PROD }}/g' apps/auth/src/environments/environment.prod.ts
-          sed -i 's/__APP_ID__/${{ secrets.APP_ID_PROD }}/g' apps/auth/src/environments/environment.prod.ts
-          sed -i 's/__MEASUREMENT_ID__/${{ secrets.MEASUREMENT_ID_PROD }}/g' apps/auth/src/environments/environment.prod.ts
-          sed -i 's/__API_KEY__/${{ secrets.API_KEY_PROD }}/g' apps/blog/src/environments/environment.prod.ts
-          sed -i 's/__AUTH_DOMAIN__/${{ secrets.AUTH_DOMAIN_PROD }}/g' apps/blog/src/environments/environment.prod.ts
-          sed -i 's/__PROJECT_ID__/${{ secrets.PROJECT_ID_PROD }}/g' apps/blog/src/environments/environment.prod.ts
-          sed -i 's/__STORAGE_BUCKET__/${{ secrets.STORAGE_BUCKET_PROD }}/g' apps/blog/src/environments/environment.prod.ts
-          sed -i 's/__MASSAGING_SENDER_ID__/${{ secrets.MASSAGING_SENDER_ID_PROD }}/g' apps/blog/src/environments/environment.prod.ts
-          sed -i 's/__APP_ID__/${{ secrets.APP_ID_PROD }}/g' apps/blog/src/environments/environment.prod.ts
-          sed -i 's/__MEASUREMENT_ID__/${{ secrets.MEASUREMENT_ID_PROD }}/g' apps/blog/src/environments/environment.prod.ts
-          sed -i 's/__API_KEY__/${{ secrets.API_KEY_PROD }}/g' apps/shell/src/environments/environment.prod.ts
-          sed -i 's/__AUTH_DOMAIN__/${{ secrets.AUTH_DOMAIN_PROD }}/g' apps/shell/src/environments/environment.prod.ts
-          sed -i 's/__PROJECT_ID__/${{ secrets.PROJECT_ID_PROD }}/g' apps/shell/src/environments/environment.prod.ts
-          sed -i 's/__STORAGE_BUCKET__/${{ secrets.STORAGE_BUCKET_PROD }}/g' apps/shell/src/environments/environment.prod.ts
-          sed -i 's/__MASSAGING_SENDER_ID__/${{ secrets.MASSAGING_SENDER_ID_PROD }}/g' apps/shell/src/environments/environment.prod.ts
-          sed -i 's/__APP_ID__/${{ secrets.APP_ID_PROD }}/g' apps/shell/src/environments/environment.prod.ts
-          sed -i 's/__MEASUREMENT_ID__/${{ secrets.MEASUREMENT_ID_PROD }}/g' apps/shell/src/environments/environment.prod.ts
+          sed -i 's/__API_KEY__/${{ secrets.FIREBASE_API_KEY_PROD }}/g' apps/auth/src/environments/environment.prod.ts
+          sed -i 's/__AUTH_DOMAIN__/${{ secrets.FIREBASE_AUTH_DOMAIN_PROD }}/g' apps/auth/src/environments/environment.prod.ts
+          sed -i 's/__PROJECT_ID__/${{ secrets.FIREBASE_PROJECT_ID_PROD }}/g' apps/auth/src/environments/environment.prod.ts
+          sed -i 's/__STORAGE_BUCKET__/${{ secrets.FIREBASE_STORAGE_BUCKET_PROD }}/g' apps/auth/src/environments/environment.prod.ts
+          sed -i 's/__MASSAGING_SENDER_ID__/${{ secrets.FIREBASE_MASSAGING_SENDER_ID_PROD }}/g' apps/auth/src/environments/environment.prod.ts
+          sed -i 's/__APP_ID__/${{ secrets.FIREBASE_APP_ID_PROD }}/g' apps/auth/src/environments/environment.prod.ts
+          sed -i 's/__MEASUREMENT_ID__/${{ secrets.FIREBASE_MEASUREMENT_ID_PROD }}/g' apps/auth/src/environments/environment.prod.ts
+          sed -i 's/__API_KEY__/${{ secrets.FIREBASE_API_KEY_PROD }}/g' apps/blog/src/environments/environment.prod.ts
+          sed -i 's/__AUTH_DOMAIN__/${{ secrets.FIREBASE_AUTH_DOMAIN_PROD }}/g' apps/blog/src/environments/environment.prod.ts
+          sed -i 's/__PROJECT_ID__/${{ secrets.FIREBASE_PROJECT_ID_PROD }}/g' apps/blog/src/environments/environment.prod.ts
+          sed -i 's/__STORAGE_BUCKET__/${{ secrets.FIREBASE_STORAGE_BUCKET_PROD }}/g' apps/blog/src/environments/environment.prod.ts
+          sed -i 's/__MASSAGING_SENDER_ID__/${{ secrets.FIREBASE_MASSAGING_SENDER_ID_PROD }}/g' apps/blog/src/environments/environment.prod.ts
+          sed -i 's/__APP_ID__/${{ secrets.FIREBASE_APP_ID_PROD }}/g' apps/blog/src/environments/environment.prod.ts
+          sed -i 's/__MEASUREMENT_ID__/${{ secrets.FIREBASE_MEASUREMENT_ID_PROD }}/g' apps/blog/src/environments/environment.prod.ts
+          sed -i 's/__API_KEY__/${{ secrets.FIREBASE_API_KEY_PROD }}/g' apps/shell/src/environments/environment.prod.ts
+          sed -i 's/__AUTH_DOMAIN__/${{ secrets.FIREBASE_AUTH_DOMAIN_PROD }}/g' apps/shell/src/environments/environment.prod.ts
+          sed -i 's/__PROJECT_ID__/${{ secrets.FIREBASE_PROJECT_ID_PROD }}/g' apps/shell/src/environments/environment.prod.ts
+          sed -i 's/__STORAGE_BUCKET__/${{ secrets.FIREBASE_STORAGE_BUCKET_PROD }}/g' apps/shell/src/environments/environment.prod.ts
+          sed -i 's/__MASSAGING_SENDER_ID__/${{ secrets.FIREBASE_MASSAGING_SENDER_ID_PROD }}/g' apps/shell/src/environments/environment.prod.ts
+          sed -i 's/__APP_ID__/${{ secrets.FIREBASE_APP_ID_PROD }}/g' apps/shell/src/environments/environment.prod.ts
+          sed -i 's/__MEASUREMENT_ID__/${{ secrets.FIREBASE_MEASUREMENT_ID_PROD }}/g' apps/shell/src/environments/environment.prod.ts
           sed -i 's_http://localhost:4201_https://appstrophe-auth-f3e74_g' firebase.json
           sed -i 's_http://localhost:4202_https://appstrophe-blog-46f62_g' firebase.json 
           sed -i 's/appstrophe-test-auth.web.app/appstrophe-auth-f3e74.web.app/g' apps/shell/src/environments/environment.prod.ts
