@@ -33,7 +33,7 @@
           "headers": [
             {
               "key": "Access-Control-Allow-Origin",
-              "value": "https://appstrophe-auth.web.app"
+              "value": "http://localhost:4201"
             }
           ]
         }
@@ -59,7 +59,7 @@
           "headers": [
             {
               "key": "Access-Control-Allow-Origin",
-              "value": "https://appstrophe-blog.web.app"
+              "value": "http://localhost:4202"
             }
           ]
         }
