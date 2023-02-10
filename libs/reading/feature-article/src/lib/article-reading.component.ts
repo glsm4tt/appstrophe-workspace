@@ -7,7 +7,7 @@ import { RouterModule } from "@angular/router";
   imports: [
     RouterModule,
   ],
-  templateUrl: './article-reading.component.html'
+  template: `<router-outlet></router-outlet>`
 })
 export class ArticleReadingComponent {
 }

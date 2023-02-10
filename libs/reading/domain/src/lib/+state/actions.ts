@@ -1,5 +1,7 @@
 import { createAction, props } from '@ngrx/store';
+import { ArticleDetailed } from '../entities';
 import { Article } from '../entities/article';
+import { Comment } from '../entities/comment';
 import { FilterArticlesFormState } from './reducers';
 
 export const loadArticles = createAction(
@@ -18,4 +20,27 @@ export const loadArticlesFailure = createAction(
 export const filterArticlesFormStateChange = createAction(
   '[Article] Filter articles form state changed',
   props<{ filterArticlesFormState: FilterArticlesFormState }>()
+);
+
+export const loadArticle = createAction(
+  '[Article] Load article',
+  props<{ articleId: string }>()
+);
+
+export const articleLoaded = createAction(
+  '[Article] Article loaded',
+  props<{ article: Partial<ArticleDetailed> }>()
+);
+
+export const loadArticleFailure = createAction(
+  '[Article] Load article failure'
+);
+
+export const articleCommentsLoaded = createAction(
+  '[Article] Article comments loaded',
+  props<{ comments: Comment[] }>()
+);
+
+export const loadArticleCommentsFailure = createAction(
+  '[Article] Load article comments failure'
 );

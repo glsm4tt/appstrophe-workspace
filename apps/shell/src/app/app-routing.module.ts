@@ -1,6 +1,7 @@
 import { loadRemoteModule } from '@angular-architects/module-federation';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { environment } from '../environments/environment';
 
 const routes: Routes = [
   {
@@ -8,7 +9,7 @@ const routes: Routes = [
     loadChildren: () =>
       loadRemoteModule({
         type: 'module',
-        remoteEntry: 'http://localhost:4201/remoteEntry.js', //'https://appstrophe-auth.web.app/remoteEntry.js',
+        remoteEntry: environment.host.auth,
         exposedModule: './routes'
       }).then(m => m.AUTH_ROUTES),
   },
@@ -17,7 +18,7 @@ const routes: Routes = [
     loadChildren: () =>
       loadRemoteModule({
         type: 'module',
-        remoteEntry: 'http://localhost:4202/remoteEntry.js', //'https://appstrophe-blog.web.app/remoteEntry.js',
+        remoteEntry: environment.host.blog,
         exposedModule: './routes'
       }).then(m => m.BLOG_ROUTES),
   },

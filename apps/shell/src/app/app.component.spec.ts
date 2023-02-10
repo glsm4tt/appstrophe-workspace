@@ -1,12 +1,12 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { TestBed } from '@angular/core/testing';
-import { AngularFireModule } from '@angular/fire/compat';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { of } from 'rxjs';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideFirestore } from '@angular/fire/firestore';
+import { getFirestore } from '@firebase/firestore';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -15,7 +15,8 @@ describe('AppComponent', () => {
         AppComponent,
         BrowserAnimationsModule,
         RouterTestingModule,
-        AngularFireModule.initializeApp({})
+        provideFirebaseApp(() => initializeApp(environment.firebase)),
+        provideFirestore(() => getFirestore())
       ],
       providers: [
         { provide: APP_BASE_HREF, useValue: '/' }

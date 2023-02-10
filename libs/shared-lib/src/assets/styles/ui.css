@@ -7,11 +7,50 @@
 /* Change autocomplete styles in WebKit */
 
 html {
-    @apply bg-zinc-50 dark:bg-zinc-800
+    @apply bg-zinc-50 dark:bg-zinc-800 
+}
+
+h1 {
+    @apply text-gray-900 dark:text-gray-100
+}
+
+h2 {
+    @apply text-gray-700 dark:text-gray-300
+}
+
+h3 {
+    @apply text-gray-600 dark:text-gray-400
+}
+
+h4 {
+    @apply text-gray-500
+}
+
+p, ul, li, a, th, td, span, img {
+    @apply text-gray-700 dark:text-gray-300
+}
+
+img {
+    @apply text-xs
 }
 
 .article-markdown {
     @apply prose prose-h1:text-gray-900 prose-h2:text-gray-700 prose-h3:text-gray-600 prose-h4:text-gray-500 prose-p:text-gray-700 prose-strong:text-gray-900 prose-li:text-gray-700 prose-a:text-gray-700 prose-code:text-gray-800 prose-code:bg-zinc-200 prose-code:rounded-sm prose-blockquote:text-gray-700 prose-figure:text-gray-700 prose-figcaption:text-gray-700 prose-strong:text-gray-700 prose-em:text-gray-700 prose-ul:text-gray-700 prose-table:text-gray-800 prose-thead:text-gray-800 prose-tr:text-gray-700 prose-th:text-gray-700 prose-td:text-gray-700 prose-hr:text-gray-700 dark:prose-h1:text-gray-100 dark:prose-h2:text-gray-300 dark:prose-h3:text-gray-400 dark:prose-h4:text-gray-500 dark:prose-p:text-gray-300 dark:prose-strong:text-gray-100 dark:prose-li:text-gray-300 dark:prose-a:text-gray-300 dark:prose-code:text-gray-200 dark:prose-code:bg-zinc-600 dark:prose-blockquote:text-gray-400 dark:prose-figure:text-gray-300 dark:prose-figcaption:text-gray-300 dark:prose-strong:text-gray-300 dark:prose-em:text-gray-300 dark:prose-ul:text-gray-300 dark:prose-table:text-gray-200 dark:prose-thead:text-gray-200 dark:prose-tr:text-gray-300 dark:prose-th:text-gray-300 dark:prose-td:text-gray-300 dark:prose-hr:text-gray-300 md:prose-lg lg:prose-xl xl:prose-2xl
+}
+
+.tooltip-container {
+    @apply text-center z-50 fixed px-2 py-1 rounded-sm drop-shadow-md text-sm text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-900 w-auto opacity-0 -translate-x-1/2 translate-y-1/3 pointer-events-none before:content-[''] before:absolute before:w-0 before:h-0 before:top-full before:left-1/2 before:-translate-x-1/2 before:border-8 before:border-solid before:border-transparent before:border-b-0 before:border-t-gray-100 before:dark:border-t-gray-900 before:drop-shadow-md;
+    animation: tooltip-slide 0.18s ease-out 0.5s; 
+    animation-fill-mode: forwards;
+}
+
+@keyframes tooltip-slide {
+  0% {
+    @apply opacity-0 -translate-x-1/2 translate-y-1/3;
+  }
+  100% {
+    @apply opacity-100 -translate-x-1/2 translate-y-0;
+  }
 }
 
 div.form-group {
@@ -57,7 +96,7 @@ div.form-group textarea.form-group__control:autofill {
  div.form-group div.form-group-content > .end+input.form-group__control, 
  div.form-group div.form-group-content > .start+textarea.form-group__control,
  div.form-group div.form-group-content > .end+textarea.form-group__control {
- @apply indent-5
+    @apply indent-5
  }
 
 @media (prefers-color-scheme: dark){

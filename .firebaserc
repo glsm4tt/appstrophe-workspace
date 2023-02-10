@@ -6,13 +6,26 @@
     "appstrophe-test": {
       "hosting": {
         "blog": [
-          "appstrophe-blog"
+          "appstrophe-test-blog"
         ],
         "shell": [
-          "appstrophe-shell"
+          "appstrophe-test-shell"
         ],
         "auth": [
-          "appstrophe-auth"
+          "appstrophe-test-auth"
+        ]
+      }
+    },
+    "appstrophe-a65a0": {
+      "hosting": {
+        "blog": [
+          "appstrophe-blog-46f62"
+        ],
+        "auth": [
+          "appstrophe-auth-f3e74"
+        ],
+        "shell": [
+          "appstrophe-shell-70b5c"
         ]
       }
     }
