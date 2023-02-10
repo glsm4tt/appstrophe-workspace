@@ -9,6 +9,7 @@
 node_modules
 
 # env files
+apps/shell/src/environments/**.ts
 apps/auth/src/environments/**.ts
 apps/blog/src/environments/**.ts
 cors.json
