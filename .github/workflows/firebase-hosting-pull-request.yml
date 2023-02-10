@@ -47,11 +47,15 @@ jobs:
           json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
       - name: Build
         run: npx nx run-many --target=build --all && npm --prefix functions run build
-#      - name: E2e tests
-#        run: npx nx run-many --target=e2e --all --nx-bail --parallel=false 
+      - name: E2e tests
+        run: npx nx run-many --target=e2e --all --nx-bail --parallel=false 
       - name: Unit tests
         run: npx nx run-many --target=test --all --watch=false --nx-bail
       - name: Cloud functions tests
         run: npm --prefix functions run test -- --token ${{ secrets.FIREBASE_TOKEN }} 
+      - name: Prepare to deployment
+        run: |
+          sed -i 's/http://localhost:4201/https://appstrophe-auth.web.app/g' firebase.json
+          sed -i 's/http://localhost:4202/https://appstrophe-blog.web.app/g' firebase.json 
       - name: Deployment
         run: firebase deploy --token ${{ secrets.FIREBASE_TOKEN }} 
