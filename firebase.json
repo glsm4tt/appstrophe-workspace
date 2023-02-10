@@ -29,11 +29,11 @@
       ],
       "headers": [
         {
-          "source": "remoteEntry.js",
+          "source": "**/*.js",
           "headers": [
             {
               "key": "Access-Control-Allow-Origin",
-              "value": "*"
+              "value": "https://appstrophe-auth.web.app"
             }
           ]
         }
@@ -55,11 +55,11 @@
       ],
       "headers": [
         {
-          "source": "remoteEntry.js",
+          "source": "**/*.js",
           "headers": [
             {
               "key": "Access-Control-Allow-Origin",
-              "value": "*"
+              "value": "https://appstrophe-blog.web.app"
             }
           ]
         }
