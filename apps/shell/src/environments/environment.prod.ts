@@ -10,7 +10,7 @@ export const environment = {
     measurementId: "__MEASUREMENT_ID__"
   },
   host: {
-    auth: 'https://appstrophe-auth-f3e74.web.app/remoteEntry.js',
-    blog: 'https://appstrophe-blog-46f62.web.app/remoteEntry.js'
+    auth: 'https://appstrophe-test-auth.web.app/remoteEntry.js',
+    blog: 'https://appstrophe-test-blog.web.app/remoteEntry.js'
   }
 };
