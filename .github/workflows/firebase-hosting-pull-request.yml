@@ -55,7 +55,7 @@ jobs:
         run: npm --prefix functions run test -- --token ${{ secrets.FIREBASE_TOKEN }} 
       - name: Prepare to deployment
         run: |
-          sed -i 's_http://localhost:4201_https://appstrophe-test-auth.web.app_g' firebase.json
-          sed -i 's_http://localhost:4202_https://appstrophe-test-blog.web.app_g' firebase.json 
+          sed -i 's_http://localhost:4201_https://appstrophe-test-auth_g' firebase.json
+          sed -i 's_http://localhost:4202_https://appstrophe-test-blog_g' firebase.json 
       - name: Deployment
         run: firebase deploy --token ${{ secrets.FIREBASE_TOKEN }} 
