@@ -10,11 +10,51 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - run: npm ci && npm run build
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install
+        run: npm ci --legacy-peer-deps && npm --prefix functions ci && sudo npm install -g firebase-tools
+      - name: Setting environment
+        run: |
+          firebase use appstrophe-a65a0 --token ${{ secrets.FIREBASE_TOKEN }}
+          sed -i 's/__API_KEY__/${{ secrets.API_KEY_PROD }}/g' apps/auth/src/environments/environment.prod.ts
+          sed -i 's/__AUTH_DOMAIN__/${{ secrets.AUTH_DOMAIN_PROD }}/g' apps/auth/src/environments/environment.prod.ts
+          sed -i 's/__PROJECT_ID__/${{ secrets.PROJECT_ID_PROD }}/g' apps/auth/src/environments/environment.prod.ts
+          sed -i 's/__STORAGE_BUCKET__/${{ secrets.STORAGE_BUCKET_PROD }}/g' apps/auth/src/environments/environment.prod.ts
+          sed -i 's/__MASSAGING_SENDER_ID__/${{ secrets.MASSAGING_SENDER_ID_PROD }}/g' apps/auth/src/environments/environment.prod.ts
+          sed -i 's/__APP_ID__/${{ secrets.APP_ID_PROD }}/g' apps/auth/src/environments/environment.prod.ts
+          sed -i 's/__MEASUREMENT_ID__/${{ secrets.MEASUREMENT_ID_PROD }}/g' apps/auth/src/environments/environment.prod.ts
+          sed -i 's/__API_KEY__/${{ secrets.API_KEY_PROD }}/g' apps/blog/src/environments/environment.prod.ts
+          sed -i 's/__AUTH_DOMAIN__/${{ secrets.AUTH_DOMAIN_PROD }}/g' apps/blog/src/environments/environment.prod.ts
+          sed -i 's/__PROJECT_ID__/${{ secrets.PROJECT_ID_PROD }}/g' apps/blog/src/environments/environment.prod.ts
+          sed -i 's/__STORAGE_BUCKET__/${{ secrets.STORAGE_BUCKET_PROD }}/g' apps/blog/src/environments/environment.prod.ts
+          sed -i 's/__MASSAGING_SENDER_ID__/${{ secrets.MASSAGING_SENDER_ID_PROD }}/g' apps/blog/src/environments/environment.prod.ts
+          sed -i 's/__APP_ID__/${{ secrets.APP_ID_PROD }}/g' apps/blog/src/environments/environment.prod.ts
+          sed -i 's/__MEASUREMENT_ID__/${{ secrets.MEASUREMENT_ID_PROD }}/g' apps/blog/src/environments/environment.prod.ts
+          sed -i 's/__API_KEY__/${{ secrets.API_KEY_PROD }}/g' apps/shell/src/environments/environment.prod.ts
+          sed -i 's/__AUTH_DOMAIN__/${{ secrets.AUTH_DOMAIN_PROD }}/g' apps/shell/src/environments/environment.prod.ts
+          sed -i 's/__PROJECT_ID__/${{ secrets.PROJECT_ID_PROD }}/g' apps/shell/src/environments/environment.prod.ts
+          sed -i 's/__STORAGE_BUCKET__/${{ secrets.STORAGE_BUCKET_PROD }}/g' apps/shell/src/environments/environment.prod.ts
+          sed -i 's/__MASSAGING_SENDER_ID__/${{ secrets.MASSAGING_SENDER_ID_PROD }}/g' apps/shell/src/environments/environment.prod.ts
+          sed -i 's/__APP_ID__/${{ secrets.APP_ID_PROD }}/g' apps/shell/src/environments/environment.prod.ts
+          sed -i 's/__MEASUREMENT_ID__/${{ secrets.MEASUREMENT_ID_PROD }}/g' apps/shell/src/environments/environment.prod.ts
+      - name: Setting config
+        uses: jsdaniell/create-json@1.1.2
         with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_APPSTROPHE_TEST }}'
-          channelId: live
-          projectId: appstrophe-test
+          name: "functions/firebase.config.json"
+          json: ${{ secrets.FIREBASE_CONFIG_PROD }}
+      - name: Setting account key
+        uses: jsdaniell/create-json@1.1.2
+        with:
+          name: "functions/serviceAccountKey.json"
+          json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY_PROD }}
+      - name: Build
+        run: npx nx run-many --target=build --all && npm --prefix functions run build
+      - name: E2e tests
+        run: npx nx run-many --target=e2e --all --nx-bail --parallel=false 
+      - name: Unit tests
+        run: npx nx run-many --target=test --all --watch=false --nx-bail
+      - name: Cloud functions tests
+        run: npm --prefix functions run test -- --token ${{ secrets.FIREBASE_TOKEN }} 
+      - name: Deployment
+        run: firebase deploy --token ${{ secrets.FIREBASE_TOKEN }} 
