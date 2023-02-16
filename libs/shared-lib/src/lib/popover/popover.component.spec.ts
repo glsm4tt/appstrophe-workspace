@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { PopoverContainerComponent } from './popover.component';
+import { DATA_TOKEN, PopoverContainerComponent } from './popover.component';
 
 describe('PopoverContainerComponent', () => {
   let component: PopoverContainerComponent;
@@ -7,7 +7,8 @@ describe('PopoverContainerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PopoverContainerComponent],
+      declarations: [PopoverContainerComponent],
+      providers: [{ provide: DATA_TOKEN, useValue: null }]
     }).compileComponents();
   });
 

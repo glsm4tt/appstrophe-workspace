@@ -31,10 +31,13 @@ export class PopoverDirective implements OnDestroy, OnInit {
   private unsubscribe = new Subject<void>();
   private overlayRef!: OverlayRef;
 
-  private _elementRef: ElementRef = inject(ElementRef);
   private _overlay: Overlay = inject(Overlay);
   private _vcr: ViewContainerRef = inject(ViewContainerRef);
   private _modalService: ModalService = inject(ModalService);
+
+  constructor(private _elementRef: ElementRef){
+    // empty
+  }
 
   ngOnInit(): void {
     this.createOverlay();

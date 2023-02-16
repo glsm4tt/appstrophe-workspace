@@ -1,9 +1,12 @@
-import { Directive, ViewContainerRef } from '@angular/core';
+import { Directive, ViewContainerRef, inject } from '@angular/core';
 
 @Directive({
   selector: '[modalHost]',
 })
 export class ModalDirective {
-  constructor(public viewContainerRef: ViewContainerRef) {
+  public viewContainerRef = inject(ViewContainerRef)
+  
+  constructor() {
+    //empty
    }
 }
