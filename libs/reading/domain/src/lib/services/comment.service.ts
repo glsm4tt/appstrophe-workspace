@@ -21,7 +21,8 @@ export class CommentService {
         map(reactions => ({
           ...c,
           reactions,
-          liked: !!(user?.uid && reactions.find(r => r.id))
+          liked: !!(user?.uid && reactions.find(r => r.id)),
+          owned: true //user?.uid === c.author.id
         }))
       ))))
     );
@@ -40,5 +41,10 @@ export class CommentService {
   unlikeComment(articleId: string, commentId: string, userId: string): Promise<void> {
     const articleCommentReactionDoc: DocumentReference<Partial<Reaction>> = doc(this._firestore, `articles/${articleId}/comments/${commentId}/reactions/${userId}`) as DocumentReference<Reaction>;
     return deleteDoc(articleCommentReactionDoc);
+  }
+
+  delete(articleId: string, commentId: string): Promise<void> {
+    const articleCommentDoc: DocumentReference<Comment> = doc(this._firestore, `articles/${articleId}/comments/${commentId}`) as DocumentReference<Comment>;
+    return deleteDoc(articleCommentDoc);
   }
 }

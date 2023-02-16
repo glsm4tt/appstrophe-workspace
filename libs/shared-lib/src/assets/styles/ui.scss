@@ -1,0 +1,126 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import '@angular/cdk/overlay-prebuilt.css';
+
+/* You can add global styles to this file, and also import other style files */
+
+/* Change autocomplete styles in WebKit */
+
+html {
+    @apply bg-zinc-50 dark:bg-zinc-800;
+}
+
+h1 {
+    @apply text-gray-900 dark:text-gray-100 text-2xl;
+}
+
+h2 {
+    @apply text-gray-700 dark:text-gray-300 text-xl;
+}
+
+h3 {
+    @apply text-gray-600 dark:text-gray-400 text-lg;
+}
+
+h4 {
+    @apply text-gray-500 text-base;
+}
+
+p, ul, li, a, th, td, span, img, fa-icon {
+    @apply text-gray-700 dark:text-gray-300
+}
+
+img {
+    @apply text-xs;
+}
+
+.article-markdown {
+    @apply prose prose-h1:text-gray-900 prose-h2:text-gray-700 prose-h3:text-gray-600 prose-h4:text-gray-500 prose-p:text-gray-700 prose-strong:text-gray-900 prose-li:text-gray-700 prose-a:text-gray-700 prose-code:text-gray-800 prose-code:bg-zinc-200 prose-code:rounded-sm prose-blockquote:text-gray-700 prose-figure:text-gray-700 prose-figcaption:text-gray-700 prose-strong:text-gray-700 prose-em:text-gray-700 prose-ul:text-gray-700 prose-table:text-gray-800 prose-thead:text-gray-800 prose-tr:text-gray-700 prose-th:text-gray-700 prose-td:text-gray-700 prose-hr:text-gray-700 dark:prose-h1:text-gray-100 dark:prose-h2:text-gray-300 dark:prose-h3:text-gray-400 dark:prose-h4:text-gray-500 dark:prose-p:text-gray-300 dark:prose-strong:text-gray-100 dark:prose-li:text-gray-300 dark:prose-a:text-gray-300 dark:prose-code:text-gray-200 dark:prose-code:bg-zinc-600 dark:prose-blockquote:text-gray-400 dark:prose-figure:text-gray-300 dark:prose-figcaption:text-gray-300 dark:prose-strong:text-gray-300 dark:prose-em:text-gray-300 dark:prose-ul:text-gray-300 dark:prose-table:text-gray-200 dark:prose-thead:text-gray-200 dark:prose-tr:text-gray-300 dark:prose-th:text-gray-300 dark:prose-td:text-gray-300 dark:prose-hr:text-gray-300 md:prose-lg lg:prose-xl xl:prose-2xl;
+}
+
+.tooltip-container {
+    @apply text-center z-50 fixed px-2 py-1 rounded-sm drop-shadow-md text-sm text-gray-700 dark:text-gray-300 bg-zinc-100 dark:bg-zinc-900 w-auto opacity-0 -translate-x-1/2 translate-y-1/3 pointer-events-none before:content-[''] before:absolute before:w-0 before:h-0 before:top-full before:left-1/2 before:-translate-x-1/2 before:border-8 before:border-solid before:border-transparent before:border-b-0 before:border-t-zinc-100 before:dark:border-t-zinc-900 before:drop-shadow-md;
+    animation: tooltip-slide 0.18s ease-out 0.5s; 
+    animation-fill-mode: forwards;
+}
+
+
+@keyframes tooltip-slide {
+  0% {
+    @apply opacity-0 -translate-x-1/2 translate-y-1/3;
+  }
+  100% {
+    @apply opacity-100 -translate-x-1/2 translate-y-0;
+  }
+}
+
+div.form-group {
+    @apply mb-2 w-full;
+}
+
+div.form-group > label.form-group__label {
+    @apply inline-block mb-2 text-gray-600 dark:text-gray-400;
+}
+
+div.form-group > label.form-group__label.required {
+    @apply after:px-1 after:content-['*'] after:text-orange-500;
+}
+
+a.form-group__label-link {
+    @apply block sm:inline-block sm:float-right text-orange-500 cursor-pointer text-sm mb-1 sm:mb-0 sm:mt-1;
+}
+
+div.form-group > div.form-group-content {
+    @apply relative flex items-center;
+} 
+
+div.form-group > div.form-group-content > .start {
+    @apply absolute left-2  mr-auto;
+} 
+
+div.form-group > div.form-group-content > .end {
+    @apply absolute right-2 ml-auto;
+} 
+
+div.form-group input.form-group__control,
+div.form-group textarea.form-group__control {
+    @apply block w-full px-3 py-1.5 text-base font-normal text-gray-700 dark:text-gray-300 bg-white dark:bg-zinc-800 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-800 focus:dark:text-gray-200 focus:ring-1 active:bg-white focus:bg-white dark:focus:bg-zinc-800 dark:active:bg-zinc-800 focus:border-orange-600 focus:ring-orange-600 focus:outline-none autofill:shadow-inner-xl autofill:shadow-white autofill:dark:shadow-zinc-800;
+}
+
+div.form-group input.form-group__control:autofill,
+div.form-group textarea.form-group__control:autofill {
+    -webkit-text-fill-color: rgb(55 65 81);
+ }
+
+ div.form-group div.form-group-content > .start+input.form-group__control,
+ div.form-group div.form-group-content > .end+input.form-group__control, 
+ div.form-group div.form-group-content > .start+textarea.form-group__control,
+ div.form-group div.form-group-content > .end+textarea.form-group__control {
+    @apply indent-5;
+ }
+
+@media (prefers-color-scheme: dark){
+    div.form-group input.form-group__control:autofill,
+    div.form-group textarea.form-group__control:autofill {
+        -webkit-text-fill-color: rgb(209 213 219);
+    }
+}
+
+
+div.form-group > small.form-group__help {
+    @apply block mt-1 text-xs text-gray-600 dark:text-gray-400;
+}
+
+button.btn {
+    @apply flex items-center py-1 justify-center bg-orange-500 rounded-sm text-white hover:bg-orange-600 active:bg-orange-700 disabled:text-gray-500 disabled:bg-zinc-200 disabled:hover:bg-zinc-200 dark:disabled:bg-zinc-700 dark:disabled:hover:bg-zinc-700;
+}
+
+button.btn.cancel {
+    @apply bg-transparent text-gray-600 dark:text-gray-300 hover:bg-zinc-400 dark:hover:bg-zinc-600;
+}
+
+.cdk-overlay-dark-backdrop {
+    @apply bg-zinc-100/50 dark:bg-zinc-900/50;
+}

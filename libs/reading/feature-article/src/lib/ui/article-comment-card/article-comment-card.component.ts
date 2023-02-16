@@ -1,9 +1,9 @@
 import { NgClass, NgIf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { AuthorFullnamePipe, Comment } from '@appstrophe-workspace/reading/domain';
 import { FirestoreTimestampPipe, SharedLibModule } from '@appstrophe-workspace/shared-lib';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { faThumbsUp, faEllipsisV, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'article-comment-card',
@@ -12,15 +12,18 @@ import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
   template: `
     <div class="card">
       <div class="card_author">
-          <img [src]="comment?.author?.photoUrl" alt="Photo de l'auteur du commentaire">
-          <div class="author__identity">
-            <h3>{{ comment?.author | authorFullname }}</h3>
-            <h4>{{ comment?.date | firestoreTimestamp }}</h4>
-          </div>
+        <img [src]="comment?.author?.photoUrl" alt="Photo de l'auteur du commentaire">
+        <div class="author__identity">
+          <h3>{{ comment?.author | authorFullname }}</h3>
+          <h4>{{ comment?.date | firestoreTimestamp }}</h4>
+        </div>
+        <div *ngIf="comment?.owned" class="comment-settings">
+          <fa-icon [icon]="faEllipsisV" tooltip="Settings" app-popover [popoverContent]="commentPopover"></fa-icon>
+        </div>
       </div>
       <div class="card_body">
           <p>
-              {{ comment?.text }}
+            {{ comment?.text }}
           </p>
       </div>
       <div class="card_footer">
@@ -33,6 +36,17 @@ import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
           </div>
       </div>
     </div>
+
+    <ng-template #commentPopover>
+      <ul class="comment-popover">
+        <li>
+          <a role="button" (click)="deleteRequest.emit()">
+            <fa-icon [icon]="faTrash"></fa-icon>
+            Delete
+          </a>
+        </li>
+      </ul>
+    </ng-template>
   `,
   styles: [`
     div.card {
@@ -49,6 +63,14 @@ import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 
     div.card > div.card_author > div.author__identity {
       @apply flex flex-col items-start justify-evenly ml-4
+    }
+
+    div.card > div.card_author > div.comment-settings {
+      @apply ml-auto py-2;
+    }
+
+    div.card > div.card_author > div.comment-settings > fa-icon {
+      @apply px-4 cursor-pointer transition-all ease-in-out duration-300 hover:scale-125;
     }
 
     div.card > div.card_body {
@@ -74,12 +96,24 @@ import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
     div.card div.card_footer__end {
       @apply flex justify-center items-center
     }
+
+    ul.comment-popover > li > a {
+      @apply flex items-center px-4 py-3 cursor-pointer hover:bg-zinc-400 dark:hover:bg-zinc-600
+    }
+
+    ul.comment-popover > li > a > fa-icon {
+      @apply mr-4
+    }
   `],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ArticleCommentCardComponent {
-  @Input() comment: Partial<Comment>;
+  @Input() comment!: Partial<Comment>;
   @Output() likeChange = new EventEmitter<void>();
+  @Output() deleteRequest = new EventEmitter<void>();
 
-  faThumbsUp = faThumbsUp;
+  readonly faThumbsUp = faThumbsUp;
+  readonly faEllipsisV = faEllipsisV;
+  readonly faPen = faPen;
+  readonly faTrash = faTrash;
 }
