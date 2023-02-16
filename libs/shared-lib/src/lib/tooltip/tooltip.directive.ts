@@ -20,7 +20,7 @@ export class TooltipDirective implements OnDestroy {
   @HostListener('mouseenter') onMouseEnter() {
     this.timer = setTimeout(() => {
       const x = this.el.nativeElement.getBoundingClientRect().left + this.el.nativeElement.offsetWidth / 2; // Get the middle of the element
-      const y = this.el.nativeElement.getBoundingClientRect().top - this.el.nativeElement.offsetHeight - 24; // Get the bottom of the element, plus a little extra
+      const y = this.el.nativeElement.getBoundingClientRect().top - this.el.nativeElement.offsetHeight - 24; // Get the top of the element, minus a little extra
       this.createTooltipPopup(x, y);
     }, this.delay)
   }

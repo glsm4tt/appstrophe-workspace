@@ -25,7 +25,8 @@ export class Mock {
         date: new Timestamp(1675409728, 2),
         text: `Ceci est un texte\n sur deux niveaux.\n  avec un tab.`,
         reactions: [Mock.reaction],
-        liked: false
+        liked: false,
+        owned: true
     };
 
     static readonly articleDtoList: ArticleDto[] = [1, 2, 3, 4, 5, 6, 7, 8].map(i => ({
@@ -102,7 +103,7 @@ export class Mock {
     static readonly user: User = {
         emailVerified: false,
         isAnonymous: false,
-        metadata: undefined,
+        metadata: {},
         providerData: [],
         refreshToken: '',
         tenantId: '',

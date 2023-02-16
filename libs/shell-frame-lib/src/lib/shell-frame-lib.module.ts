@@ -3,15 +3,16 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './ui/header/header.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterModule } from '@angular/router';
-import { OutsideClickDirective } from './utils/directives/click-outside.directive';
+import { SharedLibModule } from '@appstrophe-workspace/shared-lib';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    SharedLibModule
   ],
-  declarations: [HeaderComponent, OutsideClickDirective],
-  exports: [HeaderComponent, OutsideClickDirective],
+  declarations: [HeaderComponent],
+  exports: [HeaderComponent],
 })
 export class ShellFrameLibModule { }

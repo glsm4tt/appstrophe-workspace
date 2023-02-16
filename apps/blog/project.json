@@ -25,7 +25,7 @@
         "styles": [
           "apps/blog/src/styles.css",
           "node_modules/prismjs/themes/prism-okaidia.css",
-          "libs/shared-lib/src/assets/styles/ui.css"
+          "libs/shared-lib/src/assets/styles/ui.scss"
         ],
         "scripts": [
           "node_modules/marked/marked.min.js",

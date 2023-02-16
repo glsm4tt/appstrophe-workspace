@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
-import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { provideFirestore, getFirestore, DocumentReference } from '@angular/fire/firestore';
 import { Mock } from '../testing';
 import * as AngularFire from '@angular/fire/firestore';
 
@@ -9,7 +9,7 @@ import { first } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { AuthService, AuthServiceStub } from '@appstrophe-workspace/auth-lib';
 import { User } from '@angular/fire/auth';
-import { Reaction, Comment } from '../entities';
+import { Comment } from '../entities';
 
 describe('CommentService', () => {
   let service: CommentService;
@@ -53,22 +53,30 @@ describe('CommentService', () => {
   });
 
   it('should call addDoc when addComment is called', async () => {
-    const spy = jest.spyOn(AngularFire, 'addDoc').mockReturnValue(new Promise(resolve => resolve(null)));
+    const docRef = { } as DocumentReference<unknown>;
+    const spy = jest.spyOn(AngularFire, 'addDoc').mockReturnValue(new Promise(resolve => resolve(docRef)));
     await service.addComment('1', 'test');
     expect(spy).toHaveBeenCalledTimes(1);
     expect(spy).toHaveBeenCalledWith(expect.anything(), { text: 'test' });
   });
 
-  it('should call addDoc when likeComment is called', async () => {
-    const spy = jest.spyOn(AngularFire, 'setDoc').mockReturnValue(new Promise(resolve => resolve(null)));
+  it('should call setDoc when likeComment is called', async () => {
+    const spy = jest.spyOn(AngularFire, 'setDoc').mockReturnValue(new Promise(resolve => resolve()));
     await service.likeComment('1', '2', '3');
     expect(spy).toHaveBeenCalledTimes(1);
     expect(spy).toHaveBeenCalledWith(expect.anything(), { type: 'like' });
   });
 
-  it('should call addDoc when unlikeComment is called', async () => {
-    const spy = jest.spyOn(AngularFire, 'deleteDoc').mockReturnValue(new Promise(resolve => resolve(null)));
+  it('should call deleteDoc when unlikeComment is called', async () => {
+    const spy = jest.spyOn(AngularFire, 'deleteDoc').mockReturnValue(new Promise(resolve => resolve()));
     await service.unlikeComment('1', '2', '3');
+    expect(spy).toHaveBeenCalledTimes(1);
+    expect(spy).toHaveBeenCalledWith(expect.anything());
+  });
+
+  it('should call deleteDoc when unlikeComment is called', async () => {
+    const spy = jest.spyOn(AngularFire, 'deleteDoc').mockReturnValue(new Promise(resolve => resolve()));
+    await service.delete('1', '2');
     expect(spy).toHaveBeenCalledTimes(1);
     expect(spy).toHaveBeenCalledWith(expect.anything());
   });

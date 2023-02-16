@@ -24,7 +24,7 @@
         ],
         "styles": [
           "apps/shell/src/styles.css",
-          "libs/shared-lib/src/assets/styles/ui.css"
+          "libs/shared-lib/src/assets/styles/ui.scss"
         ],
         "scripts": [],
         "customWebpackConfig": {

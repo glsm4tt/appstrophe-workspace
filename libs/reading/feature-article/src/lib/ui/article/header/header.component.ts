@@ -72,7 +72,7 @@ import { EMPTY, Observable } from 'rxjs';
     }
 
     div.article_header div.article_header__infos div.article_header__infos_top div.social_media .social_media__icon {
-      @apply cursor-pointer transition-all ease-in-out duration-300 text-zinc-600 dark:text-zinc-500 hover:text-zinc-800 hover:dark:text-zinc-300 hover:scale-125
+      @apply cursor-pointer transition-all ease-in-out duration-300 text-zinc-600 dark:text-zinc-400 hover:text-zinc-800 hover:dark:text-zinc-200 hover:scale-125
     }
 
     div.article_header div.article_header__infos div.article_header__infos_top div.social_media .social_media__icon.linkedin {

@@ -16,7 +16,7 @@
         "assets": ["apps/auth/src/favicon.ico", "apps/auth/src/assets"],
         "styles": [
           "apps/auth/src/styles.css",
-          "libs/shared-lib/src/assets/styles/ui.css"
+          "libs/shared-lib/src/assets/styles/ui.scss"
         ],
         "scripts": [],
         "customWebpackConfig": {

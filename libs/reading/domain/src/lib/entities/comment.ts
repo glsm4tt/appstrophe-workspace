@@ -9,4 +9,5 @@ export interface Comment extends Id {
     text: string;
     reactions: Reaction[];
     liked: boolean;
+    owned: boolean;
 }
