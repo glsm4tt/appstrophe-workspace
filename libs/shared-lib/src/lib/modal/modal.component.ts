@@ -5,7 +5,7 @@ import { ModalDirective } from "./modal.directive";
 
 
 @Component({
-  selector: 'appstrophe-workspace-dialog',
+  selector: 'appstrophe-workspace-modal-container',
   template: `
     <div class="modal-container" [ngClass]="size">
       <ng-template modalHost></ng-template>
@@ -43,9 +43,9 @@ export class ModalContainerComponent implements AfterViewInit {
   constructor(@Inject(DATA_TOKEN) public component: ComponentType<unknown>) { }
 
   ngAfterViewInit(): void {
-    const viewContainerRef = this.modalHost.viewContainerRef;
-    viewContainerRef.clear();
+    const viewContainerRef = this.modalHost?.viewContainerRef;
+    viewContainerRef?.clear();
 
-    viewContainerRef.createComponent<unknown>(this.component);
+    viewContainerRef?.createComponent<unknown>(this.component);
   }
 }

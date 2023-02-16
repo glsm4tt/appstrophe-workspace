@@ -1,18 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ModalComponent } from './modal.component';
-
-describe('ModalComponent', () => {
-  let component: ModalComponent;
-  let fixture: ComponentFixture<ModalComponent>;
+import { DATA_TOKEN } from '../popover';
+import { ModalContainerComponent } from './modal.component';
+import { ModalDirective } from './modal.directive';
+describe('ModalContainerComponent', () => {
+  let component: ModalContainerComponent;
+  let fixture: ComponentFixture<ModalContainerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ModalComponent],
+      declarations: [ModalContainerComponent],
+      providers: [ModalDirective, { provide: DATA_TOKEN, useValue: null }]
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ModalComponent);
+    fixture = TestBed.createComponent(ModalContainerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
