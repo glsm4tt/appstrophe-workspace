@@ -4,6 +4,7 @@ import {
   HostListener,
   Output,
   ElementRef,
+  inject,
 } from '@angular/core';
 
 @Directive({
@@ -13,13 +14,13 @@ export class OutsideClickDirective {
   @Output()
   outsideClick: EventEmitter<MouseEvent> = new EventEmitter();
 
+  private _elementRef: ElementRef = inject(ElementRef);
+
   @HostListener('document:mousedown', ['$event'])
   onClick(event: MouseEvent): void {
-    if (!this.elementRef.nativeElement.contains(event.target)) {
+    if (!this._elementRef.nativeElement.contains(event.target)) {
       event.stopPropagation(); 
       this.outsideClick.emit(event);
     }
   }
-
-  constructor(private elementRef: ElementRef) {}
 }

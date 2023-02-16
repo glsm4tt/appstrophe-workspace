@@ -53,7 +53,7 @@ import { ArticleDetailedWithComments, CommentService } from '@appstrophe-workspa
 })
 export class ArticleCommentsAddComponent implements OnInit {
 
-  @Input() article: Partial<ArticleDetailedWithComments>;
+  @Input() article!: Partial<ArticleDetailedWithComments>;
   
   readonly faPen = faPen;
 
@@ -76,7 +76,7 @@ export class ArticleCommentsAddComponent implements OnInit {
   async submitComment(){
     if(!this.commentForm.value.comment.trim().replace('\n', '')) 
       return;
-    await this._commentService.addComment(this.article.id, this.commentForm.value.comment);
+    await this._commentService.addComment(this.article?.id as string, this.commentForm.value.comment);
   }
 
   checkIfConnected(){

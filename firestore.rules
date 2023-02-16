@@ -11,13 +11,13 @@ service cloud.firestore {
       }
       
       match /comments/{commentId} {
-        allow create, delete: if request.resource.data.keys().hasOnly(["text"]);
-        allow delete: if true;
+        allow create: if request.auth != null && request.resource.data.keys().hasOnly(["text"]);
+        allow delete: if request.auth.uid == resource.data.author.id;
         allow read: if true;
         
         match /reactions/{reactionId} {
-          allow create: if request.resource.data.keys().hasOnly(["type"]) && request.resource.data.type == 'like';
-          allow delete: if true;
+          allow create: if request.auth != null && request.resource.data.keys().hasOnly(["type"]) && request.resource.data.type == 'like';
+          allow delete: if request.auth.uid == resource.id;
           allow read: if true;
         }
       }

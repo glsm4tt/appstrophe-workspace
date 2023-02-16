@@ -8,7 +8,6 @@ import { ArticleBodyComponent } from '../../ui/article/body/body.component';
 import { ArticleFooterComponent } from '../../ui/article/footer/footer.component';
 import { ArticleHeaderComponent } from '../../ui/article/header/header.component';
 import * as fromArticle from '@appstrophe-workspace/reading/domain';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'article-details',
@@ -23,7 +22,7 @@ import { ActivatedRoute } from '@angular/router';
             <div class="article_page__body">
                 <article-body [articleUrl]="article.articleUrl"></article-body>
             </div>
-            <article-footer [article]="article"></article-footer>-->
+            <article-footer [article]="article"></article-footer>
             <article-comments></article-comments>
           </ng-container>
       </ng-template>
@@ -44,9 +43,8 @@ import { ActivatedRoute } from '@angular/router';
 export class ArticleDetailsComponent implements OnInit {
   article$: Observable<Partial<ArticleDetailed>> = EMPTY;
   isLoading$: Observable<boolean> = EMPTY;
-  
+
   private _store = inject(Store<fromArticle.ArticleRootState>);
-  private _route = inject(ActivatedRoute);
 
   ngOnInit() {
     this.article$ = this._store.select(fromArticle.selectArticle);
