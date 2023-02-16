@@ -1,3 +1,4 @@
+import { Overlay } from '@angular/cdk/overlay';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CommentDeleteConfirmationModalComponent } from './comment-delete-confirmation-modal.component';
@@ -11,6 +12,7 @@ describe('CommentDeleteConfirmationModalComponent', () => {
       imports: [
         CommentDeleteConfirmationModalComponent
       ],
+      providers: [Overlay]
     }).compileComponents();
   });
 

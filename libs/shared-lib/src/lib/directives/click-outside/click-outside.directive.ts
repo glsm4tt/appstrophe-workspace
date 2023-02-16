@@ -14,7 +14,9 @@ export class OutsideClickDirective {
   @Output()
   outsideClick: EventEmitter<MouseEvent> = new EventEmitter();
 
-  private _elementRef: ElementRef = inject(ElementRef);
+  constructor(private _elementRef: ElementRef){
+    // empty
+  }
 
   @HostListener('document:mousedown', ['$event'])
   onClick(event: MouseEvent): void {
