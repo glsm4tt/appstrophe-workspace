@@ -3,10 +3,12 @@ import { of } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { Mock } from '../testing/entities/mock';
 import * as AngularFire from '@angular/fire/firestore';
+import * as Storage from '@angular/fire/storage';
 
 import { ArticleService } from './article.service';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
-import { provideFirestore, getFirestore, DocumentReference, Query } from '@angular/fire/firestore';
+import { provideFirestore, getFirestore, DocumentReference } from '@angular/fire/firestore';
+import { getStorage, provideStorage } from '@angular/fire/storage';
 
 describe('ArticleService', () => {
   let service: ArticleService;
@@ -14,7 +16,8 @@ describe('ArticleService', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        provideFirebaseApp(() => initializeApp({ projectId: 'fake_test_id' })),
+        provideFirebaseApp(() => initializeApp({ projectId: 'fake_test_id', storageBucket: 'fake_storage_bucket' })),
+        provideStorage(() => getStorage()),
         provideFirestore(() => getFirestore())
       ]
     });
@@ -43,23 +46,14 @@ describe('ArticleService', () => {
   });
 
   it('should get one article when getOne is called', done => {
-    const docDataSpy = jest.spyOn(AngularFire, 'docData').mockImplementation((ref: DocumentReference<unknown>, options?: { idField?: string; }) => {
-      switch(ref.path) {
-        case 'articles/1':
-          return of(Mock.article);
-
-        case 'articles/1/metadata/1':
-          return of(Mock.articleMetadata);
-
-        default: 
-          return of(null);
-      }
-    });
+    const docDataSpy = jest.spyOn(AngularFire, 'docData').mockReturnValue(of(Mock.article));
+    const getDownloadURLSpy = jest.spyOn(Storage, 'getDownloadURL').mockReturnValue(new Promise(resolve => resolve(Mock.articleDetailed.articleUrl)));
 
     const article$ = service.getOne('1');
     article$.pipe(first()).subscribe({
       next: article => {
-        expect(docDataSpy).toHaveBeenCalledTimes(2);
+        expect(docDataSpy).toHaveBeenCalledTimes(1);
+        expect(getDownloadURLSpy).toHaveBeenCalledTimes(1);
         expect(article).toEqual(Mock.articleDetailed);
         done();
       }

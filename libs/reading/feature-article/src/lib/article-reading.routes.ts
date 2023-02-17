@@ -27,6 +27,11 @@ export const ARTICLE_READING_ROUTES: Route[] = [
                 ]
             },
             {
+                path: 'article',
+                pathMatch: 'full',
+                redirectTo: 'articles'
+            },
+            {
                 path: '',
                 pathMatch: 'full',
                 redirectTo: 'articles'

@@ -1,9 +1,10 @@
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { combineLatestWith, map } from 'rxjs/operators';
 import { Article } from '../entities/article';
 import { Firestore, collectionData, collection, docData, doc, DocumentReference, CollectionReference } from '@angular/fire/firestore';
-import { ArticleDetailed, ArticleMetadata } from '../entities';
+import { Storage, ref, getDownloadURL } from '@angular/fire/storage';
+import { ArticleDetailed } from '../entities';
 
 
 @Injectable({
@@ -12,15 +13,12 @@ import { ArticleDetailed, ArticleMetadata } from '../entities';
 export class ArticleService {
 
   private _firestore = inject(Firestore);
-
-  constructor() {
-    // empty
-  }
+  private _storage = inject(Storage);
 
   getAll(): Observable<Article[]> {
     const articlesCollection: CollectionReference<Article> = collection(this._firestore, 'articles') as CollectionReference<Article>;
     return collectionData<Article>(articlesCollection, { idField: 'id' }).pipe(
-      map(articles => articles.map(article => ({
+      map((articles: Article[]) => articles.map(article => ({
         ...article,
         imageUrl: 'assets/img/logo-search-grid-2x.png',
         author: {
@@ -35,12 +33,12 @@ export class ArticleService {
     const articleDoc: DocumentReference<Article> = doc(this._firestore, `articles/${id}`) as DocumentReference<Article>;
     const articleDoc$: Observable<Article> = docData(articleDoc, { idField: 'id' });
 
-    const articleMetadataDoc: DocumentReference<ArticleMetadata> = doc(this._firestore, `articles/${id}/metadata/${id}`) as DocumentReference<ArticleMetadata>;
-    const articleMetadataDoc$: Observable<ArticleMetadata> = docData(articleMetadataDoc);
+    const articleRef = ref(this._storage, `articles/${id}/markdown/article.md`);
+    const articleRef$ = from(getDownloadURL(articleRef));
 
     return articleDoc$.pipe(
-      combineLatestWith(articleMetadataDoc$),
-      map(([article, { articleUrl }]) => ({
+      combineLatestWith(articleRef$),
+      map(([article,  articleUrl ]) => ({
         ...article,
         articleUrl,
         imageUrl: 'assets/img/logo-search-grid-2x.png',

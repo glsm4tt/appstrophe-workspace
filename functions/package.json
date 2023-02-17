@@ -9,7 +9,7 @@
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
-    "test": "firebase emulators:exec --import='./test/ressources' 'npm run mocha' --only firestore",
+    "test": "firebase emulators:exec --import='../test/ressources' 'npm run mocha' --only firestore",
     "mocha": "mocha -r ts-node/register --reporter spec test/test.online.ts"
   },
   "engines": {

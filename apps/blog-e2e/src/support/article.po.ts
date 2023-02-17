@@ -1,4 +1,4 @@
-export const ARTICLE_TEST_ID = '0JbH3xqwFblrniNu5mSM';
+export const ARTICLE_TEST_ID = 'article_1';
 
 export const getTooltip = () => cy.get('[data-cy="tooltip"]');
 export const getCopiedTooltip = () => cy.get('[data-cy="copied-tooltip"]');

@@ -91,13 +91,9 @@ export class Mock {
         }
     };
 
-    static readonly articleMetadata: ArticleMetadata = {
-        articleUrl: 'fake_test_storage_url'
-    };
-
     static readonly articleDetailed: ArticleDetailed = {
         ...Mock.article,
-        articleUrl: Mock.articleMetadata.articleUrl
+        articleUrl: 'fake_test_storage_url'
     };
 
     static readonly user: User = {

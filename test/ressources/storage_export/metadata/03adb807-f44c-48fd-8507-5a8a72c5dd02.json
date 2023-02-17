@@ -1,0 +1,17 @@
+{
+  "name": "articles/article_2/markdown/article.md",
+  "bucket": "appstrophe-test.appspot.com",
+  "metageneration": 1,
+  "generation": 1676624859733,
+  "contentType": "application/octet-stream",
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "downloadTokens": ["fc7a2132-37ca-4cc2-b9af-58c8f3d4aa36"],
+  "etag": "7p7OYMEYKId7axGQIZS+tUgwriw",
+  "customMetadata": {},
+  "timeCreated": "2023-02-17T09:07:39.733Z",
+  "updated": "2023-02-17T09:07:39.733Z",
+  "size": 3485,
+  "md5Hash": "tElYOFDcOnrnPJR4QADO+w==",
+  "crc32c": "1507206939"
+}
