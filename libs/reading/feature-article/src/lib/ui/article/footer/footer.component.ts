@@ -27,7 +27,7 @@ import { faHandsClapping, faComment, faArrowUpFromBracket } from '@fortawesome/f
       </div>
       <div class="card_footer__end">
           <span class="card_footer__share">
-              <fa-icon tooltip="Share" class="share__icon" [icon]="faArrowUpFromBracket"></fa-icon>
+              <fa-icon appsTooltip="Share" class="share__icon" [icon]="faArrowUpFromBracket"></fa-icon>
           </span>
       </div>
     </div>
