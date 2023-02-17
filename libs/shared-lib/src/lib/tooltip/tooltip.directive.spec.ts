@@ -5,7 +5,7 @@ import { TooltipDirective } from './tooltip.directive';
 
 @Component({
   template: `
-    <div id="smart-div" tooltip="Hi I'm in a tooltip">Something Smart</div>
+    <div id="smart-div" appsTooltip="Hi I'm in a tooltip">Something Smart</div>
   `
 })
 class TestComponent { }

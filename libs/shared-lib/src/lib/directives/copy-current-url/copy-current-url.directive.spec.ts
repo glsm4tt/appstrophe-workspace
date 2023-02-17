@@ -7,7 +7,7 @@ import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
   template: `
-    <div id="smart-div" copyCurrentUrl>Something Smart</div>
+    <div id="smart-div" appsCopyCurrentUrl>Something Smart</div>
   `
 })
 class TestComponent { }

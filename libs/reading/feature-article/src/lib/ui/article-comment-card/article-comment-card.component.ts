@@ -18,7 +18,7 @@ import { faThumbsUp, faEllipsisV, faPen, faTrash } from '@fortawesome/free-solid
           <h4>{{ comment?.date | firestoreTimestamp }}</h4>
         </div>
         <div *ngIf="comment?.owned" class="comment-settings">
-          <fa-icon [icon]="faEllipsisV" tooltip="Settings" appsPopover [popoverContent]="commentPopover"></fa-icon>
+          <fa-icon [icon]="faEllipsisV" appsTooltip="Settings" appsPopover [popoverContent]="commentPopover"></fa-icon>
         </div>
       </div>
       <div class="card_body">
