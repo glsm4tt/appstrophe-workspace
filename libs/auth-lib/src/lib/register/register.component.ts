@@ -5,7 +5,7 @@ import { AuthService } from '../services/auth.service';
 import { PasswordConfirmation } from '../validators/password-confirmation.validator';
 
 @Component({
-  selector: 'appstrophe-workspace-register',
+  selector: 'apps-auth-register',
   template: `
   <div class="register-page">
     <div class="register-container">

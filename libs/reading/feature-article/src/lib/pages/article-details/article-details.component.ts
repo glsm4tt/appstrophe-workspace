@@ -10,7 +10,7 @@ import { ArticleHeaderComponent } from '../../ui/article/header/header.component
 import * as fromArticle from '@appstrophe-workspace/reading/domain';
 
 @Component({
-  selector: 'article-details',
+  selector: 'apps-read-article-details',
   template: `
     <div class="article_page">
       <ng-container *ngIf="isLoading$ | async; else article_content">
@@ -18,12 +18,12 @@ import * as fromArticle from '@appstrophe-workspace/reading/domain';
       </ng-container>
       <ng-template #article_content>
           <ng-container *ngIf="article$ | async as article">
-            <article-header></article-header>
+            <apps-read-article-header></apps-read-article-header>
             <div class="article_page__body">
-                <article-body [articleUrl]="article.articleUrl"></article-body>
+                <apps-read-article-body [articleUrl]="article.articleUrl"></apps-read-article-body>
             </div>
-            <article-footer [article]="article"></article-footer>
-            <article-comments></article-comments>
+            <apps-read-article-footer [article]="article"></apps-read-article-footer>
+            <apps-read-article-comments></apps-read-article-comments>
           </ng-container>
       </ng-template>
     </div>

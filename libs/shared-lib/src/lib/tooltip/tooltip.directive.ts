@@ -1,11 +1,11 @@
 import { Directive, ElementRef, HostListener, Input, OnDestroy } from '@angular/core';
 
 @Directive({
-  selector: '[tooltip]'
+  selector: '[appsTooltip]'
 })
 export class TooltipDirective implements OnDestroy {
   
-  @Input() tooltip = ''; // The text for the tooltip to display
+  @Input() appsTooltip = ''; // The text for the tooltip to display
   @Input() delay? = 100; // Optional delay input, in ms
 
   private myPopup!: HTMLDivElement;
@@ -37,7 +37,7 @@ export class TooltipDirective implements OnDestroy {
 
   private createTooltipPopup(x: number, y: number) {
     const popup = document.createElement('div');
-    popup.innerHTML = this.tooltip;
+    popup.innerHTML = this.appsTooltip;
     popup.setAttribute('data-cy', 'tooltip');
     popup.setAttribute('class', 'tooltip-container');
     popup.style.top = y.toString() + "px";

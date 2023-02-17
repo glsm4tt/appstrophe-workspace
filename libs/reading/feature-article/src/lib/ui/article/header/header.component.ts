@@ -13,7 +13,7 @@ import { filter, map, shareReplay, startWith } from 'rxjs/operators';
 import { EMPTY, Observable } from 'rxjs';
 
 @Component({
-  selector: 'article-header',
+  selector: 'apps-read-article-header',
   template: `
     <div class="article_header" data-cy="article-header">
       <img class="article_header__avatar" [src]="photoUrl" data-cy="author-avatar">

@@ -14,7 +14,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "article",
+            "prefix": "appsRead",
             "style": "camelCase"
           }
         ],
@@ -22,7 +22,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "article",
+            "prefix": "apps-read",
             "style": "kebab-case"
           }
         ]

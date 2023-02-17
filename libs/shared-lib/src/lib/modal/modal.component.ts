@@ -5,10 +5,10 @@ import { ModalDirective } from "./modal.directive";
 
 
 @Component({
-  selector: 'appstrophe-workspace-modal-container',
+  selector: 'apps-modal-container',
   template: `
     <div class="modal-container" [ngClass]="size">
-      <ng-template modalHost></ng-template>
+      <ng-template appsModalHost></ng-template>
     </div>
   `,
   styles: [`

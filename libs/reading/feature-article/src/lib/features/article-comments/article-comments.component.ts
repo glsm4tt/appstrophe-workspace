@@ -9,14 +9,14 @@ import * as fromArticle from '@appstrophe-workspace/reading/domain';
 import { Store } from '@ngrx/store';
 
 @Component({
-  selector: 'article-comments',
+  selector: 'apps-read-article-comments',
   template: `
     <div class="commments_section" *ngIf="articleWithComments$ | async as article">
       <div class="commments_section__add">
-          <article-comments-add [article]="article"></article-comments-add>
+          <apps-read-article-comments-add [article]="article"></apps-read-article-comments-add>
       </div>
       <div class="commments_section__list">
-          <article-comments-list [article]="article"></article-comments-list>
+          <apps-read-article-comments-list [article]="article"></apps-read-article-comments-list>
       </div>
     </div>
   `,
