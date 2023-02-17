@@ -8,14 +8,14 @@ import { ArticleSearchComponent } from '../../features/article-search/article-se
 import { ArticleListComponent } from '../../features/article-list/article-list.component';
 
 @Component({
-  selector: 'article-catalog',
+  selector: 'apps-read-article-catalog',
   template: `
-    <article-search></article-search>
+    <apps-read-article-search></apps-read-article-search>
     <ng-container *ngIf="isLoading$ | async; else articles">
             
     </ng-container>
     <ng-template #articles>
-      <article-list [articles]="articles$ | async"></article-list>
+      <apps-read-article-list [articles]="articles$ | async"></apps-read-article-list>
     </ng-template>
   `,
   standalone: true,

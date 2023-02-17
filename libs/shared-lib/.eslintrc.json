@@ -14,7 +14,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "",
+            "prefix": "apps",
             "style": "camelCase"
           }
         ],
@@ -22,7 +22,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "appstrophe-workspace",
+            "prefix": "apps",
             "style": "kebab-case"
           }
         ]

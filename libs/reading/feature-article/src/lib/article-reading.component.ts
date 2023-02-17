@@ -3,7 +3,7 @@ import { RouterModule } from "@angular/router";
 
 @Component({
   standalone: true,
-  selector: 'article-reading',
+  selector: 'apps-read-article-reading',
   imports: [
     RouterModule,
   ],

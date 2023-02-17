@@ -4,7 +4,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 @Component({
-  selector: 'appstrophe-workspace-login',
+  selector: 'apps-auth-login',
   template: `
     <div class="login-page">
       <div class="login-container">

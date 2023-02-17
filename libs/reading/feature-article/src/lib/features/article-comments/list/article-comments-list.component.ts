@@ -9,10 +9,10 @@ import { ModalService, SharedLibModule } from '@appstrophe-workspace/shared-lib'
 import { CommentDeleteConfirmationModalComponent } from '../../../ui/comment-delete-confirmation-modal/comment-delete-confirmation-modal.component';
 
 @Component({
-  selector: 'article-comments-list',
+  selector: 'apps-read-article-comments-list',
   standalone: true,
   imports: [NgForOf, ArticleCommentCardComponent, CommentDeleteConfirmationModalComponent, SharedLibModule],
-  template: `<article-comment-card *ngFor="let comment of article?.comments" [comment]="comment" (likeChange)="likeChange(article, comment)" (deleteRequest)="deleteRequest(article, comment)"></article-comment-card>`,
+  template: `<apps-read-article-comment-card *ngFor="let comment of article?.comments" [comment]="comment" (likeChange)="likeChange(article, comment)" (deleteRequest)="deleteRequest(article, comment)"></apps-read-article-comment-card>`,
   styles: [`
     :host {
       @apply grid gap-y-2

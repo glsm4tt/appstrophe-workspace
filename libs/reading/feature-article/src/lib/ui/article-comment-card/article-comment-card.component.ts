@@ -1,12 +1,12 @@
 import { NgClass, NgIf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { AuthorFullnamePipe, Comment } from '@appstrophe-workspace/reading/domain';
 import { FirestoreTimestampPipe, SharedLibModule } from '@appstrophe-workspace/shared-lib';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faThumbsUp, faEllipsisV, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'article-comment-card',
+  selector: 'apps-read-article-comment-card',
   standalone: true,
   imports: [FontAwesomeModule, NgIf, NgClass, SharedLibModule, FirestoreTimestampPipe, AuthorFullnamePipe],
   template: `
@@ -18,7 +18,7 @@ import { faThumbsUp, faEllipsisV, faPen, faTrash } from '@fortawesome/free-solid
           <h4>{{ comment?.date | firestoreTimestamp }}</h4>
         </div>
         <div *ngIf="comment?.owned" class="comment-settings">
-          <fa-icon [icon]="faEllipsisV" tooltip="Settings" app-popover [popoverContent]="commentPopover"></fa-icon>
+          <fa-icon [icon]="faEllipsisV" tooltip="Settings" appsPopover [popoverContent]="commentPopover"></fa-icon>
         </div>
       </div>
       <div class="card_body">
@@ -29,7 +29,7 @@ import { faThumbsUp, faEllipsisV, faPen, faTrash } from '@fortawesome/free-solid
       <div class="card_footer">
           <div class="card_footer__start">
               <span class="card_footer__likes">
-                  <fa-icon [ngClass]="{'text-orange-400': comment?.liked}" (click)="likeChange.emit()" [tooltip]="comment?.reactions?.length ? comment?.reactions?.length + ' Reactiond' : 'Be the first one liking it !'" class="like__icon" [icon]="faThumbsUp">
+                  <fa-icon [ngClass]="{'text-orange-400': comment?.liked}" (click)="likeChange.emit()" [appsTooltip]="comment?.reactions?.length ? comment?.reactions?.length + ' Reactiond' : 'Be the first one liking it !'" class="like__icon" [icon]="faThumbsUp">
                   </fa-icon>
                   <span *ngIf="comment?.reactions?.length">{{ comment?.reactions?.length }}</span>
               </span>

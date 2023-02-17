@@ -4,7 +4,7 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 @Component({
-  selector: 'appstrophe-workspace-password-retrieve',
+  selector: 'apps-auth-password-retrieve',
   template: `
     <div class="password-retrieve-page">
       <div class="password-retrieve-container">

@@ -1,7 +1,7 @@
 {
   "projectType": "library",
   "sourceRoot": "libs/reading/feature-video/src",
-  "prefix": "appstrophe-workspace",
+  "prefix": "apps-read",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",

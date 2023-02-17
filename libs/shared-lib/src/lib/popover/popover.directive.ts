@@ -15,14 +15,14 @@ import {
   OverlayRef
 } from "@angular/cdk/overlay";
 
-import { takeUntil, tap } from "rxjs/operators";
+import { takeUntil } from "rxjs/operators";
 import { Subject } from "rxjs";
-import { ComponentPortal, TemplatePortal } from "@angular/cdk/portal";
+import { ComponentPortal } from "@angular/cdk/portal";
 import { DATA_TOKEN, PopoverContainerComponent } from "./popover.component";
 import { ModalService } from "../modal/modal.service";
 
 @Directive({
-  selector: "[app-popover]"
+  selector: "[appsPopover]"
 })
 export class PopoverDirective implements OnDestroy, OnInit {
   @Input()

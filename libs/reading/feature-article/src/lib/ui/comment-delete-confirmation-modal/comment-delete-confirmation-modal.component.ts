@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, inject } from "@angular/core";
 import { ModalService } from "@appstrophe-workspace/shared-lib";
 
 @Component({
-    selector: 'article-test',
+    selector: 'apps-read-article-test',
     standalone: true,
     imports: [],
     template: `

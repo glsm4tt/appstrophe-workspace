@@ -2,7 +2,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/shared-lib/src",
-  "prefix": "appstrophe-workspace",
+  "prefix": "apps",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",

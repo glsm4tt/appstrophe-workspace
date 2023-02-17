@@ -5,11 +5,11 @@ import { ArticleCardComponent } from '../../ui/article-card/article-card.compone
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'article-list',
+  selector: 'apps-read-article-list',
   template: `
     <div class="card-catalog">
-      <article-card data-cy="article-card" [id]="'article-card-' + article.id" class="card" *ngFor="let article of articles" [article]="article"
-        [routerLink]="['/blog/article/' + article.id]"></article-card>
+      <apps-read-article-card data-cy="article-card" [id]="'article-card-' + article.id" class="card" *ngFor="let article of articles" [article]="article"
+        [routerLink]="['/blog/article/' + article.id]"></apps-read-article-card>
     </div>
   `,
   styles: [`
@@ -26,6 +26,6 @@ import { RouterModule } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ArticleListComponent {
-  @Input() articles: Partial<Article>[] 
+  @Input() articles!: Partial<Article>[] 
 
 }
