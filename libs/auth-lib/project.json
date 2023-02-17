@@ -2,7 +2,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/auth-lib/src",
-  "prefix": "appstroph-workspace",
+  "prefix": "apps-auth",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",

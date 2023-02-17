@@ -1,7 +1,7 @@
 {
   "projectType": "library",
   "sourceRoot": "libs/reading/feature-article/src",
-  "prefix": "article",
+  "prefix": "apps-article",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",

@@ -2,7 +2,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "sourceRoot": "apps/shell/src",
-  "prefix": "appstroph-shell",
+  "prefix": "apps-shell",
   "targets": {
     "build": {
       "executor": "@nrwl/angular:webpack-browser",

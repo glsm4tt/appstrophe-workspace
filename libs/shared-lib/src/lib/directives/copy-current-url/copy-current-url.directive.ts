@@ -2,7 +2,7 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
 import { Clipboard } from '@angular/cdk/clipboard';
 
 @Directive({
-  selector: '[copyCurrentUrl]'
+  selector: '[appsCopyCurrentUrl]'
 })
 export class CopyCurrentUrlDirective {
 

@@ -11,9 +11,9 @@ import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular
 import { SharedLibModule } from '@appstrophe-workspace/shared-lib';
 
 @Component({
-  selector: 'article-search',
+  selector: 'apps-read-article-search',
   template: `
-  <form class="search-section" [formState]="formState$ | async" [formGroup]="searchForm">
+  <form class="search-section" [appsFormState]="formState$ | async" [formGroup]="searchForm">
     <div class="search-fields">
       <div class="form-group">
           <div class="form-group-content">

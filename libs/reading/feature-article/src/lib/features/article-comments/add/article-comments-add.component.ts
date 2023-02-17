@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 import { ArticleDetailedWithComments, CommentService } from '@appstrophe-workspace/reading/domain';
 
 @Component({
-  selector: 'article-comments-add',
+  selector: 'apps-read-article-comments-add',
   template: `
     <form class="comment-section" [formGroup]="commentForm" (ngSubmit)="submitComment()">
       <div class="comment-fields">

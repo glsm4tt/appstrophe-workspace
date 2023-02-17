@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 import { Article } from '@appstrophe-workspace/reading/domain';
 
 @Component({
-  selector: 'article-card',
+  selector: 'apps-read-article-card',
   template: `
     <div class="card">
       <div class="card_avatar">
