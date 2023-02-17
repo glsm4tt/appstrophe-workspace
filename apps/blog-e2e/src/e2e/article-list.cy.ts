@@ -3,9 +3,9 @@ import { getArticleCards } from '../support/article.po';
 describe('/blog/articles', () => {
   beforeEach(() => cy.visit('/'));
 
-  it('should have 8 articles cards displayed in the page', () => {
+  it('should have 2 articles cards displayed in the page', () => {
     // the page <root>/blog/articles should have 1 cards
-    getArticleCards().should('have.length', 1);
+    getArticleCards().should('have.length', 2);
   });
 
   it('should redirect to the article detail page on a card click', () => {

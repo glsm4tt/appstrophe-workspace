@@ -4,11 +4,13 @@
   "license": "MIT",
   "scripts": {
     "ng": "nx",
+    "emulator": "firebase emulators:start --import='./test/ressources'",
+    "test:e2e:all": "firebase emulators:exec --import='./test/ressources' 'npm run e2e:all'",
+    "e2e:all": "npx nx run-many --target=e2e --all --nx-bail --parallel=false",
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2020 browser module main",
     "start": "nx serve",
-    "build": "nx build",
-    "test": "nx test",
-    "run:all": "node node_modules/@angular-architects/module-federation/src/server/mf-dev-server.js"
+    "build:all": "npx nx run-many --target=build --all && npm --prefix functions run build",
+    "test:all": "npx nx run-many --target=test --all --watch=false --nx-bail"
   },
   "private": true,
   "dependencies": {

@@ -67,11 +67,11 @@ jobs:
           name: "functions/serviceAccountKey.json"
           json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
       - name: Build
-        run: npx nx run-many --target=build --all && npm --prefix functions run build
+        run: npm run build:all
       - name: E2e tests
-        run: npx nx run-many --target=e2e --all --nx-bail --parallel=false 
+        run: npm run test:e2e:all -- --token ${{ secrets.FIREBASE_TOKEN }}
       - name: Unit tests
-        run: npx nx run-many --target=test --all --watch=false --nx-bail
+        run: npm run test:all
       - name: Cloud functions tests
         run: npm --prefix functions run test -- --token ${{ secrets.FIREBASE_TOKEN }}
       - name: Deployment

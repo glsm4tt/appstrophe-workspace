@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { CollectionReference, collection, collectionData, DocumentReference, addDoc, doc, setDoc, deleteDoc, Firestore } from '@angular/fire/firestore';
-import { Observable, combineLatestWith, mergeMap, combineLatest, map, tap, startWith } from 'rxjs';
+import { Observable, combineLatestWith, mergeMap, combineLatest, map, startWith } from 'rxjs';
 import { Reaction, Comment } from '../entities';
 import { AuthService } from '@appstrophe-workspace/auth-lib';
 
