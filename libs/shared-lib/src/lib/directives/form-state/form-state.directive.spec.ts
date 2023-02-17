@@ -17,7 +17,7 @@ describe('FormStateDirective', () => {
     directive.formGroup = new FormGroup({});
     const spy = jest.spyOn(directive.formGroup, 'patchValue');
     
-    directive.formState = { value: 'test' };
+    directive.appsFormState = { value: 'test' };
     expect(spy).toBeCalledTimes(1);
     expect(spy).toBeCalledWith({ value: 'test' }, {emitEvent: false})
   });

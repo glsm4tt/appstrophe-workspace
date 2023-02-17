@@ -21,16 +21,16 @@ import { EMPTY, Observable } from 'rxjs';
           <div class="article_header__infos_top">
               <h2 data-cy="author-fullname">Sylvain Dedieu</h2>
               <div class="social_media" *ngIf="url$ | async as url">
-                  <a [href]="'https://twitter.com/intent/tweet?url=' + url" tooltip="Share on Twitter"
+                  <a [href]="'https://twitter.com/intent/tweet?url=' + url" appsTooltip="Share on Twitter"
                       data-cy="share-on-twitter" class="social_media__icon" target="_blank" title="Share on Twitter">
                       <fa-icon [icon]="faTwitter"></fa-icon>
                   </a>
-                  <a [href]="'https://www.linkedin.com/shareArticle?mini=true?url=' + url" tooltip="Share on LinkedIn"
+                  <a [href]="'https://www.linkedin.com/shareArticle?mini=true?url=' + url" appsTooltip="Share on LinkedIn"
                       data-cy="share-on-linkedIn" class="social_media__icon linkedin" target="_blank"
                       title="Share on LinkedIn">
                       <fa-icon [icon]="faLinkedin"></fa-icon>
                   </a>
-                  <fa-icon copyCurrentUrl tooltip="Copy link" data-cy="copy-link" class="social_media__icon copy-link"
+                  <fa-icon appsCopyCurrentUrl appsTooltip="Copy link" data-cy="copy-link" class="social_media__icon copy-link"
                       [icon]="faLink">
                   </fa-icon>
               </div>
@@ -40,7 +40,7 @@ import { EMPTY, Observable } from 'rxjs';
               <fa-icon class="separator" [icon]="faCircle"></fa-icon>
               <span data-cy="time-of-read">5 min read</span>
               <fa-icon class="separator" [icon]="faCircle"></fa-icon>
-              <fa-icon class="youtube" data-cy="watch-on-youtube" tooltip="Watch the Youtube video" [icon]="faYoutube">
+              <fa-icon class="youtube" data-cy="watch-on-youtube" appsTooltip="Watch the Youtube video" [icon]="faYoutube">
               </fa-icon>
           </div>
       </div>
@@ -105,7 +105,7 @@ export class ArticleHeaderComponent implements OnInit {
   readonly faLinkedin = faLinkedin;
   readonly faLink = faLink;
   photoUrl!: string;
-  
+
   url$: Observable<string> = EMPTY;
 
   constructor(private router: Router) {
