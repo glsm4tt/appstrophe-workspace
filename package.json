@@ -9,7 +9,7 @@
     "e2e:all": "npx nx run-many --target=e2e --all --nx-bail --parallel=false",
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2020 browser module main",
     "start": "nx serve",
-    "build:all": "npx nx run-many --target=build --all && npm --prefix functions run build",
+    "build:all": "npx nx run-many --target=build --all",
     "test:all": "npx nx run-many --target=test --all --watch=false --nx-bail"
   },
   "private": true,
