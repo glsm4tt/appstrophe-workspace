@@ -67,7 +67,7 @@ jobs:
           name: "functions/serviceAccountKey.json"
           json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
       - name: Build
-        run: npm run build:all
+        run: npm run build:all && npm --prefix functions run build
       - name: E2e tests
         run: npm run test:e2e:all -- --token ${{ secrets.FIREBASE_TOKEN }}
       - name: Unit tests
