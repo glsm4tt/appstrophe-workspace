@@ -69,8 +69,6 @@ jobs:
           json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
       - name: Build
         run: npm run build:all && npm --prefix functions run build
-      - name: Debugg
-        run: firebase emulators:exec --import='./test/ressources' 'curl -v -X GET "http://localhost:8080/emulator/v1/projects/appstrophe-test/databases/(default)/documents"'
       - name: E2e tests
         run: npm run test:e2e:all -- --token ${{ secrets.FIREBASE_TOKEN }}
       - name: Unit tests
