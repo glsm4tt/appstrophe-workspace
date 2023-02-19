@@ -11,7 +11,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install
-        run: npm ci --legacy-peer-deps && npm --prefix functions ci && sudo npm install -g firebase-tools
+        run: npm ci --legacy-peer-deps && npm --prefix functions ci && sudo npm install -g firebase-tools@11.22.0
       - name: Firebase version check
         run: firebase -V
       - name: Setting environment
