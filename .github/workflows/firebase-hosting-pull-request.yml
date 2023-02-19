@@ -68,6 +68,11 @@ jobs:
           json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
       - name: Build
         run: npm run build:all && npm --prefix functions run build
+      - name: Cache firebase emulators
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/firebase/emulators
+          key: ${{ runner.os }}-firebase-emulators-${{ hashFiles('~/.cache/firebase/emulators/**') }}
       - name: E2e tests
         run: npm run test:e2e:all -- --token ${{ secrets.FIREBASE_TOKEN }}
       - name: Unit tests
