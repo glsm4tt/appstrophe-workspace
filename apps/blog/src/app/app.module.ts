@@ -10,9 +10,7 @@ import { provideAuth, browserPopupRedirectResolver, browserSessionPersistence, c
 import { provideFunctions, getFunctions } from '@angular/fire/functions';
 import { environment } from '../environments/environment';
 
-const isDev = environment.production;
-
-console.log(`================================IS DEV : ${isDev}=====================`)
+const isDev = !environment.production;
 
 @NgModule({
   declarations: [AppComponent],

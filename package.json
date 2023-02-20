@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "nx",
     "emulator": "firebase emulators:start --import='./test/ressources'",
-    "test:e2e:all": "firebase emulators:exec --import='./test/ressources' 'npm run e2e:all'",
+    "test:e2e:all": "firebase emulators:exec --import='./test/ressources' 'npx nx run target:e2e --project=blog-e2e --silent=false'",
     "e2e:all": "npx nx run-many --target=e2e --all --nx-bail --parallel=false",
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2020 browser module main",
     "start": "nx serve",
