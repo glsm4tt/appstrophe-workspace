@@ -10,7 +10,7 @@ import { provideAuth, browserPopupRedirectResolver, browserSessionPersistence, c
 import { provideFunctions, getFunctions } from '@angular/fire/functions';
 import { environment } from '../environments/environment';
 
-const isDev = !environment.production;
+const isDev = environment.production;
 
 console.log(`================================IS DEV : ${isDev}=====================`)
 
@@ -21,7 +21,7 @@ console.log(`================================IS DEV : ${isDev}==================
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => {
       const firestore = initializeFirestore(getApp(), {
-        experimentalForceLongPolling: /*isDev ? true : */false,
+        experimentalForceLongPolling: isDev ? true : false,
       });
 
       if (isDev) {
@@ -32,12 +32,12 @@ console.log(`================================IS DEV : ${isDev}==================
       return firestore;
     }),
     provideAuth(() => {
-      const auth = initializeAuth(getApp()/*, {
+      const auth = initializeAuth(getApp(), {
         persistence: isDev
           ? browserSessionPersistence
           : indexedDBLocalPersistence,
         popupRedirectResolver: browserPopupRedirectResolver,
-      }*/);
+      });
 
       if (isDev) connectAuthEmulator(auth, 'http://localhost:9099');
 
