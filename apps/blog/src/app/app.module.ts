@@ -21,7 +21,7 @@ console.log(`================================IS DEV : ${isDev}==================
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => {
       const firestore = initializeFirestore(getApp(), {
-        experimentalForceLongPolling: isDev ? true : false,
+        experimentalForceLongPolling: /*isDev ? true : */false,
       });
 
       if (isDev) {
