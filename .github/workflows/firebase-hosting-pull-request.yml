@@ -11,9 +11,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install
-        run: npm ci --legacy-peer-deps && npm --prefix functions ci && sudo npm install -g firebase-tools
+        run: npm ci --legacy-peer-deps && npm --prefix functions ci && sudo npm install -g firebase-tools@11.22.0
       - name: Setting environment
         run: |
+          firebase use appstrophe-test --token ${{ secrets.FIREBASE_TOKEN }}
           sed -i 's/__API_KEY__/${{ secrets.FIREBASE_API_KEY }}/g' apps/auth/src/environments/environment.ts
           sed -i 's/__AUTH_DOMAIN__/${{ secrets.FIREBASE_AUTH_DOMAIN }}/g' apps/auth/src/environments/environment.ts
           sed -i 's/__PROJECT_ID__/${{ secrets.FIREBASE_PROJECT_ID }}/g' apps/auth/src/environments/environment.ts
@@ -67,9 +68,15 @@ jobs:
           name: "functions/serviceAccountKey.json"
           json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
       - name: Build
-        run: npm run build:all
-      - name: E2e tests
-        run: npm run test:e2e:all -- --token ${{ secrets.FIREBASE_TOKEN }}
+        run: npm run build:all && npm --prefix functions run build
+#      - name: CURL TEST
+#        run: >
+#          firebase emulators:exec --import='./test/ressources' 'curl -H "Authorization: Bearer owner" -H "Content-Type: application/json" -X POST -d "{}" http://localhost:9099/identitytoolkit.googleapis.com/v1/projects/appstrophe-test/accounts:query'
+#      - name: CURL FIRESTORE TEST
+#        run: >
+#          firebase emulators:exec --import='./test/ressources' 'curl -v -X GET "http://localhost:8080/v1/projects/appstrophe-test/databases/(default)/documents/articles"'
+#      - name: E2e tests
+#        run: npm run test:e2e:all -- --token ${{ secrets.FIREBASE_TOKEN }}
       - name: Unit tests
         run: npm run test:all
       - name: Cloud functions tests

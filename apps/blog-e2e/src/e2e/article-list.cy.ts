@@ -1,7 +1,12 @@
-import { getArticleCards } from '../support/article.po';
+import { getArticleCards, getInputSearch } from '../support/article.po';
 
 describe('/blog/articles', () => {
   beforeEach(() => cy.visit('/'));
+
+  it('should have a search input displayed in the page', () => {
+    // the page <root>/blog/articles should have 1 cards
+    getInputSearch().should('have.attr', 'placeholder', 'Filter by name');
+  });
 
   it('should have 2 articles cards displayed in the page', () => {
     // the page <root>/blog/articles should have 1 cards
