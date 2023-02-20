@@ -32,12 +32,12 @@ console.log(`================================IS DEV : ${isDev}==================
       return firestore;
     }),
     provideAuth(() => {
-      const auth = initializeAuth(getApp(), {
+      const auth = initializeAuth(getApp()/*, {
         persistence: isDev
           ? browserSessionPersistence
           : indexedDBLocalPersistence,
         popupRedirectResolver: browserPopupRedirectResolver,
-      });
+      }*/);
 
       if (isDev) connectAuthEmulator(auth, 'http://localhost:9099');
 
