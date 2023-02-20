@@ -12,6 +12,8 @@ import { environment } from '../environments/environment';
 
 const isDev = !environment.production;
 
+console.log(`================================IS DEV : ${isDev}=====================`)
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
