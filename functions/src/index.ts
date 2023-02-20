@@ -40,10 +40,8 @@ export const onCommentCreate = firestore
         try {
             await db.doc(`articles/${context.params.articleId}/comments/${context.params.commentId}`).update({
                 author: {
-                    firstname: "bob",
-                    id: context.auth?.uid ?? "",
-                    name: "Smith",
-                    photoUrl: ""
+                    alias: "@test_user_read",
+                    id: context.auth?.uid ?? ""
                 },
                 date: admin.firestore.Timestamp.now()
             });
