@@ -69,6 +69,12 @@ jobs:
           json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
       - name: Build
         run: npm run build:all && npm --prefix functions run build
+      - name: CURL TEST
+        run: >
+          firebase emulators:exec --import='./test/ressources' 'curl -H "Authorization: Bearer owner" -H "Content-Type: application/json" -X POST -d "{}" http://localhost:9099/identitytoolkit.googleapis.com/v1/projects/appstrophe-test/accounts:query'
+      - name: CURL FIRESTORE TEST
+        run: >
+          firebase emulators:exec --import='./test/ressources' 'curl -v -X GET "http://localhost:8080/v1/projects/appstrophe-test/databases/(default)/documents/articles"'
       - name: E2e tests
         run: npm run test:e2e:all -- --token ${{ secrets.FIREBASE_TOKEN }}
       - name: Unit tests
