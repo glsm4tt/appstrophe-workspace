@@ -20,8 +20,8 @@ describe("appstrophe cloud functions api", () => {
         
         const expected = {
             author: {
-                alias: '@test_user_read',
-                id: 'Ki3WFGMtnDGTHB0ArzV0XNbNyOt5'
+                alias: "@test_user_read",
+                id: "Ki3WFGMtnDGTHB0ArzV0XNbNyOt5"
             },
             date: admin.firestore.Timestamp.now(),
             text: "Some comment"
@@ -30,7 +30,7 @@ describe("appstrophe cloud functions api", () => {
         const wrapped = test.wrap(functions.onCommentCreate);
         await wrapped({text: "Some random text"}, {
             auth: {
-                uid: 'Ki3WFGMtnDGTHB0ArzV0XNbNyOt5'
+                uid: "Ki3WFGMtnDGTHB0ArzV0XNbNyOt5"
             },
             params: {
                 articleId, 
