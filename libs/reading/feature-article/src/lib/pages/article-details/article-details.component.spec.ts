@@ -4,12 +4,10 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { MarkdownModule } from 'ngx-markdown';
 
 import { ArticleDetailsComponent } from './article-details.component';
-import { AuthService } from '@appstrophe-workspace/auth-lib';
+import { AuthService } from '@appstrophe-workspace/auth/domain';
 import { EffectsModule } from '@ngrx/effects';
 import { Store, StoreModule } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
-
-import * as fromArticle from '@appstrophe-workspace/reading/domain';
 
 const ARTICLE_ID = '4';
 

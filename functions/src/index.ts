@@ -1,10 +1,11 @@
-import { logger, firestore, EventContext } from "firebase-functions";
+import { logger, firestore, EventContext, auth } from "firebase-functions";
 import { initializeApp } from "firebase-admin/app";
 import * as admin from "firebase-admin";
 
 initializeApp();
 
 const db = admin.firestore();
+
 /*
 export const changeCommentReactionStatus = https.onCall(async (data, context) => {
     logger.info(`-- Function called with data: ${data} --`, {structuredData: true});
@@ -51,16 +52,16 @@ export const onCommentCreate = firestore
     });
 
 export const onCommentLikeCreate = firestore
-.document("articles/{articleId}/comments/{commentId}/reactions/{reactionId}")
-.onCreate(async (snap, context: EventContext<{ articleId: string, commentId: string, reactionId: string }>) => {
-    logger.info(`-- Function called with snap: ${snap.data} --`, { structuredData: true });
-    logger.info(`-- Function called with context: ${context.auth} --`, { structuredData: true });
+    .document("articles/{articleId}/comments/{commentId}/reactions/{reactionId}")
+    .onCreate(async (snap, context: EventContext<{ articleId: string, commentId: string, reactionId: string }>) => {
+        logger.info(`-- Function called with snap: ${snap.data} --`, { structuredData: true });
+        logger.info(`-- Function called with context: ${context.auth} --`, { structuredData: true });
 
-    try {
-        await db.doc(`articles/${context.params.articleId}/comments/${context.params.commentId}/reactions/${context.params.reactionId}`).update({
-            date: admin.firestore.Timestamp.now()
-        });
-    } catch (err) {
-        logger.error(`An error occured: ${err}`, { structuredData: true });
-    }
-});
+        try {
+            await db.doc(`articles/${context.params.articleId}/comments/${context.params.commentId}/reactions/${context.params.reactionId}`).update({
+                date: admin.firestore.Timestamp.now()
+            });
+        } catch (err) {
+            logger.error(`An error occured: ${err}`, { structuredData: true });
+        }
+    });

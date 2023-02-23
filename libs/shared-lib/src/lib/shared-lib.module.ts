@@ -10,9 +10,11 @@ import { ModalContainerComponent } from './modal/modal.component';
 import { ModalService } from './modal/modal.service';
 import { ModalDirective } from './modal/modal.directive';
 import { PopoverDirective } from './popover';
+import { ToasterComponent, ToasterDirective, ToasterService } from './toaster';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
-  imports: [CommonModule, OverlayModule],
+  imports: [CommonModule, OverlayModule, FontAwesomeModule],
   declarations: [
     FormStateDirective,
     TooltipDirective,
@@ -21,7 +23,9 @@ import { PopoverDirective } from './popover';
     OutsideClickDirective,
     PopoverContainerComponent,
     ModalDirective,
-    ModalContainerComponent
+    ModalContainerComponent,
+    ToasterComponent,
+    ToasterDirective
   ],
   exports: [
     FormStateDirective,
@@ -33,6 +37,6 @@ import { PopoverDirective } from './popover';
     ModalDirective,
     ModalContainerComponent
   ],
-  providers: [ModalService]
+  providers: [ModalService, ToasterService]
 })
 export class SharedLibModule { }

@@ -16,7 +16,16 @@
     "strictNullChecks": false,
     "baseUrl": ".",
     "paths": {
-      "@appstrophe-workspace/auth-lib": ["libs/auth-lib/src/index.ts"],
+      "@appstrophe-workspace/auth/domain": ["libs/auth/domain/src/index.ts"],
+      "@appstrophe-workspace/auth/feature-login": [
+        "libs/auth/feature-login/src/index.ts"
+      ],
+      "@appstrophe-workspace/auth/feature-register": [
+        "libs/auth/feature-register/src/index.ts"
+      ],
+      "@appstrophe-workspace/auth/feature-user-settings": [
+        "libs/auth/feature-user-settings/src/index.ts"
+      ],
       "@appstrophe-workspace/blog-lib": ["libs/blog-lib/src/index.ts"],
       "@appstrophe-workspace/reading/domain": [
         "libs/reading/domain/src/index.ts"

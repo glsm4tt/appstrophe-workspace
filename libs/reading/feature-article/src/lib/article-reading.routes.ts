@@ -1,9 +1,9 @@
 import { Route } from "@angular/router";
-import { ArticleReadingComponent } from "./article-reading.component";
 import { fromReadingDomain } from "@appstrophe-workspace/reading/domain";
 import { importProvidersFrom } from "@angular/core";
 import { MarkdownModule } from "ngx-markdown";
 import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { ArticleReadingComponent } from "./article-reading.component";
 
 export const ARTICLE_READING_ROUTES: Route[] = [
     {
@@ -21,7 +21,7 @@ export const ARTICLE_READING_ROUTES: Route[] = [
                 path: 'article/:articleId',
                 loadComponent: () => import('./pages/article-details/article-details.component').then(m => m.ArticleDetailsComponent),
                 providers: [
-                    importProvidersFrom(MarkdownModule.forRoot( { loader: HttpClient })),
+                    importProvidersFrom(MarkdownModule.forRoot({ loader: HttpClient })),
                     importProvidersFrom(HttpClientModule),
                     importProvidersFrom(HttpClientModule)
                 ]

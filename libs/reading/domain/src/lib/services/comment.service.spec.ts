@@ -7,9 +7,9 @@ import * as AngularFire from '@angular/fire/firestore';
 import { CommentService } from './comment.service';
 import { first } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { AuthService, AuthServiceStub } from '@appstrophe-workspace/auth-lib';
 import { User } from '@angular/fire/auth';
 import { Comment } from '../entities';
+import { AuthService, AuthServiceStub } from '@appstrophe-workspace/auth/domain';
 
 describe('CommentService', () => {
   let service: CommentService;

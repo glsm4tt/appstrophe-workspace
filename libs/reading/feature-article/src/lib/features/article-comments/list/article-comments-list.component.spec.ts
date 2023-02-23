@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AuthService, AuthServiceStub } from '@appstrophe-workspace/auth-lib';
+import { AuthService, AuthServiceStub } from '@appstrophe-workspace/auth/domain';
 import { CommentService, CommentServiceStub } from '@appstrophe-workspace/reading/domain';
 
 import { ArticleCommentsListComponent } from './article-comments-list.component';

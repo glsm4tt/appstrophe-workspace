@@ -5,8 +5,9 @@ import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { environment } from '../environments/environment';
 import { provideFirebaseApp, initializeApp, getApp } from '@angular/fire/app';
-import { provideAuth, getAuth, browserPopupRedirectResolver, browserSessionPersistence, connectAuthEmulator, indexedDBLocalPersistence, initializeAuth } from '@angular/fire/auth';
+import { provideAuth, browserPopupRedirectResolver, browserSessionPersistence, connectAuthEmulator, indexedDBLocalPersistence, initializeAuth } from '@angular/fire/auth';
 import { provideFirestore, initializeFirestore, connectFirestoreEmulator, enableIndexedDbPersistence } from '@angular/fire/firestore';
+import { SharedLibModule } from '@appstrophe-workspace/shared-lib';
 
 const isDev = !environment.production;
 
@@ -14,6 +15,7 @@ const isDev = !environment.production;
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    SharedLibModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => {
       const firestore = initializeFirestore(getApp(), {
