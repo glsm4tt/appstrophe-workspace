@@ -1,4 +1,4 @@
-import { logger, firestore, EventContext, auth } from "firebase-functions";
+import { logger, firestore, EventContext } from "firebase-functions";
 import { initializeApp } from "firebase-admin/app";
 import * as admin from "firebase-admin";
 
