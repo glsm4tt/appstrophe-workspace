@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/auth/domain/src",
+  "prefix": "appstrophe-workspace",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/auth/domain"],
+      "options": {
+        "jestConfig": "libs/auth/domain/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/auth/domain/**/*.ts",
+          "libs/auth/domain/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

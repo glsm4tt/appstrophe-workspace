@@ -13,5 +13,8 @@
     "**/*.test.ts",
     "jest.config.ts"
   ],
-  "include": ["**/*.ts"]
+  "include": [
+    "**/*.ts",
+    "../../auth/feature-register/src/lib/auth-register.component.ts"
+  ]
 }

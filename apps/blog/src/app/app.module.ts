@@ -7,8 +7,8 @@ import { provideFirebaseApp, initializeApp, getApp } from '@angular/fire/app';
 import { provideFirestore, connectFirestoreEmulator, enableIndexedDbPersistence, initializeFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage, connectStorageEmulator } from '@angular/fire/storage';
 import { provideAuth, browserPopupRedirectResolver, browserSessionPersistence, connectAuthEmulator, indexedDBLocalPersistence, initializeAuth } from '@angular/fire/auth';
-import { provideFunctions, getFunctions } from '@angular/fire/functions';
 import { environment } from '../environments/environment';
+import { SharedLibModule } from '@appstrophe-workspace/shared-lib';
 
 const isDev = !environment.production;
 
@@ -16,6 +16,7 @@ const isDev = !environment.production;
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    SharedLibModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => {
       const firestore = initializeFirestore(getApp(), {
@@ -48,7 +49,6 @@ const isDev = !environment.production;
 
       return storage;
     }),
-    provideFunctions(() => getFunctions()),
     RouterModule.forRoot([
       {
         path: 'blog',

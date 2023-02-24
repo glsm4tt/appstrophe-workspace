@@ -2,7 +2,7 @@ import { NgForOf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, Input, OnInit } from '@angular/core';
 import { ArticleDetailedWithComments, Comment, CommentService } from '@appstrophe-workspace/reading/domain';
 import { ArticleCommentCardComponent } from '../../../ui/article-comment-card/article-comment-card.component';
-import { AuthService } from '@appstrophe-workspace/auth-lib';
+import { AuthService } from '@appstrophe-workspace/auth/domain';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ModalService, SharedLibModule } from '@appstrophe-workspace/shared-lib';

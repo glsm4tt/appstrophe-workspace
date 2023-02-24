@@ -1,6 +1,7 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+    
     match /articles/{articleId} {
       allow write: if false;
       allow read: if true;
@@ -21,6 +22,12 @@ service cloud.firestore {
           allow read: if true;
         }
       }
+    }
+
+    match /users/{userAlias} {
+      allow create: if userAlias.matches('^@[a-z0-9_]*$') && request.auth.uid == request.resource.data.uid && request.resource.data.keys().hasOnly(["uid"]);
+      allow read: if true;
+      allow update, delete: if false;
     }
   }
 }
