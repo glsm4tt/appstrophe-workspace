@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { firstValueFrom, map, Observable } from 'rxjs';
-import { getAuth, Auth, User, createUserWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, UserCredential, UserInfo } from '@angular/fire/auth';
+import { getAuth, Auth, User, createUserWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, UserCredential } from '@angular/fire/auth';
 import { docData, DocumentReference, Firestore } from '@angular/fire/firestore';
 import { AppStropher } from '../entities/AppStropher';
 import { doc, setDoc } from '@firebase/firestore';
@@ -10,7 +10,7 @@ import { doc, setDoc } from '@firebase/firestore';
 })
 export class AuthService {
 
-  user$!: Observable<User | null>; 
+  private user$!: Observable<User | null>; 
   private _firestore = inject(Firestore);
   private _auth = inject(Auth);
 
@@ -21,6 +21,18 @@ export class AuthService {
     this.user$ = new Observable(subscriber => {
       this._auth.onAuthStateChanged(user => subscriber.next(user))
     });
+
+    this.signInWithEmailAndPassword('test_user_read@fake-domain.net', 'test_user_read')
+  }
+
+  /**
+   * Get an {Observable} of the current connected user
+   * The inner value can be {null} or a {@angular/fire/auth.User}
+   * 
+   * @returns {null} or a {@angular/fire/auth.User}
+   */
+  getConnectedUser(): Observable<User | null> {
+    return this.user$;
   }
 
   /**

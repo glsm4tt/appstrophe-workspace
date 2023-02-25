@@ -9,7 +9,7 @@
 /* Change autocomplete styles in WebKit */
 
 html {
-    @apply bg-zinc-50 dark:bg-zinc-800;
+    @apply bg-zinc-50 dark:bg-zinc-800 text-gray-700 dark:text-gray-300;
 }
 
 h1 {
@@ -26,10 +26,6 @@ h3 {
 
 h4 {
     @apply text-gray-500 text-base;
-}
-
-p, ul, li, a, th, td, span, img, fa-icon {
-    @apply text-gray-700 dark:text-gray-300
 }
 
 img {
@@ -129,6 +125,10 @@ button.btn {
 
 button.btn.cancel {
     @apply bg-transparent text-gray-600 dark:text-gray-300 hover:bg-zinc-400 dark:hover:bg-zinc-600;
+}
+
+div.cdk-overlay-pane {
+    width: auto !important; // ugly workaround help to avoid popover showing off screen
 }
 
 .cdk-overlay-dark-backdrop {

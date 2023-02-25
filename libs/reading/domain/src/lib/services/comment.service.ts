@@ -15,7 +15,7 @@ export class CommentService {
   getComments(articleId: string): Observable<Comment[]> {
     const articleCommentsCollection: CollectionReference<Comment> = collection(this._firestore, `articles/${articleId}/comments`) as CollectionReference<Comment>;
     return collectionData(articleCommentsCollection, { idField: 'id' }).pipe(
-      combineLatestWith(this._authService.user$),
+      combineLatestWith(this._authService.getConnectedUser()),
       mergeMap(([comments, user]) => combineLatest(comments.map(c => collectionData<Reaction>(collection(this._firestore, `articles/${articleId}/comments/${c.id}/reactions`) as CollectionReference<Reaction>, { idField: 'id' }).pipe(
         startWith([]),
         map(reactions => ({

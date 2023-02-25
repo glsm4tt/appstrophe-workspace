@@ -4,6 +4,7 @@ import { HeaderComponent } from './ui/header/header.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterModule } from '@angular/router';
 import { SharedLibModule } from '@appstrophe-workspace/shared-lib';
+import { HeaderAuthSectionComponent } from './ui/header/header-auth-section.component';
 
 @NgModule({
   imports: [
@@ -12,7 +13,7 @@ import { SharedLibModule } from '@appstrophe-workspace/shared-lib';
     FontAwesomeModule,
     SharedLibModule
   ],
-  declarations: [HeaderComponent],
-  exports: [HeaderComponent],
+  declarations: [HeaderComponent, HeaderAuthSectionComponent],
+  exports: [HeaderComponent, HeaderAuthSectionComponent],
 })
 export class ShellFrameLibModule { }

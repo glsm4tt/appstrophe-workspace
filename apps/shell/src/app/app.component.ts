@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'apps-shell-root',
   template: `
-    <appstrophe-workspace-header></appstrophe-workspace-header>
+    <apps-shell-header></apps-shell-header>
     <div class="flex flex-col min-h-screen">
         <div class="flex-grow">
             <router-outlet class="h-full"></router-outlet>

@@ -41,11 +41,12 @@ describe('CommentService', () => {
   it('should get all comments of an article when getComments is called', done => {
     const comments: Comment[] = [Mock.comment].map(c => ({ ...c, reactions: [] }));
     const spy = jest.spyOn(AngularFire, 'collectionData').mockReturnValue(of(comments));
-    authService.user$ = of({uid: '123'} as User)
+    const userSpy = jest.spyOn(authService, 'getConnectedUser').mockReturnValue(of({uid: '123'} as User));
     const comments$ = service.getComments('1');
     comments$.pipe(first()).subscribe({
       next: _comments => {
         expect(spy).toHaveBeenCalled();
+        expect(userSpy).toHaveBeenCalledTimes(1);
         expect(_comments).toEqual(comments);
         done();
       }

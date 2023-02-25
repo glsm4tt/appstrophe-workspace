@@ -8,7 +8,10 @@ import {
   ElementRef,
   HostListener,
   Injector,
-  inject
+  inject,
+  EventEmitter,
+  Output,
+  Renderer2
 } from "@angular/core";
 import {
   Overlay,
@@ -28,12 +31,19 @@ export class PopoverDirective implements OnDestroy, OnInit {
   @Input()
   popoverContent!: TemplateRef<object>;
 
+  @Output()
+  popoverAttached = new EventEmitter<OverlayRef>();
+
+  @Output()
+  popoverDetached = new EventEmitter<OverlayRef>();
+
   private unsubscribe = new Subject<void>();
   private overlayRef!: OverlayRef;
 
   private _overlay: Overlay = inject(Overlay);
   private _vcr: ViewContainerRef = inject(ViewContainerRef);
   private _modalService: ModalService = inject(ModalService);
+  private _renderer: Renderer2 = inject(Renderer2);
 
   constructor(private _elementRef: ElementRef){
     // empty
@@ -95,12 +105,16 @@ export class PopoverDirective implements OnDestroy, OnInit {
       const comp = new ComponentPortal(PopoverContainerComponent, this._vcr, portalInjector);
       
       this.overlayRef.attach(comp);
+      this.popoverAttached.emit(this.overlayRef);
+      this._renderer.addClass(this._elementRef.nativeElement, 'popover-active');
     }
   }
 
-  private detachOverlay(): void {
+  public detachOverlay(): void {
     if (this.overlayRef.hasAttached()) {
       this.overlayRef.detach();
+      this.popoverDetached.emit(this.overlayRef);
+      this._renderer.removeClass(this._elementRef.nativeElement, 'popover-active');
     }
   }
 }

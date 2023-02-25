@@ -48,13 +48,14 @@ describe('ArticleCommentsAddComponent', () => {
     const textareaElement: HTMLTextAreaElement = articleCommentsAddComponentElement.querySelector('#comment');
     const checkIfConnectedSpy = jest.spyOn(component, 'checkIfConnected');
     const navigateSpy = jest.spyOn(router, 'navigateByUrl');
-    authService.user$ = of(null);
+    const userSpy = jest.spyOn(authService, 'getConnectedUser').mockReturnValue(of(null));
 
     const event = new Event('focus');
     textareaElement.dispatchEvent(event);
 
     expect(checkIfConnectedSpy).toBeCalledTimes(1);
     expect(navigateSpy).toBeCalledTimes(1);
+    expect(userSpy).toBeCalledTimes(1);
     expect(navigateSpy).toBeCalledWith(`/auth/login?previous=/`);
   });
 
@@ -65,12 +66,13 @@ describe('ArticleCommentsAddComponent', () => {
     const textareaElement: HTMLTextAreaElement = articleCommentsAddComponentElement.querySelector('#comment');
     const checkIfConnectedSpy = jest.spyOn(component, 'checkIfConnected');
     const navigateSpy = jest.spyOn(router, 'navigateByUrl');
-    authService.user$ = of(Mock.user);
+    const userSpy = jest.spyOn(authService, 'getConnectedUser').mockReturnValue(of(null));
 
     const event = new Event('focus');
     textareaElement.dispatchEvent(event);
 
     expect(checkIfConnectedSpy).toBeCalledTimes(1);
+    expect(userSpy).toBeCalledTimes(1);
     expect(navigateSpy).not.toHaveBeenCalled();
   });
 });
