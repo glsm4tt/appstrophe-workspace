@@ -8,9 +8,6 @@ import { AuthService } from '@appstrophe-workspace/auth/domain';
   template: `
     <div class="login-page">
       <div class="login-container">
-          <div class="logo">
-              <img />
-          </div>
           <h3 data-cy="title" class="title">Sign in</h3>
           <form class="sign-in_form" [formGroup]="loginForm" (ngSubmit)="login()">
               <div class="form-group">

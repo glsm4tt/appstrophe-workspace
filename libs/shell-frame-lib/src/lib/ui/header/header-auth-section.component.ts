@@ -3,7 +3,7 @@ import { faUser, faUserAstronaut, faGears, faRightFromBracket } from '@fortaweso
 import { User } from '@angular/fire/auth';
 import { PopoverDirective } from '@appstrophe-workspace/shared-lib';
 import { NavigationEnd, Router } from '@angular/router';
-import { EMPTY, filter, map, Observable } from 'rxjs';
+import { EMPTY, filter, map, Observable, tap } from 'rxjs';
 
 @Component({
     selector: 'apps-shell-header-auth-section',

@@ -8,6 +8,7 @@ import { provideFirebaseApp, initializeApp, getApp } from '@angular/fire/app';
 import { provideAuth, browserPopupRedirectResolver, browserSessionPersistence, connectAuthEmulator, indexedDBLocalPersistence, initializeAuth } from '@angular/fire/auth';
 import { provideFirestore, initializeFirestore, connectFirestoreEmulator, enableIndexedDbPersistence } from '@angular/fire/firestore';
 import { SharedLibModule } from '@appstrophe-workspace/shared-lib';
+import { provideStorage, getStorage, connectStorageEmulator } from '@angular/fire/storage';
 
 const isDev = !environment.production;
 
@@ -40,6 +41,13 @@ const isDev = !environment.production;
       if (isDev) connectAuthEmulator(auth, 'http://localhost:9099');
 
       return auth;
+    }),
+    provideStorage(() => {
+      const storage = getStorage()
+
+      if (isDev) connectStorageEmulator(storage, 'localhost', 9199);
+
+      return storage;
     }),
     RouterModule.forRoot([
       {

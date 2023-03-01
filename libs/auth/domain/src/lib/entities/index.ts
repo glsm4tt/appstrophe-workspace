@@ -1,1 +1,1 @@
-export const index = '';
+export { AppStropher } from './AppStropher'

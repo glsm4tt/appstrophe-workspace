@@ -18,6 +18,11 @@
           "apps/shell/src/assets",
           {
             "glob": "**",
+            "input": "libs/auth/domain/src/assets/",
+            "output": "/assets/"
+          },
+          {
+            "glob": "**",
             "input": "libs/reading/feature-article/src/assets/",
             "output": "/assets/"
           }
