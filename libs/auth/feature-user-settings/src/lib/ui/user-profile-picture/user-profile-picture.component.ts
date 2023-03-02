@@ -8,7 +8,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
   standalone: true,
   imports: [FontAwesomeModule],
   template: `
-    <div class="user_picture__container">
+    <div data-cy="user-picture" class="user_picture__container">
       <img [src]="user?.photoURL" alt="Votre photo">
       <button role="button" class="btn outlined user_picture__edit_button" (click)="uploader.click()">
         <input hidden type="file" #uploader (change)="onPictureSelected($event)"/>

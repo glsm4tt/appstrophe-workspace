@@ -52,3 +52,6 @@ Thumbs.db
 firestore-debug.log
 ui-debug.log
 firebase-debug.log
+
+# Firebase
+**/firebase.config.json

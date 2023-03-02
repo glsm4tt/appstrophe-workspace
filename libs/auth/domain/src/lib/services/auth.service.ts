@@ -28,8 +28,6 @@ export class AuthService {
       combineLatestWith(this._userSettingsChanged),
       switchMap(([user]) => user ? this.getMe(user as User) : of(null))
     );
-
-    this.signInWithEmailAndPassword('test_user_read@fake-domain.net', 'test_user_read');
   }
 
   /**

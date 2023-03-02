@@ -19,7 +19,7 @@ import { UserProfilePictureComponent } from "../../ui/user-profile-picture/user-
           <section class="user_picture__section">
             <apps-user-settings-picture [user]="user" (userPictureChange)="onPictureSelected($event, user)"></apps-user-settings-picture>
           </section>
-          <section class="user_alias__section">
+          <section data-cy="alias" class="user_alias__section">
             {{user?.alias}}
           </section>
         </div>
