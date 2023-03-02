@@ -3,13 +3,13 @@ import { Component, inject, OnInit } from "@angular/core";
 import { AuthService, UserService, AppStropher } from "@appstrophe-workspace/auth/domain";
 import { EMPTY, Observable } from "rxjs";
 import { faPen } from '@fortawesome/free-solid-svg-icons';
-import { ToasterService } from "@appstrophe-workspace/shared-lib";
+import { SharedLibModule, ToasterService } from "@appstrophe-workspace/shared-lib";
 import { UserProfilePictureComponent } from "../../ui/user-profile-picture/user-profile-picture.component";
 
 @Component({
   selector: 'apps-user-settings',
   standalone: true,
-  imports: [NgIf, AsyncPipe, UserProfilePictureComponent],
+  imports: [NgIf, AsyncPipe, UserProfilePictureComponent, SharedLibModule],
   template: `
   <div class="user_settings__page">
     <div class="user_settings__container">

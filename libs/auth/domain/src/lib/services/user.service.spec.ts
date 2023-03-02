@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { getStorage, provideStorage } from '@angular/fire/storage';
 
 import { AuthService } from './auth.service';
 
@@ -12,6 +13,7 @@ describe('AuthService', () => {
     TestBed.configureTestingModule({
       imports: [
         provideFirebaseApp(() => initializeApp({ projectId: 'fake_test_id', apiKey: 'fake_api_key' })),
+        provideStorage(() => getStorage()),
         provideFirestore(() => getFirestore()),
         provideAuth(() => getAuth())
       ]

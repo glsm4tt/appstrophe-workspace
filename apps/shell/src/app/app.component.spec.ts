@@ -7,6 +7,8 @@ import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideFirestore } from '@angular/fire/firestore';
 import { getFirestore } from '@firebase/firestore';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { getStorage, provideStorage } from '@angular/fire/storage';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -16,7 +18,9 @@ describe('AppComponent', () => {
         BrowserAnimationsModule,
         RouterTestingModule,
         provideFirebaseApp(() => initializeApp(environment.firebase)),
-        provideFirestore(() => getFirestore())
+        provideFirestore(() => getFirestore()),
+        provideAuth(() => getAuth()),
+        provideStorage(() => getStorage())
       ],
       providers: [
         { provide: APP_BASE_HREF, useValue: '/' }

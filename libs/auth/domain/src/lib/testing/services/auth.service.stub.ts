@@ -8,7 +8,7 @@ const userCredential: UserCredential = {
 };
 
 export const AuthServiceStub = {
-  user$: of(null),
+  getConnectedUser: () => of(null),
   signInWithEmailAndPassword: (email: string, password: string, auth?: Auth): Promise<UserCredential> => new Promise(resolve => resolve(userCredential)),
   createUserWithEmailAndPassword: (email: string, password: string, auth?: Auth): Promise<UserCredential> => new Promise(resolve => resolve(userCredential)),
   sendEmailVerification: (user: User): Promise<void> => new Promise(resolve => resolve(null)),

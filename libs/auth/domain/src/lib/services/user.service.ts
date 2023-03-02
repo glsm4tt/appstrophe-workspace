@@ -9,9 +9,7 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class UserService {
-  
-  private _firestore = inject(Firestore);
-  private _auth = inject(Auth);
+
   private _storage = inject(Storage)
   private _authService = inject(AuthService)
 
@@ -19,7 +17,7 @@ export class UserService {
     // empty
   }
 
-  async uploadProfilePicture(file: File, user: AppStropher) {
+  async uploadProfilePicture(file: File, user: AppStropher): Promise<void> {
     const storageRef = ref(this._storage, `users/${user.uid}`);
     await uploadBytes(storageRef, file);
     this._authService.askForUserUpdate();

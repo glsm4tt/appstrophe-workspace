@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AuthService, AuthServiceStub } from '@appstrophe-workspace/auth/domain';
+import { AuthService, AuthServiceStub, UserService, UserServiceStub } from '@appstrophe-workspace/auth/domain';
 
 import { UserSettingsComponent } from './user-settings.component';
 
@@ -15,7 +15,8 @@ describe('UserSettingsComponent', () => {
         RouterTestingModule
       ],
       providers: [
-        { provide: AuthService, useValue: AuthServiceStub }
+        { provide: AuthService, useValue: AuthServiceStub },
+        { provide: UserService, useValue: UserServiceStub }
       ]
     }).compileComponents();
   });
