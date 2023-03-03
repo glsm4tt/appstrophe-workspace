@@ -34,7 +34,7 @@ export class ArticleCommentsListComponent implements OnInit {
   }
 
   likeChange(article: Partial<ArticleDetailedWithComments>, comment: Comment): void {
-    this._authService.user$.pipe(
+    this._authService.getConnectedUser().pipe(
       first()
     ).subscribe(
       async user => {

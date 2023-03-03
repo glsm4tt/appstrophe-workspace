@@ -1,26 +1,74 @@
 import { Injectable, inject } from '@angular/core';
-import { firstValueFrom, map, Observable } from 'rxjs';
-import { getAuth, Auth, User, createUserWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, UserCredential, UserInfo } from '@angular/fire/auth';
-import { docData, DocumentReference, Firestore } from '@angular/fire/firestore';
+import { firstValueFrom, map, Observable, switchMap, of, tap, combineLatestWith, from, catchError, BehaviorSubject, mergeMap } from 'rxjs';
+import { getAuth, Auth, User, createUserWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, UserCredential } from '@angular/fire/auth';
+import { collection, collectionData, docData, DocumentReference, Firestore, query, CollectionReference, doc, setDoc, where } from '@angular/fire/firestore';
+import { Storage, ref, getDownloadURL} from '@angular/fire/storage';
 import { AppStropher } from '../entities/AppStropher';
-import { doc, setDoc } from '@firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  user$!: Observable<User | null>; 
+  private user$!: Observable<AppStropher | null>; 
   private _firestore = inject(Firestore);
   private _auth = inject(Auth);
+  private _storage = inject(Storage);
+  private _userSettingsChanged = new BehaviorSubject<void>(null);
 
   /**
    * Subscribe to any Auth changes to update the user observable
    */
   constructor() {
     this.user$ = new Observable(subscriber => {
-      this._auth.onAuthStateChanged(user => subscriber.next(user))
-    });
+      this._auth.onAuthStateChanged(user => {
+        subscriber.next(user)
+      })
+    }).pipe(
+      combineLatestWith(this._userSettingsChanged),
+      switchMap(([user]) => user ? this.getMe(user as User) : of(null))
+    );
+  }
+
+  /**
+   * Get the given user infos as an {Observable<AppStropher>}.
+   * Note: This method is made to get called with the current connected {@angular/fire/auth.User}
+   * 
+   * @param user a {@angular/fire/auth.User}
+   * @returns {Observable<AppStropher>}
+   */
+  private getMe(user: User): Observable<AppStropher> {
+    const userDoc: DocumentReference<AppStropher> = doc(this._firestore, `users/${user.uid}`) as DocumentReference<AppStropher>;
+    const userPictureUrlRef = ref(this._storage, `users/${user.uid}`)
+    const userPictureUrl$ = from(getDownloadURL(userPictureUrlRef)).pipe(catchError(err => of(null)))
+
+    return docData(userDoc, {'idField': 'id'}).pipe(
+      combineLatestWith(userPictureUrl$),
+      map(([appstropher, url]) => ({
+        ...appstropher,
+        ...user,
+        photoURL: appstropher.photoURL ?? url ?? 'assets/img/empty_user.png'
+      }))
+    );
+  }
+
+  /**
+   * Cheaty hack to make the {@angular/fire/storage} reactive.
+   * Every time we need to replay the getMe method, we juste have to 
+   * next a new empty value in the _userSettingsChanged {rxjs.BehaviorSubject}
+   */
+  askForUserUpdate(): void {
+    this._userSettingsChanged.next();
+  }
+
+  /**
+   * Get an {Observable} of the current connected user
+   * The inner value can be {null} or a {AppStropher}
+   * 
+   * @returns {null} or a {AppStropher}
+   */
+  getConnectedUser(): Observable<AppStropher | null> {
+    return this.user$;
   }
 
   /**
@@ -79,7 +127,7 @@ export class AuthService {
       // Send the email confirmation link to verify user email address
       await this.sendEmailVerification(user);
       // TODO: handle rollback if alias creation fails
-      await this.createAppStropher(user, alias);
+      await this.createAppStropher(user, `@${alias}`);
       return userCredential;
   }
 
@@ -92,8 +140,8 @@ export class AuthService {
    * @returns {Promise<void>} a promise of void 
    */
   createAppStropher(user: User, alias: string): Promise<void> {
-    const userDoc: DocumentReference<AppStropher> = doc(this._firestore, `users/@${alias}`) as DocumentReference<AppStropher>;
-    return setDoc(userDoc, {uid: user.uid});
+    const userDoc: DocumentReference = doc(this._firestore, `users/${user.uid}`) as DocumentReference;
+    return setDoc(userDoc, { alias });
   }
 
   /**
@@ -109,10 +157,17 @@ export class AuthService {
     return sendPasswordResetEmail(_auth, email);
   }
 
+  /**
+   * Check if the user alias already exists in database
+   * 
+   * @param alias {string} the alias to test
+   * @returns {boolean} whether the alias already exists or not
+   */
   doesAliasAlreadyExists(alias: string): Promise<boolean> {
-    const userDoc: DocumentReference<AppStropher> = doc(this._firestore, `users/${alias}`) as DocumentReference<AppStropher>;
-    return firstValueFrom(docData(userDoc, {idField: 'alias'}).pipe(
-      map(user => !!user)
+    const usersCollection: CollectionReference<AppStropher> = collection(this._firestore, `users`) as CollectionReference<AppStropher>;
+    const usersQuery = query(usersCollection, where('alias', '==', alias))
+    return firstValueFrom(collectionData(usersQuery).pipe(
+      map(users => !!users.length)
     ))
   }
 }

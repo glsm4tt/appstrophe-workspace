@@ -1,1 +1,1 @@
-export * from './lib/auth-feature-user-settings.module';
+export * from './lib/user-settings-routes';

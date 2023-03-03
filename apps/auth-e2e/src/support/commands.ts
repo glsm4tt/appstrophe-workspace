@@ -8,17 +8,22 @@
 // https://on.cypress.io/custom-commands
 // ***********************************************
 
-// eslint-disable-next-line @typescript-eslint/no-namespace
-declare namespace Cypress {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  interface Chainable<Subject> {
-    login(email: string, password: string): void;
-  }
-}
+import { initializeApp, getApp } from "firebase/app";
+import { signInWithEmailAndPassword, connectAuthEmulator, initializeAuth, browserSessionPersistence } from "firebase/auth";
+import firebaseConfig from '../../firebase.config.json';
+
+
+initializeApp(firebaseConfig);
+const auth = initializeAuth(getApp(), {
+  persistence: browserSessionPersistence,
+  popupRedirectResolver: undefined,
+})
+connectAuthEmulator(auth, 'http://localhost:9099')
+
 //
 // -- This is a parent command --
 Cypress.Commands.add('login', (email, password) => {
-  console.log('Custom command example: Login', email, password);
+ signInWithEmailAndPassword(auth, email, password)
 });
 //
 // -- This is a child command --

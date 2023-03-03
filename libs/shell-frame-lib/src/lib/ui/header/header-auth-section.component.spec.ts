@@ -1,23 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AuthService, AuthServiceStub } from '@appstrophe-workspace/auth/domain';
 
-import { HeaderComponent } from './header.component';
+import { HeaderAuthSectionComponent } from './header-auth-section.component';
 
-describe('HeaderComponent', () => {
-  let component: HeaderComponent;
-  let fixture: ComponentFixture<HeaderComponent>;
+describe('HeaderAuthSectionComponent', () => {
+  let component: HeaderAuthSectionComponent;
+  let fixture: ComponentFixture<HeaderAuthSectionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [BrowserAnimationsModule],
-      providers: [{ provide: AuthService, useValue: AuthServiceStub }],
-      declarations: [HeaderComponent],
+      declarations: [HeaderAuthSectionComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HeaderComponent);
+    fixture = TestBed.createComponent(HeaderAuthSectionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

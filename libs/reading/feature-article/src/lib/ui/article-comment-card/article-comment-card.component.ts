@@ -18,7 +18,7 @@ import { faThumbsUp, faEllipsisV, faPen, faTrash } from '@fortawesome/free-solid
           <h4>{{ comment?.date | firestoreTimestamp }}</h4>
         </div>
         <div *ngIf="comment?.owned" class="comment-settings">
-          <fa-icon [icon]="faEllipsisV" appsTooltip="Settings" appsPopover [popoverContent]="commentPopover"></fa-icon>
+          <fa-icon [icon]="faEllipsisV" appsTooltip="Settings" appsPopover [popoverContent]="comment_popover"></fa-icon>
         </div>
       </div>
       <div class="card_body">
@@ -37,7 +37,7 @@ import { faThumbsUp, faEllipsisV, faPen, faTrash } from '@fortawesome/free-solid
       </div>
     </div>
 
-    <ng-template #commentPopover>
+    <ng-template #comment_popover>
       <ul class="comment-popover">
         <li>
           <a role="button" (click)="deleteRequest.emit()">
@@ -98,7 +98,7 @@ import { faThumbsUp, faEllipsisV, faPen, faTrash } from '@fortawesome/free-solid
     }
 
     ul.comment-popover > li > a {
-      @apply flex items-center px-4 py-3 cursor-pointer hover:bg-zinc-400 dark:hover:bg-zinc-600
+      @apply flex items-center justify-center px-4 py-3 cursor-pointer hover:bg-zinc-400 dark:hover:bg-zinc-600
     }
 
     ul.comment-popover > li > a > fa-icon {

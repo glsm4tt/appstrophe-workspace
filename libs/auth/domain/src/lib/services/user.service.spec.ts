@@ -13,8 +13,8 @@ describe('AuthService', () => {
     TestBed.configureTestingModule({
       imports: [
         provideFirebaseApp(() => initializeApp({ projectId: 'fake_test_id', apiKey: 'fake_api_key' })),
-        provideFirestore(() => getFirestore()),
         provideStorage(() => getStorage()),
+        provideFirestore(() => getFirestore()),
         provideAuth(() => getAuth())
       ]
     });

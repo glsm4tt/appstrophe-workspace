@@ -24,8 +24,8 @@ service cloud.firestore {
       }
     }
 
-    match /users/{userAlias} {
-      allow create: if userAlias.matches('^@[a-z0-9_]*$') && request.auth.uid == request.resource.data.uid && request.resource.data.keys().hasOnly(["uid"]);
+    match /users/{userId} {
+      allow create: if request.auth.uid == userId && request.resource.data.alias.matches('^@[a-z0-9_]*$') && request.resource.data.keys().hasOnly(["alias"]);
       allow read: if true;
       allow update, delete: if false;
     }

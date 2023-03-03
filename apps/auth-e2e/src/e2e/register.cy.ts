@@ -33,7 +33,7 @@ describe('auth/register', () => {
 
   it('should have a form input email required and email validation', () => {
     const dummyPassword = '123456';
-    const validAlias = 'alias'
+    const validAlias = 'test_alias';
     const notAnEmail = '123';
     const validEmail = 'test@test.abc';
 
@@ -110,7 +110,7 @@ describe('auth/register', () => {
     const notValidAlias = '@"alias';
     const alreadyTakenAlias = 'test_user_read';
     const wayTooLongAlias = 'test_user_really_way_too_long_alias';
-    const validAlias = 'alias';
+    const validAlias = 'test_alias';
 
     // Fill the email and the passwords inputs so the email and password part validation are ok
     // and we can focus on the password input behaviour
@@ -216,7 +216,7 @@ describe('auth/register', () => {
     const tooShortPassword = '123';
     const dummyPassword = '123456';
     const validEmail = 'test@test.abc';
-    const validAlias = 'alias'
+    const validAlias = 'test_alias';
 
     // Fill both the email and the alias inputs so the email and alias part validation are ok
     // and we can focus on the password input behaviour
@@ -301,7 +301,7 @@ describe('auth/register', () => {
   it('should register a new user and navigate to the login page when form is submitted', () => {
     const dummyPassword = '123456';
     const validEmail = 'test@test.abc';
-    const validAlias = 'alias';
+    const validAlias = 'test_alias';
 
     // Fill all inputs with valid informations
     getInputEmail().type(validEmail);

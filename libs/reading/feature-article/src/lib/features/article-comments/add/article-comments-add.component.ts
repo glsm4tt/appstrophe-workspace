@@ -76,7 +76,7 @@ export class ArticleCommentsAddComponent implements OnInit {
   }
 
   checkIfConnected() {
-    this._authService.user$.pipe(
+    this._authService.getConnectedUser().pipe(
       first()
     ).subscribe(
       user => {

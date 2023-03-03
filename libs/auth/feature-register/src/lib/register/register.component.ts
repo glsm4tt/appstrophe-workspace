@@ -24,9 +24,6 @@ import { aliasValidator, passwordValidator } from '../validators/auth-validators
   template: `
   <div class="register-page">
     <div class="register-container">
-        <div class="logo">
-            <img />
-        </div>
         <h3 data-cy="title" class="title">Register</h3>
         <form class="register_form" [formGroup]="registerForm" (ngSubmit)="register()">
             <div class="form-group">
@@ -89,16 +86,8 @@ import { aliasValidator, passwordValidator } from '../validators/auth-validators
       @apply mt-8 flex flex-col items-stretch space-y-4 w-full md:w-2/3 lg:w-1/2 xl:w-1/3
     }
 
-    div.register-page > div.register-container > div.logo {
-      @apply flex items-center justify-center 
-    }
-
     div.register-page > div.register-container > h3.title {
-      @apply text-center 
-    }
-
-    div.register-page > div.register-container > h3 {
-      @apply text-gray-700 dark:text-gray-300 text-3xl font-semibold
+      @apply text-center text-gray-700 dark:text-gray-300 text-3xl font-semibold
     }
 
     div.register-page > div.register-container > form.register_form {
