@@ -10,8 +10,7 @@
       "outputs": ["{workspaceRoot}/coverage/libs/reading/domain"],
       "options": {
         "jestConfig": "libs/reading/domain/jest.config.ts",
-        "passWithNoTests": true,
-        "tsConfig": "libs/reading/domain/tsconfig.lib.json"
+        "passWithNoTests": true
       }
     },
     "lint": {

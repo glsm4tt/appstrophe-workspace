@@ -10,8 +10,7 @@
       "outputs": ["{workspaceRoot}/coverage/libs/auth/feature-login"],
       "options": {
         "jestConfig": "libs/auth/feature-login/jest.config.ts",
-        "passWithNoTests": true,
-        "tsConfig": "libs/auth/feature-login/tsconfig.lib.json"
+        "passWithNoTests": true
       }
     },
     "lint": {

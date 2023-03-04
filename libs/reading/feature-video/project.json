@@ -10,8 +10,7 @@
       "outputs": ["{workspaceRoot}/coverage/libs/reading/feature-video"],
       "options": {
         "jestConfig": "libs/reading/feature-video/jest.config.ts",
-        "passWithNoTests": true,
-        "tsConfig": "libs/reading/feature-video/tsconfig.lib.json"
+        "passWithNoTests": true
       }
     },
     "lint": {

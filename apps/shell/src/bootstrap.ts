@@ -10,7 +10,7 @@ import { connectStorageEmulator, getStorage, provideStorage } from '@angular/fir
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducer } from './app/+state/reducer';
-import { PreloadAllModules, RouterModule } from '@angular/router';
+import { provideRouter } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { routes } from './app/routes';
@@ -23,9 +23,9 @@ if (!isDev) {
 
 bootstrapApplication(AppComponent, {
   providers: [
+    provideRouter(routes),
     importProvidersFrom(
       BrowserAnimationsModule,
-      RouterModule.forRoot(routes),
       provideFirebaseApp(() => initializeApp(environment.firebase)),
       provideFirestore(() => {
         const firestore = initializeFirestore(getApp(), {

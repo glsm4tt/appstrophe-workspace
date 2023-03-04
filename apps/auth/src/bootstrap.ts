@@ -4,7 +4,7 @@ import { provideAuth, initializeAuth, browserSessionPersistence, indexedDBLocalP
 import { provideFirestore, initializeFirestore, connectFirestoreEmulator, enableIndexedDbPersistence } from '@angular/fire/firestore';
 import { provideStorage, getStorage, connectStorageEmulator } from '@angular/fire/storage';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
+import { provideRouter, RouterModule, withEnabledBlockingInitialNavigation } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
@@ -23,8 +23,8 @@ const isDev = !environment.production;
 
 bootstrapApplication(AppComponent, {
   providers: [
+    provideRouter(routes, withEnabledBlockingInitialNavigation()),
     importProvidersFrom(
-      RouterModule.forRoot(routes, { initialNavigation: 'enabledBlocking' }),
       provideFirebaseApp(() => initializeApp(environment.firebase)),
       provideFirestore(() => {
         const firestore = initializeFirestore(getApp(), {

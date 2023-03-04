@@ -10,8 +10,7 @@
       "outputs": ["{workspaceRoot}/coverage/libs/reading/feature-article"],
       "options": {
         "jestConfig": "libs/reading/feature-article/jest.config.ts",
-        "passWithNoTests": true,
-        "tsConfig": "libs/reading/feature-article/tsconfig.lib.json"
+        "passWithNoTests": true
       }
     },
     "lint": {

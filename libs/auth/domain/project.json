@@ -10,8 +10,7 @@
       "outputs": ["{workspaceRoot}/coverage/libs/auth/domain"],
       "options": {
         "jestConfig": "libs/auth/domain/jest.config.ts",
-        "passWithNoTests": true,
-        "tsConfig": "libs/auth/domain/tsconfig.lib.json"
+        "passWithNoTests": true
       }
     },
     "lint": {

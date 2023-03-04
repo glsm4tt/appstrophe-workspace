@@ -10,8 +10,7 @@
       "outputs": ["{workspaceRoot}/coverage/libs/shared-lib"],
       "options": {
         "jestConfig": "libs/shared-lib/jest.config.ts",
-        "passWithNoTests": true,
-        "tsConfig": "libs/shared-lib/tsconfig.lib.json"
+        "passWithNoTests": true
       }
     },
     "lint": {

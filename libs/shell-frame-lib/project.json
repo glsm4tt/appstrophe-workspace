@@ -10,8 +10,7 @@
       "outputs": ["{workspaceRoot}/coverage/libs/shell-frame-lib"],
       "options": {
         "jestConfig": "libs/shell-frame-lib/jest.config.ts",
-        "passWithNoTests": true,
-        "tsConfig": "libs/shell-frame-lib/tsconfig.lib.json"
+        "passWithNoTests": true
       }
     },
     "lint": {
