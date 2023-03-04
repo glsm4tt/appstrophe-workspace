@@ -1,4 +1,5 @@
 {
+  "name": "blog-e2e",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/blog-e2e/src",
   "projectType": "application",
@@ -8,7 +9,8 @@
       "options": {
         "cypressConfig": "apps/blog-e2e/cypress.config.ts",
         "devServerTarget": "blog:serve:development",
-        "testingType": "e2e"
+        "testingType": "e2e",
+        "tsConfig": "apps/blog-e2e/tsconfig.json"
       },
       "configurations": {
         "production": {

@@ -6,9 +6,7 @@ export const LOGIN_ROUTES: Routes = [
   {
     path: '',
     component: AuthLoginComponent,
-    providers: [
-      fromAuthDomain()
-    ],
+    providers: fromAuthDomain(),
     children: [
       {
         path: 'login',

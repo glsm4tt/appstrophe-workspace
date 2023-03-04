@@ -1,4 +1,5 @@
 {
+  "name": "auth-e2e",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/auth-e2e/src",
   "projectType": "application",
@@ -8,7 +9,8 @@
       "options": {
         "cypressConfig": "apps/auth-e2e/cypress.config.ts",
         "devServerTarget": "auth:serve:development",
-        "testingType": "e2e"
+        "testingType": "e2e",
+        "tsConfig": "apps/auth-e2e/tsconfig.json"
       },
       "configurations": {
         "production": {

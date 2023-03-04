@@ -1,15 +1,19 @@
 import { enableProdMode, importProvidersFrom } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { AppRoutingModule } from './app/app-routing.module';
 import { AppComponent } from './app/app.component';
-
 import { environment } from './environments/environment';
 import { provideFirebaseApp, initializeApp, getApp } from '@angular/fire/app';
 import { provideFirestore, connectFirestoreEmulator, enableIndexedDbPersistence, initializeFirestore } from '@angular/fire/firestore';
 import { provideAuth, browserPopupRedirectResolver, browserSessionPersistence, connectAuthEmulator, indexedDBLocalPersistence, initializeAuth } from '@angular/fire/auth';
 import { connectStorageEmulator, getStorage, provideStorage } from '@angular/fire/storage';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { reducer } from './app/+state/reducer';
+import { provideRouter } from '@angular/router';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { routes } from './app/routes';
 
 const isDev = !environment.production;
 
@@ -19,9 +23,9 @@ if (!isDev) {
 
 bootstrapApplication(AppComponent, {
   providers: [
+    provideRouter(routes),
     importProvidersFrom(
       BrowserAnimationsModule,
-      AppRoutingModule,
       provideFirebaseApp(() => initializeApp(environment.firebase)),
       provideFirestore(() => {
         const firestore = initializeFirestore(getApp(), {
@@ -53,7 +57,21 @@ bootstrapApplication(AppComponent, {
         if (isDev) connectAuthEmulator(auth, 'http://localhost:9099');
   
         return auth;
-      })
+      }),
+      StoreModule.forRoot(reducer, {
+        metaReducers: !environment.production ? [] : [],
+        runtimeChecks: {
+          strictActionImmutability: true,
+          strictStateImmutability: true,
+        },
+      }),
+      !environment.production ? StoreDevtoolsModule.instrument({
+        maxAge: 25, // Retains last 25 states
+        logOnly: environment.production, // Restrict extension to log-only mode
+        autoPause: true,
+      }) : [],
+      StoreRouterConnectingModule.forRoot(),
+      EffectsModule.forRoot([])
     )
   ]
 });

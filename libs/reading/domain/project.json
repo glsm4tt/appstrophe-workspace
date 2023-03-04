@@ -1,11 +1,13 @@
 {
+  "name": "reading-domain",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/reading/domain/src",
   "prefix": "apps-read",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/reading/domain"],
+      "outputs": ["{workspaceRoot}/coverage/libs/reading/domain"],
       "options": {
         "jestConfig": "libs/reading/domain/jest.config.ts",
         "passWithNoTests": true

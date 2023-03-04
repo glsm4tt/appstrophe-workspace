@@ -1,11 +1,13 @@
 {
+  "name": "auth-feature-login",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/auth/feature-login/src",
   "prefix": "apps-login",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/auth/feature-login"],
+      "outputs": ["{workspaceRoot}/coverage/libs/auth/feature-login"],
       "options": {
         "jestConfig": "libs/auth/feature-login/jest.config.ts",
         "passWithNoTests": true
