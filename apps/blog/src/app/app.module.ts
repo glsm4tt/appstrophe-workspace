@@ -9,6 +9,8 @@ import { provideStorage, getStorage, connectStorageEmulator } from '@angular/fir
 import { provideAuth, browserPopupRedirectResolver, browserSessionPersistence, connectAuthEmulator, indexedDBLocalPersistence, initializeAuth } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import { SharedLibModule } from '@appstrophe-workspace/shared-lib';
+import { StoreModule } from '@ngrx/store';
+import { reducer } from './blog/+state/reducer';
 
 const isDev = !environment.production;
 
@@ -60,6 +62,14 @@ const isDev = !environment.production;
         pathMatch: 'full'
       }
     ], { initialNavigation: 'enabledBlocking' }),
+    StoreModule.forRoot(reducer,
+      {
+        metaReducers: !environment.production ? [] : [],
+        runtimeChecks: {
+          strictActionImmutability: true,
+          strictStateImmutability: true,
+        },
+      }),
   ],
   providers: [],
   bootstrap: [AppComponent],

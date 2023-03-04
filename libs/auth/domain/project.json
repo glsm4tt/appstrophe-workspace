@@ -1,14 +1,17 @@
 {
+  "name": "auth-domain",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/auth/domain/src",
   "prefix": "appstrophe-workspace",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/auth/domain"],
+      "outputs": ["{workspaceRoot}/coverage/libs/auth/domain"],
       "options": {
         "jestConfig": "libs/auth/domain/jest.config.ts",
-        "passWithNoTests": true
+        "passWithNoTests": true,
+        "tsConfig": "libs/auth/domain/tsconfig.lib.json"
       }
     },
     "lint": {

@@ -34,6 +34,10 @@ module.exports = {
           "@angular/common/http": { singleton: true, strictVersion: true, requiredVersion: 'auto' }, 
           "@angular/router": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
           "@angular/fire": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+          "@ngrx/store": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+          "@ngrx/effects": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+          "@ngrx/entity": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+          "@ngrx/router-store": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
           
           ...sharedMappings.getDescriptors()
         })

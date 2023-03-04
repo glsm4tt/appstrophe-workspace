@@ -1,4 +1,5 @@
 {
+  "name": "shell-frame-lib",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/shell-frame-lib/src",
@@ -6,10 +7,11 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/shell-frame-lib"],
+      "outputs": ["{workspaceRoot}/coverage/libs/shell-frame-lib"],
       "options": {
         "jestConfig": "libs/shell-frame-lib/jest.config.ts",
-        "passWithNoTests": true
+        "passWithNoTests": true,
+        "tsConfig": "libs/shell-frame-lib/tsconfig.lib.json"
       }
     },
     "lint": {

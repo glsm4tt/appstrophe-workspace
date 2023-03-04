@@ -1,14 +1,17 @@
 {
+  "name": "auth-feature-register",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/auth/feature-register/src",
   "prefix": "apps-register",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/auth/feature-register"],
+      "outputs": ["{workspaceRoot}/coverage/libs/auth/feature-register"],
       "options": {
         "jestConfig": "libs/auth/feature-register/jest.config.ts",
-        "passWithNoTests": true
+        "passWithNoTests": true,
+        "tsConfig": "libs/auth/feature-register/tsconfig.lib.json"
       }
     },
     "lint": {

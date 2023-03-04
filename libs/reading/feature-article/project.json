@@ -1,14 +1,17 @@
 {
+  "name": "reading-feature-article",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/reading/feature-article/src",
   "prefix": "apps-article",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/reading/feature-article"],
+      "outputs": ["{workspaceRoot}/coverage/libs/reading/feature-article"],
       "options": {
         "jestConfig": "libs/reading/feature-article/jest.config.ts",
-        "passWithNoTests": true
+        "passWithNoTests": true,
+        "tsConfig": "libs/reading/feature-article/tsconfig.lib.json"
       }
     },
     "lint": {
