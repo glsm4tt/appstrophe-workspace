@@ -27,7 +27,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
     }
 
     div.user_picture__container > button.user_picture__edit_button {
-      @apply absolute left-0 bottom-1 px-2
+      @apply absolute left-0 bottom-1
     }
 
     div.user_picture__container > button.user_picture__edit_button > fa-icon {

@@ -3,13 +3,15 @@ import { Component, inject, OnInit } from "@angular/core";
 import { AuthService, UserService, AppStropher } from "@appstrophe-workspace/auth/domain";
 import { EMPTY, Observable } from "rxjs";
 import { faPen } from '@fortawesome/free-solid-svg-icons';
-import { SharedLibModule, ToasterService } from "@appstrophe-workspace/shared-lib";
+import { ModalService, SharedLibModule, ToasterService } from "@appstrophe-workspace/shared-lib";
 import { UserProfilePictureComponent } from "../../ui/user-profile-picture/user-profile-picture.component";
+import { UserProfileAccountComponent } from "../../ui/user-profile-account/user-profile-account.component";
+import { AccountDeleteConfirmationModalComponent } from "../../ui/user-profile-account-delete-confirmation-modal/user-profile-account-delete-confirmation-modal.component";
 
 @Component({
   selector: 'apps-user-settings',
   standalone: true,
-  imports: [NgIf, AsyncPipe, UserProfilePictureComponent, SharedLibModule],
+  imports: [NgIf, AsyncPipe, UserProfilePictureComponent, UserProfileAccountComponent, SharedLibModule],
   template: `
   <div class="user_settings__page">
     <div class="user_settings__container">
@@ -21,6 +23,9 @@ import { UserProfilePictureComponent } from "../../ui/user-profile-picture/user-
           </section>
           <section data-cy="alias" class="user_alias__section">
             {{user?.alias}}
+          </section>
+          <section class="user_account__section">
+            <apps-user-settings-account [user]="user" (deleteRequest)="deleteRequest()"></apps-user-settings-account>
           </section>
         </div>
       </ng-container>
@@ -51,6 +56,10 @@ import { UserProfilePictureComponent } from "../../ui/user-profile-picture/user-
     section.user_alias__section {
       @apply my-2 flex flex-col items-center justify-center font-bold
     }
+
+    section.user_account__section {
+      @apply my-2 w-full
+    }
   `]
 })
 export class UserSettingsComponent implements OnInit {
@@ -62,6 +71,7 @@ export class UserSettingsComponent implements OnInit {
   private _authService = inject(AuthService);
   private _userService = inject(UserService);
   private _toasterService = inject(ToasterService);
+  private _modalService = inject(ModalService);
 
   ngOnInit(): void {
     this.user$ = this._authService.getConnectedUser();
@@ -73,5 +83,15 @@ export class UserSettingsComponent implements OnInit {
     } catch (err) {
       this._toasterService.open('Oups... Profile picture update failed', 'danger');
     }
+  }
+
+  deleteRequest() {
+    // Ask for user confirmation
+    const modal = this._modalService.open(AccountDeleteConfirmationModalComponent);
+    
+    // If confirmation ok then proceed to deletion
+    modal?.onClose.subscribe(
+      res => res ? this._authService.deleteAccount() : null
+    )
   }
 }

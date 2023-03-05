@@ -8,12 +8,12 @@ import { ModalDirective } from "./modal.directive";
   selector: 'apps-modal-container',
   template: `
     <div class="modal-container" [ngClass]="size">
-      <ng-template appsModalHost></ng-template>
+      <div appsModalHost></div>
     </div>
   `,
   styles: [`
     div.modal-container {
-      @apply absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/3 flex flex-col rounded-sm drop-shadow-md text-sm text-gray-700 dark:text-gray-300 bg-zinc-300 dark:bg-zinc-700;
+      @apply absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/3 flex flex-col rounded-sm drop-shadow-md text-sm text-gray-700 dark:text-gray-300 bg-zinc-200 dark:bg-zinc-800;
     }
 
     div.modal-container.sm {
@@ -34,18 +34,18 @@ import { ModalDirective } from "./modal.directive";
   `],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ModalContainerComponent implements AfterViewInit {
+export class ModalContainerComponent<C> implements AfterViewInit {
 
   @Input() size: 'sm' | 'md' | 'lg' | 'xl' = 'md';
 
   @ViewChild(ModalDirective, { static: true }) modalHost!: ModalDirective;
 
-  constructor(@Inject(DATA_TOKEN) public component: ComponentType<unknown>) { }
+  constructor(@Inject(DATA_TOKEN) public component: ComponentType<C>) { }
 
   ngAfterViewInit(): void {
     const viewContainerRef = this.modalHost?.viewContainerRef;
     viewContainerRef?.clear();
-
-    viewContainerRef?.createComponent<unknown>(this.component);
+    viewContainerRef?.createComponent<C>(this.component);
+    this.modalHost?.changeDetectorRef.detectChanges();
   }
 }

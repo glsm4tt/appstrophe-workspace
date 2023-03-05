@@ -37,7 +37,7 @@ export class ModalService {
         providers: [{ provide: DATA_TOKEN, useValue: comp }]
       });
 
-      const component = new ComponentPortal(ModalContainerComponent, null, portalInjector);
+      const component = new ComponentPortal(ModalContainerComponent<C>, null, portalInjector);
 
       this.overlayRef.attach(component);
 
