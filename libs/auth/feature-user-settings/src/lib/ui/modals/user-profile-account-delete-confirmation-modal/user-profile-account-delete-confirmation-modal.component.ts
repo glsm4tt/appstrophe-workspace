@@ -4,7 +4,7 @@ import { FormGroup, FormControl, ReactiveFormsModule } from "@angular/forms";
 import { AppStropher, AuthService } from "@appstrophe-workspace/auth/domain";
 import { ModalService } from "@appstrophe-workspace/shared-lib";
 import { EMPTY, Observable, tap } from "rxjs";
-import { aliasConfirmValidator } from "../../validators/alias-confirm-validators";
+import { entryConfirmValidator } from "../../../validators/entry-confirm-validators";
 
 @Component({
   selector: 'apps-user-settings-account-delete-confirmation-modal',
@@ -17,7 +17,7 @@ import { aliasConfirmValidator } from "../../validators/alias-confirm-validators
         </div>
         <div class="modal-content">
           <p>To confirm, please type <span>{{user?.alias}}</span> in the input bellow.</p>
-          <div class="form-group">
+          <div class="form-group danger">
             <input data-cy="input-alias-confirm" type="text" class="form-group__control" formControlName="aliasConfirm" id="alias-confirm"
               [placeholder]="user?.alias" aria-describedby="alias-confirm-help" aria-errormessage="alias-confirm-error" [attr.aria-invalid]="deleteAccountForm.controls['aliasConfirm'].invalid">
               <small id="alias-confirm-help" class="form-group__help">Once deleted, it will no longer be possible to recover it.</small>
@@ -80,7 +80,7 @@ export class AccountDeleteConfirmationModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.user$ = this._authService.getConnectedUser().pipe(tap(
-      user => this.deleteAccountForm.get('aliasConfirm').addValidators([aliasConfirmValidator(user?.alias)])
+      user => this.deleteAccountForm.get('aliasConfirm').addValidators([entryConfirmValidator(user?.alias)])
     ));
   }
 

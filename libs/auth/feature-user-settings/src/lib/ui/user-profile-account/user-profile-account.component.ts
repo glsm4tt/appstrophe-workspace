@@ -1,12 +1,10 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { AppStropher } from "@appstrophe-workspace/auth/domain";
-import { faPen } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 @Component({
   selector: 'apps-user-settings-account',
   standalone: true,
-  imports: [FontAwesomeModule],
+  imports: [],
   template: `
     <div data-cy="user-account" class="user_account__container">
       <h2>Delete account</h2>
@@ -31,7 +29,5 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 export class UserProfileAccountComponent {
 
   @Input() user: AppStropher;
-  @Output() deleteRequest = new EventEmitter<File>();
-
-  readonly faPen = faPen;
+  @Output() deleteRequest = new EventEmitter<void>();
 }
