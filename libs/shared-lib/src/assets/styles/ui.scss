@@ -120,7 +120,7 @@ div.form-group > small.form-group__error > span {
 }
 
 button.btn {
-    @apply flex items-center py-1 justify-center bg-orange-500 rounded-sm text-white hover:bg-orange-600 active:bg-orange-700 disabled:text-gray-500 disabled:bg-zinc-200 disabled:hover:bg-zinc-200 dark:disabled:bg-zinc-700 dark:disabled:hover:bg-zinc-700;
+    @apply flex items-center px-4 py-1 justify-center bg-orange-500 rounded-sm text-white hover:bg-orange-600 active:bg-orange-700 disabled:text-gray-500 disabled:bg-zinc-200 disabled:hover:bg-zinc-200 dark:disabled:bg-zinc-700 dark:disabled:hover:bg-zinc-700;
 }
 
 button.btn.outlined {
@@ -128,7 +128,15 @@ button.btn.outlined {
 }
 
 button.btn.cancel {
-    @apply bg-transparent text-gray-600 dark:text-gray-300 hover:bg-zinc-400 dark:hover:bg-zinc-600;
+    @apply bg-transparent border border-zinc-300 dark:border-zinc-700 text-gray-600 dark:text-gray-300 hover:bg-zinc-400 dark:hover:bg-zinc-600;
+}
+
+button.btn.danger {
+    @apply text-gray-50 dark:text-gray-50 bg-red-600 dark:bg-red-600 hover:bg-red-700 dark:hover:bg-red-700 disabled:text-gray-500 disabled:bg-zinc-200 disabled:hover:bg-zinc-200 dark:disabled:bg-zinc-700 dark:disabled:hover:bg-zinc-700;
+}
+
+button.btn.outlined.danger {
+    @apply bg-transparent border-zinc-300 dark:border-zinc-700 text-red-600 dark:text-red-600 hover:bg-red-600 dark:hover:bg-red-600 hover:text-gray-50 dark:hover:text-gray-50;
 }
 
 div.cdk-overlay-pane {

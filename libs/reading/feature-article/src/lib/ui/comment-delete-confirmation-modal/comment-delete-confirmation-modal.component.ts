@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, inject } from "@angular/core";
 import { ModalService } from "@appstrophe-workspace/shared-lib";
 
 @Component({
-    selector: 'apps-read-article-test',
+    selector: 'apps-read-article-comment-delete-confirmation-modal',
     standalone: true,
     imports: [],
     template: `
@@ -31,7 +31,7 @@ import { ModalService } from "@appstrophe-workspace/shared-lib";
       }
   
       div.modal-footer > button.btn {
-        @apply p-2 ml-2;
+        @apply ml-2;
       }
     `],
     changeDetection: ChangeDetectionStrategy.OnPush

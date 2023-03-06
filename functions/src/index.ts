@@ -1,4 +1,4 @@
-import { logger, firestore, EventContext } from "firebase-functions";
+import { logger, firestore, EventContext, auth } from "firebase-functions";
 import { initializeApp } from "firebase-admin/app";
 import * as admin from "firebase-admin";
 
@@ -65,3 +65,13 @@ export const onCommentLikeCreate = firestore
             logger.error(`An error occured: ${err}`, { structuredData: true });
         }
     });
+
+export const onUserDeleted = auth.user().onDelete(async user => {
+    logger.info(`-- Function called with user: ${user} --`, { structuredData: true });
+
+    try {
+        await db.doc(`users/${user.uid}`).delete();
+    } catch (err) {
+        logger.error(`An error occured: ${err}`, { structuredData: true });
+    }
+})

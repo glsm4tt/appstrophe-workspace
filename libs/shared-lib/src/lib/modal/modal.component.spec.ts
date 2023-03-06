@@ -3,8 +3,8 @@ import { DATA_TOKEN } from '../popover';
 import { ModalContainerComponent } from './modal.component';
 import { ModalDirective } from './modal.directive';
 describe('ModalContainerComponent', () => {
-  let component: ModalContainerComponent;
-  let fixture: ComponentFixture<ModalContainerComponent>;
+  let component: ModalContainerComponent<unknown>;
+  let fixture: ComponentFixture<ModalContainerComponent<unknown>>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
