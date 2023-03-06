@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { firstValueFrom, map, Observable, switchMap, of, tap, combineLatestWith, from, catchError, BehaviorSubject, mergeMap } from 'rxjs';
-import { getAuth, Auth, User, createUserWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, UserCredential, deleteUser } from '@angular/fire/auth';
+import { getAuth, Auth, User, createUserWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, UserCredential, deleteUser, updateEmail } from '@angular/fire/auth';
 import { collection, collectionData, docData, DocumentReference, Firestore, query, CollectionReference, doc, setDoc, where } from '@angular/fire/firestore';
 import { Storage, ref, getDownloadURL} from '@angular/fire/storage';
 import { AppStropher } from '../entities/AppStropher';
@@ -175,11 +175,22 @@ export class AuthService {
    * Delete the given account
    * This methods calls the firestore {@angular/fire/auth.sendEmailVerification} method
    * 
-   * @param user the {@angular/fire/auth.User} to remove
    * @returns {Promise<void>} 
    */
   deleteAccount(): Promise<void> {
     const user = this._auth.currentUser;
     return deleteUser(user);
+  }
+
+  /**
+   * Change the user email address
+   * This methods calls the firestore {@angular/fire/auth.updateEmail} method
+   * 
+   * @param email {string} the new wanted {@angular/fire/auth.User.email}
+   * @returns {Promise<void>} 
+   */
+  changeEmail(email: string): Promise<void> {
+    const user = this._auth.currentUser;
+    return updateEmail(user, email);
   }
 }

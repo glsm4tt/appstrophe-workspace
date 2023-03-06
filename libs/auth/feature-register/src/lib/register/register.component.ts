@@ -57,9 +57,9 @@ import { aliasValidator, passwordValidator } from '../validators/auth-validators
             <div class="form-group">
                 <label for="password" class="form-group__label required">Password</label>
                 <input data-cy="input-password" type="password" class="form-group__control" formControlName="password" id="password"
-                    aria-describedby="passwordHelp" aria-errormessage="passworError" placeholder="Enter your password" [attr.aria-invalid]="registerForm.controls['password'].invalid">
+                    aria-describedby="passwordHelp" aria-errormessage="passwordError" placeholder="Enter your password" [attr.aria-invalid]="registerForm.controls['password'].invalid">
                 <small id="passwordHelp" class="form-group__help">Make a strong password for better security.</small>
-                <small id="passworError" class="form-group__error" [ngSwitch]="passwordError">
+                <small id="passwordError" class="form-group__error" [ngSwitch]="passwordError">
                   <span *ngSwitchCase="'required'">This field is required</span>
                   <span *ngSwitchCase="'minlength'">Password must have at least 6 characters</span>
                 </small>

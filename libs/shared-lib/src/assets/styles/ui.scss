@@ -42,7 +42,6 @@ img {
     animation-fill-mode: forwards;
 }
 
-
 @keyframes tooltip-slide {
   0% {
     @apply opacity-0 -translate-x-1/2 translate-y-1/3;
@@ -87,9 +86,33 @@ div.form-group textarea.form-group__control:focus + .form-group__icon.end {
     @apply text-orange-500;
 } 
 
+div.form-group.danger input.form-group__control:focus + .form-group__icon.start,
+div.form-group.danger input.form-group__control:focus + .form-group__icon.end,
+div.form-group.danger textarea.form-group__control:focus + .form-group__icon.start,
+div.form-group.danger textarea.form-group__control:focus + .form-group__icon.end {
+    @apply text-red-600;
+} 
+
+div.form-group.warning input.form-group__control:focus + .form-group__icon.start,
+div.form-group.warning input.form-group__control:focus + .form-group__icon.end,
+div.form-group.warning textarea.form-group__control:focus + .form-group__icon.start,
+div.form-group.warning textarea.form-group__control:focus + .form-group__icon.end {
+    @apply text-yellow-600;
+} 
+
 div.form-group input.form-group__control,
 div.form-group textarea.form-group__control {
     @apply block w-full px-3 py-1.5 text-base font-normal text-gray-700 dark:text-gray-300 bg-white dark:bg-zinc-800 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-800 focus:dark:text-gray-200 focus:ring-1 active:bg-white focus:bg-white dark:focus:bg-zinc-800 dark:active:bg-zinc-800 focus:border-orange-600 focus:ring-orange-600 focus:outline-none autofill:shadow-inner-xl autofill:shadow-white autofill:dark:shadow-zinc-800;
+}
+
+div.form-group.danger input.form-group__control,
+div.form-group.danger textarea.form-group__control{
+    @apply focus:border-red-600 focus:ring-red-600;
+}
+
+div.form-group.warning input.form-group__control,
+div.form-group.warning textarea.form-group__control {
+    @apply focus:border-yellow-600 focus:ring-yellow-600;
 }
 
 div.form-group input.form-group__control:autofill,
@@ -119,6 +142,14 @@ div.form-group > small.form-group__error > span {
     @apply block mt-1 text-xs text-orange-500;
 }
 
+div.form-group.danger > small.form-group__error > span {
+    @apply text-red-600;
+}
+
+div.form-group.warning > small.form-group__error > span {
+    @apply text-yellow-600;
+}
+
 button.btn {
     @apply flex items-center px-4 py-1 justify-center bg-orange-500 rounded-sm text-white hover:bg-orange-600 active:bg-orange-700 disabled:text-gray-500 disabled:bg-zinc-200 disabled:hover:bg-zinc-200 dark:disabled:bg-zinc-700 dark:disabled:hover:bg-zinc-700;
 }
@@ -135,8 +166,16 @@ button.btn.danger {
     @apply text-gray-50 dark:text-gray-50 bg-red-600 dark:bg-red-600 hover:bg-red-700 dark:hover:bg-red-700 disabled:text-gray-500 disabled:bg-zinc-200 disabled:hover:bg-zinc-200 dark:disabled:bg-zinc-700 dark:disabled:hover:bg-zinc-700;
 }
 
+button.btn.warning {
+    @apply text-gray-50 dark:text-gray-50 bg-yellow-600 dark:bg-yellow-600 hover:bg-yellow-700 dark:hover:bg-yellow-700 disabled:text-gray-500 disabled:bg-zinc-200 disabled:hover:bg-zinc-200 dark:disabled:bg-zinc-700 dark:disabled:hover:bg-zinc-700;
+}
+
 button.btn.outlined.danger {
-    @apply bg-transparent border-zinc-300 dark:border-zinc-700 text-red-600 dark:text-red-600 hover:bg-red-600 dark:hover:bg-red-600 hover:text-gray-50 dark:hover:text-gray-50;
+    @apply bg-transparent border-zinc-300 dark:border-zinc-700 text-red-600 dark:text-red-600 hover:bg-red-600 dark:hover:bg-red-600 hover:text-gray-50 dark:hover:text-gray-50 disabled:dark:hover:text-red-600 disabled:bg-transparent disabled:bg-opacity-60 disabled:hover:bg-transparent disabled:hover:bg-opacity-60 dark:disabled:bg-transparent dark:disabled:bg-opacity-60 dark:disabled:hover:bg-transparent dark:disabled:hover:bg-opacity-60;
+}
+
+button.btn.outlined.warning {
+    @apply bg-transparent border-zinc-300 dark:border-zinc-700 text-yellow-600 dark:text-yellow-600 hover:bg-yellow-600 dark:hover:bg-yellow-600 hover:text-gray-50 dark:hover:text-gray-50 disabled:dark:hover:text-yellow-600 disabled:bg-transparent disabled:opacity-60 disabled:hover:bg-transparent disabled:hover:opacity-60 dark:disabled:bg-transparent dark:disabled:opacity-60 dark:disabled:hover:bg-transparent dark:disabled:hover:opacity-60;
 }
 
 div.cdk-overlay-pane {

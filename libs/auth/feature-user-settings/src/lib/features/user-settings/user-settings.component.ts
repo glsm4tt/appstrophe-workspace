@@ -1,17 +1,19 @@
 import { AsyncPipe, NgIf } from "@angular/common";
 import { Component, inject, OnInit } from "@angular/core";
 import { AuthService, UserService, AppStropher } from "@appstrophe-workspace/auth/domain";
-import { EMPTY, Observable } from "rxjs";
+import { BehaviorSubject, EMPTY, Observable, switchMap, tap, map } from "rxjs";
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { ModalService, SharedLibModule, ToasterService } from "@appstrophe-workspace/shared-lib";
 import { UserProfilePictureComponent } from "../../ui/user-profile-picture/user-profile-picture.component";
 import { UserProfileAccountComponent } from "../../ui/user-profile-account/user-profile-account.component";
-import { AccountDeleteConfirmationModalComponent } from "../../ui/user-profile-account-delete-confirmation-modal/user-profile-account-delete-confirmation-modal.component";
+import { AccountDeleteConfirmationModalComponent } from "../../ui/modals/user-profile-account-delete-confirmation-modal/user-profile-account-delete-confirmation-modal.component";
+import { UserProfileEmailComponent } from "../../ui/user-profile-email/user-profile-email.component";
+import { EmailUpdateConfirmationModalComponent } from "../../ui/modals/user-profile-email-update-confirmation-modal/user-profile-email-update-confirmation-modal.component";
 
 @Component({
   selector: 'apps-user-settings',
   standalone: true,
-  imports: [NgIf, AsyncPipe, UserProfilePictureComponent, UserProfileAccountComponent, SharedLibModule],
+  imports: [NgIf, AsyncPipe, UserProfilePictureComponent, UserProfileAccountComponent, UserProfileEmailComponent, SharedLibModule],
   template: `
   <div class="user_settings__page">
     <div class="user_settings__container">
@@ -22,7 +24,10 @@ import { AccountDeleteConfirmationModalComponent } from "../../ui/user-profile-a
             <apps-user-settings-picture [user]="user" (userPictureChange)="onPictureSelected($event, user)"></apps-user-settings-picture>
           </section>
           <section data-cy="alias" class="user_alias__section">
-            {{user?.alias}}
+            <h2>{{user?.alias}}</h2>
+          </section>
+          <section class="user_email__section">
+            <apps-user-settings-email [user]="user" (changeEmailRequest)="changeEmailRequest($event)"></apps-user-settings-email>
           </section>
           <section class="user_account__section">
             <apps-user-settings-account [user]="user" (deleteRequest)="deleteRequest()"></apps-user-settings-account>
@@ -53,12 +58,12 @@ import { AccountDeleteConfirmationModalComponent } from "../../ui/user-profile-a
       @apply relative flex items-center justify-center
     }
 
-    section.user_alias__section {
-      @apply my-2 flex flex-col items-center justify-center font-bold
+    section {
+      @apply my-2 w-full flex flex-col items-stretch justify-center font-bold
     }
 
-    section.user_account__section {
-      @apply my-2 w-full
+    section > h2 {
+      @apply text-center
     }
   `]
 })
@@ -72,9 +77,14 @@ export class UserSettingsComponent implements OnInit {
   private _userService = inject(UserService);
   private _toasterService = inject(ToasterService);
   private _modalService = inject(ModalService);
+  private forceRefresh$ = new BehaviorSubject<void>(null)
 
   ngOnInit(): void {
-    this.user$ = this._authService.getConnectedUser();
+    this.user$ = this.forceRefresh$.pipe(
+      switchMap(_ => this._authService.getConnectedUser().pipe(
+        map(user => user ? ({...user}): user)
+      ))
+    );
   }
 
   async onPictureSelected(file: File, user: AppStropher) {
@@ -88,10 +98,25 @@ export class UserSettingsComponent implements OnInit {
   deleteRequest() {
     // Ask for user confirmation
     const modal = this._modalService.open(AccountDeleteConfirmationModalComponent);
-    
+
     // If confirmation ok then proceed to deletion
     modal?.onClose.subscribe(
       res => res ? this._authService.deleteAccount() : null
+    )
+  }
+
+  changeEmailRequest(email: string) {
+    // Ask for user confirmation
+    const modal = this._modalService.open(EmailUpdateConfirmationModalComponent);
+
+    // If confirmation ok then proceed to update
+    modal?.onClose.subscribe(
+      async res => {
+        if(res) {
+          await this._authService.changeEmail(email);
+        }
+        this.forceRefresh$.next();
+      } 
     )
   }
 }
