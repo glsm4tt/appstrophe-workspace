@@ -9,6 +9,7 @@ export interface ArticleDto extends Id {
     time: number;
     comments: number;
     likesCount: number;
+    views: number;
 }
 
 export interface Article extends ArticleDto {

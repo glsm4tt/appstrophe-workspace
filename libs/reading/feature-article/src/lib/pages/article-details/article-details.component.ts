@@ -48,7 +48,6 @@ export class ArticleDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.article$ = this._store.select(fromArticle.selectArticle);
-
     this.isLoading$ = this._store.select(fromArticle.selectIsArticleLoading);
   }
 }

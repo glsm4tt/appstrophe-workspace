@@ -48,7 +48,8 @@ export class Mock {
             name: 'dedieu',
         },
         comments: 5,
-        likesCount: i
+        likesCount: i,
+        views: 24
     }));
 
     static readonly articleList: Article[] = Mock.articleDtoList.map(a => ({
@@ -79,7 +80,8 @@ export class Mock {
             name: 'dedieu',
         },
         comments: 3,
-        likesCount: 2
+        likesCount: 2,
+        views: 38
     };
 
     static readonly article: Article = {
