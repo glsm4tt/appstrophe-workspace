@@ -12,7 +12,7 @@ export const view = https.onCall(async (data, context) => {
     try {
         const article = await db.doc(`articles/${data.articleId}`).get();
         if(article.exists) {
-            db.doc(`articles/${data.articleId}`).update({views: (article.data()?.views ?? 0) + 1})
+            return db.doc(`articles/${data.articleId}`).update({views: (article.data()?.views ?? 0) + 1})
         } else {
             throw new https.HttpsError("not-found", `The article ${data.articleId} does not exist`);
         }
