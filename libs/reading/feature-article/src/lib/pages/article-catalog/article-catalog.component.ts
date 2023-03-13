@@ -1,7 +1,7 @@
 import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, EMPTY } from 'rxjs';
+import { Observable, EMPTY, map } from 'rxjs';
 import * as fromArticle from '@appstrophe-workspace/reading/domain';
 import { Article } from '@appstrophe-workspace/reading/domain';
 import { ArticleSearchComponent } from '../../features/article-search/article-search.component';

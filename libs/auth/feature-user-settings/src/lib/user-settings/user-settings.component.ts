@@ -4,11 +4,11 @@ import { AuthService, UserService, AppStropher } from "@appstrophe-workspace/aut
 import { BehaviorSubject, EMPTY, Observable, switchMap, tap, map } from "rxjs";
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { ModalService, SharedLibModule, ToasterService } from "@appstrophe-workspace/shared-lib";
-import { UserProfilePictureComponent } from "../../ui/user-profile-picture/user-profile-picture.component";
-import { UserProfileAccountComponent } from "../../ui/user-profile-account/user-profile-account.component";
-import { AccountDeleteConfirmationModalComponent } from "../../ui/modals/user-profile-account-delete-confirmation-modal/user-profile-account-delete-confirmation-modal.component";
-import { UserProfileEmailComponent } from "../../ui/user-profile-email/user-profile-email.component";
-import { EmailUpdateConfirmationModalComponent } from "../../ui/modals/user-profile-email-update-confirmation-modal/user-profile-email-update-confirmation-modal.component";
+import { UserProfilePictureComponent } from "../ui/user-profile-picture/user-profile-picture.component";
+import { UserProfileAccountComponent } from "../ui/user-profile-account/user-profile-account.component";
+import { AccountDeleteConfirmationModalComponent } from "../ui/modals/user-profile-account-delete-confirmation-modal/user-profile-account-delete-confirmation-modal.component";
+import { UserProfileEmailComponent } from "../ui/user-profile-email/user-profile-email.component";
+import { EmailUpdateConfirmationModalComponent } from "../ui/modals/user-profile-email-update-confirmation-modal/user-profile-email-update-confirmation-modal.component";
 
 @Component({
   selector: 'apps-user-settings',

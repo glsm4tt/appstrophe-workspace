@@ -1,6 +1,8 @@
-import { NgForOf } from '@angular/common';
+import { NgForOf, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Article } from '@appstrophe-workspace/reading/domain';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faEye, faHandsClapping } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'apps-read-article-card',
@@ -13,14 +15,24 @@ import { Article } from '@appstrophe-workspace/reading/domain';
           <h2 class="card_title">{{article?.title}}</h2>
           <div class="card_content">
               <div class="card_content__img">
-                  <img [src]="article?.imageUrl" alt="Image de l'article"/>
+                <img [src]="article?.imageUrl" alt="Image de l'article"/>
               </div>
               <p class="card_content__text text-fade">{{article?.description}}</p>
           </div>
       </div>
       <div class="card_footer" (click)="onClick(article)">
-          <span  class="card_footer__badges-container"><span class="card_footer__badges" *ngFor="let tag of article?.tags">{{tag}}</span></span>
-          <span class="card_footer__infos">{{article?.time}} min read</span>
+        <span class="card_footer__badges-container">
+          <span class="card_footer__badges" *ngFor="let tag of article?.tags">{{tag}}</span>
+        </span>
+        <span class="card_footer__infos">
+          <span data-cy="article-views" *ngIf="article?.views">
+            <fa-icon [icon]="faEye"></fa-icon> {{article?.views}}
+          </span>
+          <span data-cy="article-likes"*ngIf="article?.likesCount">
+            <fa-icon [icon]="faHandsClapping"></fa-icon> {{article?.likesCount}}
+          </span>
+          <span class="card_footer__infos_time">{{article?.time}} min read</span>
+        </span>
       </div>
     </div>
   `,
@@ -78,17 +90,23 @@ import { Article } from '@appstrophe-workspace/reading/domain';
   }
 
   div.card div.card_footer span.card_footer__infos {
+    @apply flex items-center text-sm space-x-2.5
+  }
+
+  div.card div.card_footer span.card_footer__infos > span.card_footer__infos_time {
     @apply text-base justify-self-end font-medium text-orange-500
   }
   `],
   standalone: true,
-  imports: [NgForOf],
+  imports: [NgForOf, NgIf, FontAwesomeModule],
   changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class ArticleCardComponent{
   @Input() article!: Partial<Article>;
-
   @Output() clicked = new EventEmitter<Partial<Article>>();
+
+  readonly faEye = faEye;
+  readonly faHandsClapping = faHandsClapping;
 
   onClick(article: Partial<Article>) {
     this.clicked.emit(article);

@@ -7,8 +7,9 @@ import * as Storage from '@angular/fire/storage';
 
 import { ArticleService } from './article.service';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
-import { provideFirestore, getFirestore, DocumentReference } from '@angular/fire/firestore';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
+import { getFunctions, provideFunctions } from '@angular/fire/functions';
 
 describe('ArticleService', () => {
   let service: ArticleService;
@@ -18,7 +19,8 @@ describe('ArticleService', () => {
       imports: [
         provideFirebaseApp(() => initializeApp({ projectId: 'fake_test_id', storageBucket: 'fake_storage_bucket' })),
         provideStorage(() => getStorage()),
-        provideFirestore(() => getFirestore())
+        provideFirestore(() => getFirestore()),
+        provideFunctions(() => getFunctions())
       ]
     });
     service = TestBed.inject(ArticleService);

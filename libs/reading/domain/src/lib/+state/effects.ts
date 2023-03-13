@@ -15,7 +15,6 @@ import { CommentService } from '../services';
 const ARTICLES_STORAGE_KEY = '_articles_';
 const ARTICLE_STORAGE_KEY = '_article_';
 
-
 @Injectable()
 export class ArticleEffects {
 
@@ -56,11 +55,15 @@ export class ArticleEffects {
   loadArticle$ = createEffect(() =>
     this._actions$.pipe(
       ofType(ArticleActions.loadArticle),
-      map(action => ({articleId: action.articleId, article: this._localStorage.get<Partial<ArticleDetailed>>(ARTICLE_STORAGE_KEY)})),
+      map(action => ({articleId: action.articleId, article: this._localStorage.get<Partial<ArticleDetailed>>(`${ARTICLE_STORAGE_KEY}${action.articleId}`)})),
+      tap(({articleId, article}) => {
+        if(!article) // If the article doesn't exist in the cache, we add a view
+          this._articleService.view(articleId)
+      }),
       mergeMap(({articleId, article}) => (article
         ? of(article)
         : this._articleService.getOne(articleId).pipe(
-            tap(article => this._localStorage.set<Partial<ArticleDetailed>>(ARTICLE_STORAGE_KEY, article))
+            tap(article => this._localStorage.set<Partial<ArticleDetailed>>(`${ARTICLE_STORAGE_KEY}${articleId}`, article)),
           )
         ).pipe(
           map((article: Partial<ArticleDetailed>) => ArticleActions.articleLoaded({ article })),

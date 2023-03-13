@@ -1,4 +1,5 @@
-export const ARTICLE_TEST_ID = 'article_1';
+export const ARTICLE1_TEST_ID = 'article_1';
+export const ARTICLE2_TEST_ID = 'article_2';
 
 export const getTooltip = () => cy.get('[data-cy="tooltip"]');
 export const getCopiedTooltip = () => cy.get('[data-cy="copied-tooltip"]');

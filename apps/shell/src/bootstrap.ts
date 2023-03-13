@@ -14,6 +14,7 @@ import { provideRouter } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { routes } from './app/routes';
+import { provideFunctions, getFunctions, connectFunctionsEmulator } from '@angular/fire/functions';
 
 const isDev = !environment.production;
 
@@ -57,6 +58,13 @@ bootstrapApplication(AppComponent, {
         if (isDev) connectAuthEmulator(auth, 'http://localhost:9099');
   
         return auth;
+      }),
+      provideFunctions(() => {
+        const functions = getFunctions()
+
+        if(isDev) connectFunctionsEmulator(functions, 'localhost', 5001);
+
+        return functions;
       }),
       StoreModule.forRoot(reducer, {
         metaReducers: !environment.production ? [] : [],

@@ -91,4 +91,17 @@ describe("appstrophe cloud functions api", () => {
         userRef = await db.doc(`user/${userRecord.uid}`).get();
         assert.isFalse(userRef.exists);
     });
+
+    it("should add a view on the concerned article when view is called", async () => {
+        let docRef = await db.doc(`articles/${articleId}`).get();
+        const expected = {
+            ...docRef.data(),
+            views: 1
+        };
+        const wrapped = test.wrap(functions.view);
+        await wrapped({articleId})
+        docRef = await db.doc(`articles/${articleId}`).get();
+        const data = docRef.data();
+        assert.deepEqual(data, expected);
+    });
 });

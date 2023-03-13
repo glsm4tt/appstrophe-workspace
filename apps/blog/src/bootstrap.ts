@@ -2,6 +2,7 @@ import { enableProdMode, importProvidersFrom } from '@angular/core';
 import { provideFirebaseApp, initializeApp, getApp } from '@angular/fire/app';
 import { provideAuth, initializeAuth, browserSessionPersistence, indexedDBLocalPersistence, browserPopupRedirectResolver, connectAuthEmulator } from '@angular/fire/auth';
 import { provideFirestore, initializeFirestore, connectFirestoreEmulator, enableIndexedDbPersistence } from '@angular/fire/firestore';
+import { connectFunctionsEmulator, getFunctions, provideFunctions } from '@angular/fire/functions';
 import { provideStorage, getStorage, connectStorageEmulator } from '@angular/fire/storage';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter, withEnabledBlockingInitialNavigation } from '@angular/router';
@@ -56,6 +57,13 @@ bootstrapApplication(AppComponent, {
         if (isDev) connectStorageEmulator(storage, 'localhost', 9199);
   
         return storage;
+      }),
+      provideFunctions(() => {
+        const functions = getFunctions()
+
+        if(isDev) connectFunctionsEmulator(functions, 'localhost', 5001);
+
+        return functions;
       }),
       StoreModule.forRoot(reducer, {
         metaReducers: !environment.production ? [] : [],
