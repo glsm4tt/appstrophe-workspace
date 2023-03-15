@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+import { NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -15,14 +15,19 @@ import { ArticleDetailedWithComments, CommentService } from '@appstrophe-workspa
     <form class="comment-section" [formGroup]="commentForm" (ngSubmit)="submitComment()">
       <div class="comment-fields">
       <div class="form-group">
-          <label class="form-group__label" for="comment">Comment: </label>
-          <div class="form-group-content">
-            <textarea (focus)="checkIfConnected()" data-cy="input-comment" class="form-group__control" formControlName="comment" id="comment"
-                placeholder="Add a comment..."></textarea>
-            <fa-icon
-            class="form-group__icon start"
-            [icon]="faPen"></fa-icon>
-          </div>
+        <label class="form-group__label" for="comment">Comment: </label>
+        <div class="form-group-content">
+          <textarea (focus)="checkIfConnected($event)" data-cy="input-comment" class="form-group__control" formControlName="comment" id="comment"
+              placeholder="Add a comment..." aria-errormessage="inputError"></textarea>
+          <fa-icon
+          class="form-group__icon start"
+          [icon]="faPen"></fa-icon>
+        </div>
+        <small id="inputError" class="form-group__error" [ngSwitch]="inputError">
+          <span *ngSwitchCase="'required'">Comment cannot be empty</span>
+          <span *ngSwitchCase="'minlength'">Comment cannot be empty</span>
+          <span *ngSwitchCase="'maxlength'">Comment must not exceed 255 characters</span>
+        </small>
       </div>
       </div>
       <div class="actions-subsection" *ngIf="commentForm.controls['comment'].value"> 
@@ -45,7 +50,7 @@ import { ArticleDetailedWithComments, CommentService } from '@appstrophe-workspa
   }
   `],
   standalone: true,
-  imports: [NgIf, ReactiveFormsModule, FontAwesomeModule, SharedLibModule]
+  imports: [NgIf, ReactiveFormsModule, FontAwesomeModule, SharedLibModule, NgSwitch, NgSwitchCase]
 })
 export class ArticleCommentsAddComponent implements OnInit {
 
@@ -54,6 +59,11 @@ export class ArticleCommentsAddComponent implements OnInit {
   readonly faPen = faPen;
 
   commentForm: FormGroup;
+
+  get inputError() {
+    const email = this.commentForm.get('comment');
+    return email.touched && email.errors && Object.keys(email.errors)[0]
+  }
 
   private _authService = inject(AuthService);
   private _commentService = inject(CommentService);
@@ -75,13 +85,15 @@ export class ArticleCommentsAddComponent implements OnInit {
     await this._commentService.addComment(this.article?.id as string, this.commentForm.value.comment);
   }
 
-  checkIfConnected() {
+  checkIfConnected(event: FocusEvent) {
     this._authService.getConnectedUser().pipe(
       first()
     ).subscribe(
       user => {
-        if (!user)
-          this._router.navigateByUrl(`/auth/login?previous=${this._router.url}`)
+        if (!user) {
+          (event.target as HTMLTextAreaElement).blur();
+          this._router.navigateByUrl(`/auth/login?previous=${this._router.url}`);
+        }
       }
     )
   }

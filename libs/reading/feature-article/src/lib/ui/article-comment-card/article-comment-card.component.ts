@@ -10,7 +10,7 @@ import { faThumbsUp, faEllipsisV, faPen, faTrash } from '@fortawesome/free-solid
   standalone: true,
   imports: [FontAwesomeModule, NgIf, NgClass, SharedLibModule, FirestoreTimestampPipe, AuthorFullnamePipe],
   template: `
-    <div class="card">
+    <div class="card" data-cy="article-card">
       <div class="card_author">
         <img [src]="comment?.author?.photoUrl" alt="Photo de l'auteur du commentaire">
         <div class="author__identity">

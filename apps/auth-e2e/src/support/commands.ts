@@ -9,7 +9,7 @@
 // ***********************************************
 
 import { initializeApp, getApp } from "firebase/app";
-import { signInWithEmailAndPassword, connectAuthEmulator, initializeAuth, browserSessionPersistence } from "firebase/auth";
+import { signInWithEmailAndPassword, getAuth, connectAuthEmulator, initializeAuth, browserSessionPersistence } from "firebase/auth";
 import firebaseConfig from '../../firebase.config.json';
 
 
@@ -22,9 +22,38 @@ connectAuthEmulator(auth, 'http://localhost:9099')
 
 //
 // -- This is a parent command --
-Cypress.Commands.add('login', (email, password) => {
- signInWithEmailAndPassword(auth, email, password)
+Cypress.Commands.add('login', (email, password, redirectPath = '/') => {
+  cy.session([email, password],
+    () => {
+      signInProgrammatically({email, password});
+    }
+  );
+
+  cy.visit(redirectPath);
 });
+
+function signInProgrammatically({
+  email,
+  password,
+}: {
+  email: string;
+  password: string;
+}) {
+  const auth = getAuth();
+
+  const signIn = signInWithEmailAndPassword(
+    auth, 
+    email, 
+    password
+  )
+  .catch((e) => {
+    cy.log(`User could not sign in programmatically!`);
+    console.error(e);
+  });
+
+  return cy.wrap(signIn);
+};
+
 //
 // -- This is a child command --
 // Cypress.Commands.add("drag", { prevSubject: 'element'}, (subject, options) => { ... })

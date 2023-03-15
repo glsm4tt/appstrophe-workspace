@@ -24,8 +24,7 @@ const validEmail = 'test_user_read2@fake-domain.net';
 
 describe('auth/user-settings page', () => {
   beforeEach(() => {
-    cy.login(LOGGED_USER_MOCK.email, LOGGED_USER_MOCK.password)
-    cy.visit('/auth/user-settings')
+    cy.login(LOGGED_USER_MOCK.email, LOGGED_USER_MOCK.password, '/auth/user-settings')
   });
 
   it('should display the user settings page', () => {
@@ -58,8 +57,7 @@ describe('auth/user-settings page', () => {
 
 describe('auth/user-settings email update', () => {
   beforeEach(() => {
-    cy.login(LOGGED_USER_MOCK.email, LOGGED_USER_MOCK.password)
-    cy.visit('/auth/user-settings')
+    cy.login(LOGGED_USER_MOCK.email, LOGGED_USER_MOCK.password, '/auth/user-settings')
   });
 
   it('should not update the user email address when the update your email button is clicked but not confirmed', () => {
@@ -171,8 +169,7 @@ describe('auth/user-settings email update', () => {
 
 describe('auth/user-settings account deletion', () => {
   beforeEach(() => {
-    cy.login(validEmail, LOGGED_USER_MOCK.password)
-    cy.visit('/auth/user-settings')
+    cy.login(validEmail, LOGGED_USER_MOCK.password, '/auth/user-settings')
   });
   
   it('should not delete the user account when the delete your account button is clicked but not confirmed', () => {

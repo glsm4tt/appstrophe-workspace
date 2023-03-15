@@ -7,17 +7,17 @@ initializeApp();
 const db = admin.firestore();
 
 export const view = https.onCall(async (data, context) => {
-    logger.info(`-- Function called with data: ${data} --`, {structuredData: true});
-    logger.info(`-- Function called with context: ${context} --`, {structuredData: true});
+    logger.info(`-- Function called with data: ${data} --`);
+    logger.info(`-- Function called with context: ${context} --`);
     try {
         const article = await db.doc(`articles/${data.articleId}`).get();
-        if(article.exists) {
-            return db.doc(`articles/${data.articleId}`).update({views: (article.data()?.views ?? 0) + 1})
+        if (article.exists) {
+            return db.doc(`articles/${data.articleId}`).update({ views: (article.data()?.views ?? 0) + 1 })
         } else {
             throw new https.HttpsError("not-found", `The article ${data.articleId} does not exist`);
         }
-    } catch(err) {
-        logger.error(`${err}`, {structuredData: true})
+    } catch (err) {
+        logger.error(`${err}`)
         throw err;
     }
 });

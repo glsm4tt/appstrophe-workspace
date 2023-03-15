@@ -67,7 +67,7 @@ describe('auth/register', () => {
     getInputEmail().should('have.attr', 'aria-errormessage').then(
       id => {
         cy.get(`#${id}`)
-          .get('span')
+          .find('span')
           .should('be.visible')
           .should('have.text', 'This field is required')
           .should('have.css', 'color', 'rgb(249, 115, 22)')
@@ -83,7 +83,7 @@ describe('auth/register', () => {
     getInputEmail().should('have.attr', 'aria-errormessage').then(
       id => {
         cy.get(`#${id}`)
-          .get('span')
+          .find('span')
           .should('be.visible')
           .should('have.text', 'This is not a valid email address')
           .should('have.css', 'color', 'rgb(249, 115, 22)')
@@ -96,7 +96,7 @@ describe('auth/register', () => {
     getInputEmail().should('have.attr', 'aria-errormessage').then(
       id => {
         cy.get(`#${id}`)
-          .get('span')
+          .find('span')
           .should('not.exist')
       })
 
@@ -139,7 +139,7 @@ describe('auth/register', () => {
     getInputAlias().should('have.attr', 'aria-errormessage').then(
       id => {
         cy.get(`#${id}`)
-          .get('span')
+          .find('span')
           .should('be.visible')
           .should('have.text', 'This field is required')
           .should('have.css', 'color', 'rgb(249, 115, 22)')
@@ -155,7 +155,7 @@ describe('auth/register', () => {
     getInputAlias().should('have.attr', 'aria-errormessage').then(
       id => {
         cy.get(`#${id}`)
-          .get('span')
+          .find('span')
           .should('be.visible')
           .should('have.text', 'Alias must contains only numbers or lowercase letters')
           .should('have.css', 'color', 'rgb(249, 115, 22)')
@@ -171,7 +171,7 @@ describe('auth/register', () => {
     getInputAlias().should('have.attr', 'aria-errormessage').then(
       id => {
         cy.get(`#${id}`)
-          .get('span')
+          .find('span')
           .should('be.visible')
           .should('have.text', 'Sorry, this alias has already been taken')
           .should('have.css', 'color', 'rgb(249, 115, 22)')
@@ -187,7 +187,7 @@ describe('auth/register', () => {
     getInputAlias().should('have.attr', 'aria-errormessage').then(
       id => {
         cy.get(`#${id}`)
-          .get('span')
+          .find('span')
           .should('be.visible')
           .should('have.text', 'Alias must not exceed 18 characters')
           .should('have.css', 'color', 'rgb(249, 115, 22)')
@@ -203,7 +203,7 @@ describe('auth/register', () => {
     getInputAlias().should('have.attr', 'aria-errormessage').then(
       id => {
         cy.get(`#${id}`)
-          .get('span')
+          .find('span')
           .should('not.exist')
       })
 
@@ -247,7 +247,7 @@ describe('auth/register', () => {
     getInputPassword().should('have.attr', 'aria-errormessage').then(
       id => {
         cy.get(`#${id}`)
-          .get('span')
+          .find('span')
           .should('be.visible')
           .should('have.text', 'This field is required')
           .should('have.css', 'color', 'rgb(249, 115, 22)')
@@ -263,7 +263,7 @@ describe('auth/register', () => {
     getInputPassword().should('have.attr', 'aria-errormessage').then(
       id => {
         cy.get(`#${id}`)
-          .get('span')
+          .find('span')
           .should('be.visible')
           .should('have.text', 'Password must have at least 6 characters')
           .should('have.css', 'color', 'rgb(249, 115, 22)')
@@ -285,7 +285,7 @@ describe('auth/register', () => {
     getInputPasswordConfirm().should('have.attr', 'aria-errormessage').then(
       id => {
         cy.get(`#${id}`)
-          .get('span')
+          .find('span')
           .should('be.visible')
           .should('have.text', 'Password and confirmation does not match')
           .should('have.css', 'color', 'rgb(249, 115, 22)')
@@ -314,7 +314,7 @@ describe('auth/register', () => {
 
     getToaster().should('be.visible')
       .should('have.css', 'background-color', 'rgb(24, 24, 27)')
-      .get('span')
+      .find('span')
       .should('have.text', 'User successfully created')
 
     cy.url().should('include', '/auth/login')
