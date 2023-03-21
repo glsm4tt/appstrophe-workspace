@@ -80,9 +80,10 @@ export class ArticleCommentsAddComponent implements OnInit {
   }
 
   async submitComment() {
-    if (!this.commentForm.value.comment.trim().replace('\n', ''))
+    if (this.commentForm.invalid || !this.commentForm.value.comment.trim().replace('\n', ''))
       return;
     await this._commentService.addComment(this.article?.id as string, this.commentForm.value.comment);
+    this.commentForm.reset({comment: ''})
   }
 
   checkIfConnected(event: FocusEvent) {

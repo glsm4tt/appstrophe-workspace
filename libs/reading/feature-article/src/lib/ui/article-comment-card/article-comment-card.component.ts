@@ -1,37 +1,41 @@
-import { NgClass, NgIf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { AuthorFullnamePipe, Comment } from '@appstrophe-workspace/reading/domain';
+import { AsyncPipe, NgClass, NgIf } from '@angular/common';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Timestamp } from '@angular/fire/firestore';
+import { Comment } from '@appstrophe-workspace/reading/domain';
 import { FirestoreTimestampPipe, SharedLibModule } from '@appstrophe-workspace/shared-lib';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faThumbsUp, faEllipsisV, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { BehaviorSubject, interval, map, Observable, scan, startWith, switchMap, take, tap, timer } from 'rxjs';
+
+type CommentDisplay = Omit<Comment, 'date'> & { date: Observable<Timestamp> }; 
 
 @Component({
   selector: 'apps-read-article-comment-card',
   standalone: true,
-  imports: [FontAwesomeModule, NgIf, NgClass, SharedLibModule, FirestoreTimestampPipe, AuthorFullnamePipe],
+  imports: [FontAwesomeModule, NgIf, NgClass, SharedLibModule, FirestoreTimestampPipe, AsyncPipe],
   template: `
     <div class="card" data-cy="article-card">
       <div class="card_author">
-        <img [src]="comment?.author?.photoUrl" alt="Photo de l'auteur du commentaire">
+        <img [src]="internalComment?.author?.photoUrl" alt="Photo de l'auteur du commentaire">
         <div class="author__identity">
-          <h3>{{ comment?.author | authorFullname }}</h3>
-          <h4>{{ comment?.date | firestoreTimestamp }}</h4>
+          <h3>{{ internalComment?.author?.alias }}</h3>
+          <h4>{{ internalComment?.date | async | firestoreTimestamp }}</h4>
         </div>
-        <div *ngIf="comment?.owned" class="comment-settings">
+        <div *ngIf="internalComment?.owned" class="comment-settings">
           <fa-icon [icon]="faEllipsisV" appsTooltip="Settings" appsPopover [popoverContent]="comment_popover"></fa-icon>
         </div>
       </div>
       <div class="card_body">
           <p>
-            {{ comment?.text }}
+            {{ internalComment?.text }}
           </p>
       </div>
       <div class="card_footer">
           <div class="card_footer__start">
               <span class="card_footer__likes">
-                  <fa-icon [ngClass]="{'text-orange-400': comment?.liked}" (click)="likeChange.emit()" [appsTooltip]="comment?.reactions?.length ? comment?.reactions?.length + ' Reactiond' : 'Be the first one liking it !'" class="like__icon" [icon]="faThumbsUp">
+                  <fa-icon [ngClass]="{'text-orange-400': internalComment?.liked}" (click)="likeChange.emit()" [appsTooltip]="internalComment?.reactions?.length ? internalComment?.reactions?.length + ' Reactiond' : 'Be the first one liking it !'" class="like__icon" [icon]="faThumbsUp">
                   </fa-icon>
-                  <span *ngIf="comment?.reactions?.length">{{ comment?.reactions?.length }}</span>
+                  <span *ngIf="internalComment?.reactions?.length">{{ internalComment?.reactions?.length }}</span>
               </span>
           </div>
       </div>
@@ -107,8 +111,26 @@ import { faThumbsUp, faEllipsisV, faPen, faTrash } from '@fortawesome/free-solid
   `],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ArticleCommentCardComponent {
-  @Input() comment!: Partial<Comment>;
+export class ArticleCommentCardComponent{
+
+  private interval$ = new BehaviorSubject<number[]>([1, 1]);
+
+  internalComment!: Partial<CommentDisplay>;
+  @Input() 
+  set comment(value: Partial<Comment>) {
+      this.internalComment = {
+        ...value,
+        date: this.interval$.pipe(
+          switchMap(i => {
+            const currentFibonacciValue = i.at(-1)
+            return currentFibonacciValue === 1 ? timer(0, 1000 * 60 * currentFibonacciValue) : interval(1000 * 60 * currentFibonacciValue)
+          }),
+          map(i => value.date),
+          tap(_ => this.interval$.next(this.calculateNextFibonacciArray(this.interval$.value)))
+        )
+      }
+  }
+
   @Output() likeChange = new EventEmitter<void>();
   @Output() deleteRequest = new EventEmitter<void>();
 
@@ -116,4 +138,12 @@ export class ArticleCommentCardComponent {
   readonly faEllipsisV = faEllipsisV;
   readonly faPen = faPen;
   readonly faTrash = faTrash;
+
+  private calculateNextFibonacciArray (fibonacciArray: number[]) {
+    const fibonacciArrayLength = fibonacciArray.length;
+    return [
+      ...fibonacciArray,
+      fibonacciArray[fibonacciArrayLength - 1] + fibonacciArray[fibonacciArrayLength - 2]
+    ];
+  }
 }

@@ -166,7 +166,9 @@ describe('/blog/article:articleId', () => {
           cy.get(`#${id}`)
             .find('span')
             .should('not.exist')
-        })
+      });
+
+      getArticleInputNewComment().should('have.value', '')
     });
   });
 });
