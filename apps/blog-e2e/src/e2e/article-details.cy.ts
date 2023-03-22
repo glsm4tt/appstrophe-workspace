@@ -107,7 +107,7 @@ describe('/blog/article:articleId', () => {
       getArticleInputNewComment()
         .should('be.focused')
     });
-    
+   
     it('should not be possible to add an empty comment', () => {
       getArticleInputNewComment()
         .clear()

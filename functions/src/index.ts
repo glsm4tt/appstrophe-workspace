@@ -11,9 +11,8 @@ initializeApp();
 
 const db = admin.firestore();
 
-export const view = https.onCall(async (data, context) => {
-    logger.info(`-- Function called with data: ${data} --`);
-    logger.info(`-- Function called with context: ${context} --`);
+export const view = https.onCall(async (data) => {
+    logger.info(`-- Function called with articleId: ${data.articleId} --`);
     try {
         const article = await db.doc(`articles/${data.articleId}`).get();
         if (article.exists) {
@@ -52,8 +51,8 @@ export const onCommentCreate = firestore
 export const onCommentLikeCreate = firestore
     .document("articles/{articleId}/comments/{commentId}/reactions/{reactionId}")
     .onCreate(async (snap, context: EventContext<{ articleId: string, commentId: string, reactionId: string }>) => {
-        logger.info(`-- Function called with snap: ${snap.data()} --`);
-        logger.info(`-- Function called with context: ${context.auth} --`);
+        logger.info(`-- Function called with snap: ${JSON.stringify(snap.data())} --`);
+        logger.info(`-- Function called with context: ${JSON.stringify(context)} --`);
 
         try {
             await db.doc(`articles/${context.params.articleId}/comments/${context.params.commentId}/reactions/${context.params.reactionId}`).update({
@@ -65,7 +64,7 @@ export const onCommentLikeCreate = firestore
     });
 
 export const onUserDeleted = auth.user().onDelete(async user => {
-    logger.info(`-- Function called with user: ${user} --`);
+    logger.info(`-- Function called with user: ${JSON.stringify(user)} --`);
 
     try {
         await db.doc(`users/${user.uid}`).delete();

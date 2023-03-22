@@ -12,7 +12,7 @@ service cloud.firestore {
       }
       
       match /comments/{commentId} {
-        allow create: if request.auth.uid == request.resource.data.author.id && request.resource.data.keys().hasOnly(["text", "author"]) && request.resource.data.text.matches('(.|\s)*\S(.|\s)*');
+        allow create: if request.auth.uid == request.resource.data.author.id && request.resource.data.keys().hasOnly(["text", "author"]) && request.resource.data.text.matches('(.|\\s)*\\S(.|\\s)*');
         allow delete: if request.auth.uid == resource.data.author.id;
         allow read: if true;
         

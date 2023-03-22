@@ -22,7 +22,7 @@ export class CommentService {
           ...c,
           reactions,
           liked: !!(user?.uid && reactions.find(r => r.id)),
-          owned: true //user?.uid === c.author.id
+          owned: user?.uid === c.author.id
         }))
       ))))
     );
