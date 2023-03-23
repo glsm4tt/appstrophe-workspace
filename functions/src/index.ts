@@ -35,7 +35,8 @@ export const onCommentCreate = firestore
 
         try {
             const authorRef: DocumentSnapshot<DocumentData> = await db.doc(`users/${comment.author?.id}`).get();
-            const author = authorRef.data() as AppStropher
+            const author = authorRef.data() as AppStropher;
+            // Update just created comment with the current date and the author alias
             await db.doc(`articles/${context.params.articleId}/comments/${context.params.commentId}`).update({
                 author: {
                     id: authorRef.id,
@@ -43,9 +44,26 @@ export const onCommentCreate = firestore
                 },
                 date: admin.firestore.Timestamp.now()
             });
+            // Update article comments number
+            const commentsRef = await db.collection(`articles/${context.params.articleId}/comments`).get();
+            await db.doc(`articles/${context.params.articleId}`).update({
+                comments: commentsRef.size
+            });
         } catch (err) {
             logger.error(`An error occured: ${err}`);
         }
+    });
+
+export const onCommentDelete = firestore
+    .document("articles/{articleId}/comments/{commentId}")
+    .onDelete(async (snap, context: EventContext<{ articleId: string, commentId: string }>) => {
+        logger.info(`-- Function called with snap: ${JSON.stringify(snap.data())} --`);
+        logger.info(`-- Function called with context: ${JSON.stringify(context)} --`);
+
+        const commentsRef = await db.collection(`articles/${context.params.articleId}/comments`).get();
+        await db.doc(`articles/${context.params.articleId}`).update({
+            comments: commentsRef.size
+        });
     });
 
 export const onCommentLikeCreate = firestore

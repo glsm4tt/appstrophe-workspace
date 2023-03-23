@@ -14,7 +14,7 @@ type CommentDisplay = Omit<Comment, 'date'> & { date: Observable<Timestamp> };
   standalone: true,
   imports: [FontAwesomeModule, NgIf, NgClass, SharedLibModule, FirestoreTimestampPipe, AsyncPipe],
   template: `
-    <div class="card" data-cy="article-card">
+    <div class="card" data-cy="article-comment-card">
       <div class="card_author">
         <img [src]="internalComment?.author?.photoUrl" alt="Photo de l'auteur du commentaire">
         <div class="author__identity">

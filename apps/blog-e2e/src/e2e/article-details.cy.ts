@@ -8,6 +8,7 @@ import {
   getArticleDetailCopyLinkButton,
   getCopiedTooltip,
   getArticleComments,
+  getArticleCommentCard,
   getArticleInputNewComment,
   getArticleNewCommentSubmitButton
 } from '../support/article.po';
@@ -16,6 +17,7 @@ const LOGGED_USER_MOCK = {
   email: 'test_user_read@fake-domain.net',
   password: 'test_user_read'
 }
+const ARTICLE_STORAGE_KEY = '_article_';
 
 describe('/blog/article:articleId', () => {
   describe('The header section', () => {
@@ -82,7 +84,7 @@ describe('/blog/article:articleId', () => {
     beforeEach(() => cy.visit(`/blog/article/${ARTICLE1_TEST_ID}`));
 
     it('should have 2 comments by default', () => {
-      getArticleComments()
+      getArticleCommentCard()
         .should('have.length', 2)
     });
 
@@ -115,7 +117,7 @@ describe('/blog/article:articleId', () => {
 
       getArticleNewCommentSubmitButton().should('not.exist')
 
-      getArticleComments()
+      getArticleCommentCard()
         .should('have.length', 2)
 
       // An error indication should be displayed
@@ -136,8 +138,11 @@ describe('/blog/article:articleId', () => {
 
       getArticleNewCommentSubmitButton().should('be.disabled')
 
-      getArticleComments()
+      getArticleCommentCard()
         .should('have.length', 2)
+
+      getArticleComments()
+      .contains('2')
 
       // An error indication should be displayed
       getArticleInputNewComment().should('have.attr', 'aria-errormessage').then(
@@ -157,10 +162,10 @@ describe('/blog/article:articleId', () => {
 
       getArticleNewCommentSubmitButton().should('not.be.disabled').click()
 
-      getArticleComments()
+      getArticleCommentCard()
         .should('have.length', 3)
 
-      // An error indication should be displayed
+      // An error indication should not be displayed
       getArticleInputNewComment().should('have.attr', 'aria-errormessage').then(
         id => {
           cy.get(`#${id}`)
@@ -168,7 +173,14 @@ describe('/blog/article:articleId', () => {
             .should('not.exist')
       });
 
-      getArticleInputNewComment().should('have.value', '')
+      getArticleInputNewComment().should('have.value', '');
+
+      cy.clearLocalStorage(`${ARTICLE_STORAGE_KEY}${ARTICLE1_TEST_ID}`)
+
+      cy.visit(`/blog/article/${ARTICLE1_TEST_ID}`)
+
+      getArticleComments()
+      .contains('3')
     });
   });
 });
