@@ -1,7 +1,7 @@
 import { enableProdMode, importProvidersFrom } from '@angular/core';
 import { provideFirebaseApp, initializeApp, getApp } from '@angular/fire/app';
 import { provideAuth, initializeAuth, browserSessionPersistence, indexedDBLocalPersistence, browserPopupRedirectResolver, connectAuthEmulator } from '@angular/fire/auth';
-import { provideFirestore, initializeFirestore, connectFirestoreEmulator, enableIndexedDbPersistence } from '@angular/fire/firestore';
+import { provideFirestore, initializeFirestore, connectFirestoreEmulator } from '@angular/fire/firestore';
 import { provideStorage, getStorage, connectStorageEmulator } from '@angular/fire/storage';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter, RouterModule, withEnabledBlockingInitialNavigation } from '@angular/router';
@@ -30,12 +30,11 @@ bootstrapApplication(AppComponent, {
         const firestore = initializeFirestore(getApp(), {
           experimentalForceLongPolling: isDev ? true : false,
         });
-  
+
         if (isDev) {
           connectFirestoreEmulator(firestore, 'localhost', 8080);
-          enableIndexedDbPersistence(firestore);
         }
-  
+
         return firestore;
       }),
       provideAuth(() => {
@@ -45,16 +44,16 @@ bootstrapApplication(AppComponent, {
             : indexedDBLocalPersistence,
           popupRedirectResolver: browserPopupRedirectResolver,
         });
-  
+
         if (isDev) connectAuthEmulator(auth, 'http://localhost:9099');
-  
+
         return auth;
       }),
-     provideStorage(() => {
+      provideStorage(() => {
         const storage = getStorage()
-  
+
         if (isDev) connectStorageEmulator(storage, 'localhost', 9199);
-  
+
         return storage;
       }),
       StoreModule.forRoot(reducer, {

@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
-import { CollectionReference, collection, collectionData, DocumentReference, addDoc, doc, setDoc, deleteDoc, Firestore } from '@angular/fire/firestore';
-import { Observable, combineLatestWith, mergeMap, combineLatest, map, startWith } from 'rxjs';
+import { CollectionReference, collection, collectionData, DocumentReference, addDoc, doc, setDoc, deleteDoc, Firestore, query, orderBy } from '@angular/fire/firestore';
+import { Observable, combineLatestWith, combineLatest, map, switchMap, firstValueFrom } from 'rxjs';
 import { Reaction, Comment } from '../entities';
 import { AuthService } from '@appstrophe-workspace/auth/domain';
 
@@ -14,23 +14,24 @@ export class CommentService {
 
   getComments(articleId: string): Observable<Comment[]> {
     const articleCommentsCollection: CollectionReference<Comment> = collection(this._firestore, `articles/${articleId}/comments`) as CollectionReference<Comment>;
-    return collectionData(articleCommentsCollection, { idField: 'id' }).pipe(
+    const articleCommentsCollectionQuery = query(articleCommentsCollection, orderBy('date', 'asc'))
+    return collectionData(articleCommentsCollectionQuery, { idField: 'id' }).pipe(
       combineLatestWith(this._authService.getConnectedUser()),
-      mergeMap(([comments, user]) => combineLatest(comments.map(c => collectionData<Reaction>(collection(this._firestore, `articles/${articleId}/comments/${c.id}/reactions`) as CollectionReference<Reaction>, { idField: 'id' }).pipe(
-        startWith([]),
+      switchMap(([comments, user]) => combineLatest(comments.map(c => collectionData<Reaction>(collection(this._firestore, `articles/${articleId}/comments/${c.id}/reactions`) as CollectionReference<Reaction>, { idField: 'id' }).pipe(
         map(reactions => ({
           ...c,
           reactions,
           liked: !!(user?.uid && reactions.find(r => r.id)),
-          owned: true //user?.uid === c.author.id
+          owned: user?.uid === c.author.id
         }))
       ))))
     );
   }
 
-  addComment(articleId: string, text: string): Promise<DocumentReference<Partial<Comment>>> {
+  async addComment(articleId: string, text: string): Promise<DocumentReference<Partial<Comment>>> {
+    const connectedUser = await firstValueFrom(this._authService.getConnectedUser());
     const articleCommentsCollection: CollectionReference<Partial<Comment>> = collection(this._firestore, `articles/${articleId}/comments`) as CollectionReference<Partial<Comment>>;
-    return addDoc(articleCommentsCollection, { text });
+    return addDoc(articleCommentsCollection, { text, author: { id: connectedUser.uid } });
   }
 
   likeComment(articleId: string, commentId: string, userId: string): Promise<void> {

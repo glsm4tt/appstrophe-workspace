@@ -4,7 +4,7 @@ import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { ArticleCommentsAddComponent } from './add/article-comments-add.component';
 import { ArticleCommentsListComponent } from './list/article-comments-list.component';
 import { Observable, EMPTY, combineLatest} from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import * as fromArticle from '@appstrophe-workspace/reading/domain';
 import { Store } from '@ngrx/store';
 

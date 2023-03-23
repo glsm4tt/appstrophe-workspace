@@ -15,3 +15,7 @@ export const getArticleDetailCopyLinkButton = () => cy.get('[data-cy="copy-link"
 export const getArticleDetailPublicationDate = () => cy.get('[data-cy="publication-date"]');
 export const getArticleDetailTimeOfRead = () => cy.get('[data-cy="time-of-read"]');
 export const getArticleDetailYoutubeButton = () => cy.get('[data-cy="watch-on-youtube"]');
+export const getArticleComments = () => cy.get('[data-cy="article-comments"]');
+export const getArticleCommentCard = () => cy.get('[data-cy="article-comment-card"]');
+export const getArticleInputNewComment = () => cy.get('[data-cy="input-comment"]');
+export const getArticleNewCommentSubmitButton = () => cy.get('[data-cy="submit"]');

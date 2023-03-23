@@ -30,10 +30,7 @@ describe("appstrophe cloud functions api", () => {
         };
 
         const wrapped = test.wrap(functions.onCommentCreate);
-        await wrapped({text: "Some random text"}, {
-            auth: {
-                uid: "Ki3WFGMtnDGTHB0ArzV0XNbNyOt5"
-            },
+        await wrapped({data: () => ({text: "Some comment", author:{id: "Ki3WFGMtnDGTHB0ArzV0XNbNyOt5"}})}, {
             params: {
                 articleId, 
                 commentId
@@ -54,10 +51,7 @@ describe("appstrophe cloud functions api", () => {
         };
 
         const wrapped = test.wrap(functions.onCommentLikeCreate);
-        await wrapped({type: "like"}, {
-            auth: {
-                uid: "Ki3WFGMtnDGTHB0ArzV0XNbNyOt5"
-            },
+        await wrapped({data: () =>({type: "like"})}, {
             params: {
                 articleId, 
                 commentId,

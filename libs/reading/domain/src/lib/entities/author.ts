@@ -1,8 +1,6 @@
-import { IdName } from "@appstrophe-workspace/shared-lib";
-
-export interface AuthorDto extends IdName {
+export interface AuthorDto {
     alias: string;
-    firstname: string;
+    id: string;
 }
 
 export interface Author extends AuthorDto {

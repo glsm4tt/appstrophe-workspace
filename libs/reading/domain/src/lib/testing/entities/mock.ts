@@ -18,8 +18,6 @@ export class Mock {
         author: {
             id: '1',
             alias: '@sdedieu',
-            firstname: 'sylvain',
-            name: 'dedieu',
             photoUrl: 'assets/img/W9aoBmrb_400x400.jpeg'
         },
         date: new Timestamp(1675409728, 2),
@@ -75,9 +73,7 @@ export class Mock {
         tags: ['Angular'],
         author: {
             id: '1',
-            alias: '@sdedieu',
-            firstname: 'sylvain',
-            name: 'dedieu',
+            alias: '@sdedieu'
         },
         comments: 3,
         likesCount: 2,

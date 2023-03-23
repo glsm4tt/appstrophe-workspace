@@ -21,7 +21,7 @@ import { faHandsClapping, faComment, faArrowUpFromBracket } from '@fortawesome/f
               <ng-container *ngIf="article">
                   <fa-icon [appsTooltip]="article?.comments ? article?.comments + ' comments' : 'Be the first one commenting it !'" class="comment__icon" [icon]="faComment">
                   </fa-icon>
-                  <span *ngIf="article?.comments">{{article?.comments}}</span>
+                  <span data-cy="article-comments" *ngIf="article?.comments">{{article?.comments}}</span>
               </ng-container>
           </span>
       </div>

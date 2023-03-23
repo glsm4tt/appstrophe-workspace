@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app/app.component';
 import { environment } from './environments/environment';
 import { provideFirebaseApp, initializeApp, getApp } from '@angular/fire/app';
-import { provideFirestore, connectFirestoreEmulator, enableIndexedDbPersistence, initializeFirestore } from '@angular/fire/firestore';
+import { provideFirestore, connectFirestoreEmulator, initializeFirestore } from '@angular/fire/firestore';
 import { provideAuth, browserPopupRedirectResolver, browserSessionPersistence, connectAuthEmulator, indexedDBLocalPersistence, initializeAuth } from '@angular/fire/auth';
 import { connectStorageEmulator, getStorage, provideStorage } from '@angular/fire/storage';
 import { StoreModule } from '@ngrx/store';
@@ -35,16 +35,15 @@ bootstrapApplication(AppComponent, {
   
         if (isDev) {
           connectFirestoreEmulator(firestore, 'localhost', 8080);
-          enableIndexedDbPersistence(firestore);
         }
   
         return firestore;
       }),
       provideStorage(() => {
         const storage = getStorage()
-  
+
         if (isDev) connectStorageEmulator(storage, 'localhost', 9199);
-  
+
         return storage;
       }),
       provideAuth(() => {
@@ -54,15 +53,15 @@ bootstrapApplication(AppComponent, {
             : indexedDBLocalPersistence,
           popupRedirectResolver: browserPopupRedirectResolver,
         });
-  
+
         if (isDev) connectAuthEmulator(auth, 'http://localhost:9099');
-  
+
         return auth;
       }),
       provideFunctions(() => {
         const functions = getFunctions()
 
-        if(isDev) connectFunctionsEmulator(functions, 'localhost', 5001);
+        if (isDev) connectFunctionsEmulator(functions, 'localhost', 5001);
 
         return functions;
       }),

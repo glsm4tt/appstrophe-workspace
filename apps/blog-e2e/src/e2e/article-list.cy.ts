@@ -26,26 +26,25 @@ describe('/blog/articles', () => {
         cy.url().should('include', `/blog/article/${articleId}`);
     });
   });
-  
+
   it('should increase the view number of the article by one when it is visited', () => {
     // check view numbers on article 2
     getArticleCards()
-    .eq(1)
-    .find('[data-cy="article-views"]')
-    .should('not.exist');
+      .eq(1)
+      .find('[data-cy="article-views"]')
+      .should('not.exist');
   
     getArticleCards()
-    .eq(1)
-    .click();
+      .eq(1)
+      .click();
 
     cy.clearLocalStorage(ARTICLES_STORAGE_KEY);
 
     cy.go('back')
     // check again view numbers on article 2
     getArticleCards()
-    .eq(1)
-    .find('[data-cy="article-views"]')
-    .contains('1')
+      .eq(1)
+      .find('[data-cy="article-views"]')
+      .contains('1')
   });
-    
 });

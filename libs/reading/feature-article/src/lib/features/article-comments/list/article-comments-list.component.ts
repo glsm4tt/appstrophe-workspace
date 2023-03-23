@@ -1,5 +1,5 @@
 import { NgForOf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input, OnChanges, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
 import { ArticleDetailedWithComments, Comment, CommentService } from '@appstrophe-workspace/reading/domain';
 import { ArticleCommentCardComponent } from '../../../ui/article-comment-card/article-comment-card.component';
 import { AuthService } from '@appstrophe-workspace/auth/domain';
@@ -20,7 +20,7 @@ import { CommentDeleteConfirmationModalComponent } from '../../../ui/comment-del
   `],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ArticleCommentsListComponent implements OnInit {
+export class ArticleCommentsListComponent {
 
   @Input() article!: Partial<ArticleDetailedWithComments>;
   
@@ -28,10 +28,6 @@ export class ArticleCommentsListComponent implements OnInit {
   private _authService = inject(AuthService);
   private _router = inject(Router);
   private _modalService = inject(ModalService);
-
-  ngOnInit(): void {
-    // empty
-  }
 
   likeChange(article: Partial<ArticleDetailedWithComments>, comment: Comment): void {
     this._authService.getConnectedUser().pipe(

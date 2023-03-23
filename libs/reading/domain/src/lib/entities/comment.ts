@@ -4,7 +4,7 @@ import { Timestamp } from '@angular/fire/firestore';
 import { Reaction } from './reaction';
 
 export interface Comment extends Id {
-    author: Author;
+    author: Partial<Author>;
     date: Timestamp;
     text: string;
     reactions: Reaction[];

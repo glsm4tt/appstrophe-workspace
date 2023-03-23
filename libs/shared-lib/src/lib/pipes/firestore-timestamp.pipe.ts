@@ -3,7 +3,8 @@ import { Timestamp } from '@angular/fire/firestore';
 
 @Pipe({
   name: 'firestoreTimestamp',
-  standalone: true
+  standalone: true,
+  pure: false
 })
 export class FirestoreTimestampPipe implements PipeTransform {
 
@@ -33,7 +34,7 @@ export class FirestoreTimestampPipe implements PipeTransform {
       if(today.getHours() - date.getHours() > 1)
         return `${today.getHours() - date.getHours()} hours ago`
       else 
-        return `${today.getMinutes() - date.getMinutes()} minutes ago`
+        return `${Math.abs(today.getMinutes() - date.getMinutes())} minutes ago`
     }
     return null;
   }
