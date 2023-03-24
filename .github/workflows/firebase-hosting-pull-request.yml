@@ -57,15 +57,17 @@ jobs:
           sed -i 's/__MASSAGING_SENDER_ID__/${{ secrets.FIREBASE_MASSAGING_SENDER_ID }}/g' apps/shell/src/environments/environment.prod.ts
           sed -i 's/__APP_ID__/${{ secrets.FIREBASE_APP_ID }}/g' apps/shell/src/environments/environment.prod.ts
           sed -i 's/__MEASUREMENT_ID__/${{ secrets.FIREBASE_MEASUREMENT_ID }}/g' apps/shell/src/environments/environment.prod.ts
-      - name: Setting config
+      - name: Setting functions config
         uses: jsdaniell/create-json@1.1.2
         with:
           name: "functions/firebase.config.json"
           json: ${{ secrets.FIREBASE_CONFIG }}
+      - name: Setting blog-e2e config
         uses: jsdaniell/create-json@1.1.2
         with:
           name: "apps/blog-e2e/firebase.config.json"
           json: ${{ secrets.FIREBASE_CONFIG }}
+      - name: Setting auth-e2e config
         uses: jsdaniell/create-json@1.1.2
         with:
           name: "apps/auth-e2e/firebase.config.json"
