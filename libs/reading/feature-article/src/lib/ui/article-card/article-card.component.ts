@@ -9,9 +9,9 @@ import { faEye, faHandsClapping } from '@fortawesome/free-solid-svg-icons';
   template: `
     <div class="card">
       <div class="card_avatar">
-          <img class="card_avatar__img" [src]="article?.author?.photoUrl" alt="Photo de l'auteur de l'article" (click)="onClick(article)">
+          <img class="card_avatar__img" [src]="article?.author?.photoUrl" alt="Photo de l'auteur de l'article">
       </div>
-      <div class="card_body" (click)="onClick(article)">
+      <div class="card_body">
           <h2 class="card_title">{{article?.title}}</h2>
           <div class="card_content">
               <div class="card_content__img">
@@ -20,7 +20,7 @@ import { faEye, faHandsClapping } from '@fortawesome/free-solid-svg-icons';
               <p class="card_content__text text-fade">{{article?.description}}</p>
           </div>
       </div>
-      <div class="card_footer" (click)="onClick(article)">
+      <div class="card_footer">
         <span class="card_footer__badges-container">
           <span class="card_footer__badges" *ngFor="let tag of article?.tags">{{tag}}</span>
         </span>
@@ -28,7 +28,7 @@ import { faEye, faHandsClapping } from '@fortawesome/free-solid-svg-icons';
           <span data-cy="article-views" *ngIf="article?.views">
             <fa-icon [icon]="faEye"></fa-icon> {{article?.views}}
           </span>
-          <span data-cy="article-likes"*ngIf="article?.likesCount">
+          <span data-cy="article-likes" *ngIf="article?.likesCount">
             <fa-icon [icon]="faHandsClapping"></fa-icon> {{article?.likesCount}}
           </span>
           <span class="card_footer__infos_time">{{article?.time}} min read</span>
@@ -99,16 +99,11 @@ import { faEye, faHandsClapping } from '@fortawesome/free-solid-svg-icons';
   `],
   standalone: true,
   imports: [NgForOf, NgIf, FontAwesomeModule],
-  changeDetection:ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ArticleCardComponent{
+export class ArticleCardComponent {
   @Input() article!: Partial<Article>;
-  @Output() clicked = new EventEmitter<Partial<Article>>();
 
   readonly faEye = faEye;
   readonly faHandsClapping = faHandsClapping;
-
-  onClick(article: Partial<Article>) {
-    this.clicked.emit(article);
-  }
 }

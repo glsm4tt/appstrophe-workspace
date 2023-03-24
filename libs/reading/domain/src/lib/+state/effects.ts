@@ -23,10 +23,6 @@ export class ArticleEffects {
   private _actions$ = inject(Actions);
   private _localStorage = inject(LocalstorageService);
 
-  private articles$: Observable<Article[]> = this._articleService.getAll().pipe(
-    tap(articles => this._localStorage.set<Partial<Article>[]>(ARTICLES_STORAGE_KEY, articles))
-  )
-
   routerListener$ = createEffect(() => 
     this._actions$.pipe(
       ofType(ROUTER_NAVIGATED),
@@ -42,10 +38,7 @@ export class ArticleEffects {
   loadArticles$ = createEffect(() =>
     this._actions$.pipe(
       ofType(ArticleActions.loadArticles),
-      map(_ => this._localStorage.get<Partial<Article>[]>(ARTICLES_STORAGE_KEY)),
-      mergeMap(articles => (articles 
-        ? of(articles)
-        : this.articles$).pipe(
+      mergeMap(_ => this._articleService.getAll().pipe(
           map((articles: Partial<Article>[]) => ArticleActions.articlesLoaded({ articles })),
           catchError(_ => of(ArticleActions.loadArticlesFailure())),
       ))
@@ -55,17 +48,14 @@ export class ArticleEffects {
   loadArticle$ = createEffect(() =>
     this._actions$.pipe(
       ofType(ArticleActions.loadArticle),
-      map(action => ({articleId: action.articleId, article: this._localStorage.get<Partial<ArticleDetailed>>(`${ARTICLE_STORAGE_KEY}${action.articleId}`)})),
-      tap(({articleId, article}) => {
-        if(!article) // If the article doesn't exist in the cache, we add a view
+      map(action => ({articleId: action.articleId, storedArticle: this._localStorage.get<Partial<ArticleDetailed>>(`${ARTICLE_STORAGE_KEY}${action.articleId}`)})),
+      tap(({articleId, storedArticle}) => {
+        if(!storedArticle) // If the article doesn't exist in the cache, we add a view
           this._articleService.view(articleId)
       }),
-      mergeMap(({articleId, article}) => (article
-        ? of(article)
-        : this._articleService.getOne(articleId).pipe(
+      mergeMap(({articleId}) => (this._articleService.getOne(articleId).pipe(
             tap(article => this._localStorage.set<Partial<ArticleDetailed>>(`${ARTICLE_STORAGE_KEY}${articleId}`, article)),
-          )
-        ).pipe(
+          )).pipe(
           map((article: Partial<ArticleDetailed>) => ArticleActions.articleLoaded({ article })),
           catchError(_ => of(ArticleActions.loadArticleFailure()))
         )

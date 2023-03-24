@@ -4,10 +4,11 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { MarkdownModule } from 'ngx-markdown';
 
 import { ArticleDetailsComponent } from './article-details.component';
-import { AuthService } from '@appstrophe-workspace/auth/domain';
+import { AuthService, AuthServiceStub } from '@appstrophe-workspace/auth/domain';
 import { EffectsModule } from '@ngrx/effects';
 import { Store, StoreModule } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
+import { ArticleService, ArticleServiceStub } from '@appstrophe-workspace/reading/domain';
 
 const ARTICLE_ID = '4';
 
@@ -27,7 +28,8 @@ describe('ArticleDetailsComponent', () => {
         EffectsModule.forRoot([])
       ],
       providers: [
-        { provide: AuthService, useValue: {} },
+        { provide: AuthService, useValue: AuthServiceStub },
+        { provide: ArticleService, useValue: ArticleServiceStub },
         {
           provide: ActivatedRoute, useValue: {
             snapshot: {

@@ -5,6 +5,13 @@ service cloud.firestore {
     match /articles/{articleId} {
       allow write: if false;
       allow read: if true;
+        
+      match /reactions/{reactionId} {
+        allow create: if request.auth.uid == reactionId && request.resource.data.keys().hasOnly(["type"]) && request.resource.data.type == 'like';
+        allow delete: if request.auth.uid == resource.id;
+        allow update: if false;
+        allow read: if true;
+      }
       
       match /metadata/{metadataId} {
         allow write: if false;
@@ -17,8 +24,9 @@ service cloud.firestore {
         allow read: if true;
         
         match /reactions/{reactionId} {
-          allow create: if request.auth != null && request.resource.data.keys().hasOnly(["type"]) && request.resource.data.type == 'like';
+          allow create: if request.auth.uid == reactionId && request.resource.data.keys().hasOnly(["type"]) && request.resource.data.type == 'like';
           allow delete: if request.auth.uid == resource.id;
+          allow update: if false;
           allow read: if true;
         }
       }

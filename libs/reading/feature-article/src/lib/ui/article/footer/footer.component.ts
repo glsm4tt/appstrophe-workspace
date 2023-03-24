@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { NgIf } from '@angular/common';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { NgClass, NgIf } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SharedLibModule } from '@appstrophe-workspace/shared-lib';
 import { ArticleDetailed } from '@appstrophe-workspace/reading/domain';
@@ -12,14 +12,17 @@ import { faHandsClapping, faComment, faArrowUpFromBracket } from '@fortawesome/f
       <div class="card_footer__start">
           <span class="card_footer__likes">
               <ng-container *ngIf="article">
-                  <fa-icon [appsTooltip]="article?.likesCount ? article?.likesCount + ' Reactions' : 'Be the first one liking it !'" class="clap__icon" [icon]="faHandsClapping">
+                  <fa-icon [appsTooltip]="article?.likesCount ? article?.likesCount + ' Reactions' : 'Be the first one to like it !'" class="clap__icon"
+                  [ngClass]="{'text-orange-400': article?.liked}" 
+                  (click)="likeChange.emit()"
+                  [icon]="faHandsClapping">
                   </fa-icon>
                   <span *ngIf="article?.likesCount">{{article?.likesCount}}</span>
               </ng-container>
           </span>
           <span class="card_footer__comments">
               <ng-container *ngIf="article">
-                  <fa-icon [appsTooltip]="article?.comments ? article?.comments + ' comments' : 'Be the first one commenting it !'" class="comment__icon" [icon]="faComment">
+                  <fa-icon [appsTooltip]="article?.comments ? article?.comments + ' comments' : 'Be the first one to comment !'" class="comment__icon" [icon]="faComment">
                   </fa-icon>
                   <span data-cy="article-comments" *ngIf="article?.comments">{{article?.comments}}</span>
               </ng-container>
@@ -52,12 +55,13 @@ import { faHandsClapping, faComment, faArrowUpFromBracket } from '@fortawesome/f
     }
   `],
   standalone: true,
-  imports: [NgIf, FontAwesomeModule, SharedLibModule],
+  imports: [NgIf, NgClass, FontAwesomeModule, SharedLibModule],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ArticleFooterComponent {
 
   @Input() article!: Partial<ArticleDetailed>;
+  @Output() likeChange = new EventEmitter<void>();
 
   faHandsClapping = faHandsClapping;
   faComment = faComment;
