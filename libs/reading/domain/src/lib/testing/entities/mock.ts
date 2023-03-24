@@ -83,6 +83,7 @@ export class Mock {
     static readonly article: Article = {
         ...Mock.articleDto,
         imageUrl: 'assets/img/logo-search-grid-2x.png',
+        liked: false,
         author: {
             ...Mock.articleDto.author,
             photoUrl: 'assets/img/W9aoBmrb_400x400.jpeg'
