@@ -51,11 +51,19 @@ describe("appstrophe cloud functions api", () => {
     it("should update the commentsCount on the article document when onCommentDelete is called", async () => {
         
         const wrapped = test.wrap(functions.onCommentDelete);
-        await wrapped({data: () => {}}, {
-            params: {
-                articleId, 
-                commentId
-            }
+        await wrapped({
+            data: () => ({
+                author: {
+                    alias: "@test_user_read",
+                    id: "Ki3WFGMtnDGTHB0ArzV0XNbNyOt5"
+                },
+                date: admin.firestore.Timestamp.now(),
+                text: "Some comment"
+            })}, {
+                params: {
+                    articleId, 
+                    commentId
+                }
         });
         const commentsRef = await db.collection(`articles/${articleId}/comments`).get();
         const commentsCount = commentsRef.size;
@@ -92,7 +100,10 @@ describe("appstrophe cloud functions api", () => {
     it("should add the date to the reaction document and update the likesCount of the comment document when onArticleLikeDelete is called", async () => {
         
         const wrapped = test.wrap(functions.onArticleLikeDelete);
-        await wrapped({data: () =>({})}, {
+        await wrapped({data: () =>({
+            date: admin.firestore.Timestamp.now(),
+            type: "like"
+        })}, {
             params: {
                 articleId,
                 reactionId
@@ -134,7 +145,10 @@ describe("appstrophe cloud functions api", () => {
     it("should add the date to the reaction document and update the likesCount of the comment document when onCommentLikeDelete is called", async () => {
         
         const wrapped = test.wrap(functions.onCommentLikeDelete);
-        await wrapped({data: () =>({})}, {
+        await wrapped({data: () =>({
+            date: admin.firestore.Timestamp.now(),
+            type: "like"
+        })}, {
             params: {
                 articleId, 
                 commentId,
