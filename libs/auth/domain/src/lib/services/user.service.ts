@@ -1,6 +1,4 @@
 import { Injectable, inject } from '@angular/core';
-import { Auth } from '@angular/fire/auth';
-import { Firestore } from '@angular/fire/firestore';
 import { Storage, ref, uploadBytes } from '@angular/fire/storage';
 import { AppStropher } from '../entities/AppStropher';
 import { AuthService } from './auth.service';

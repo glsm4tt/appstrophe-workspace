@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { firstValueFrom, map, Observable, switchMap, of, tap, combineLatestWith, from, catchError, BehaviorSubject, mergeMap, distinctUntilChanged } from 'rxjs';
+import { firstValueFrom, map, Observable, switchMap, of, tap, combineLatestWith, from, catchError, BehaviorSubject, mergeMap, distinctUntilChanged, distinctUntilKeyChanged } from 'rxjs';
 import { getAuth, Auth, User, createUserWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, UserCredential, deleteUser, updateEmail } from '@angular/fire/auth';
 import { collection, collectionData, docData, DocumentReference, Firestore, query, CollectionReference, doc, setDoc, where } from '@angular/fire/firestore';
 import { Storage, ref, getDownloadURL} from '@angular/fire/storage';
@@ -20,15 +20,15 @@ export class AuthService {
    * Subscribe to any Auth changes to update the user observable
    */
   constructor() {
-    new Observable(subscriber => {
-      this._auth.onAuthStateChanged(user => {
+    new Observable<User>(subscriber => {
+      this._auth.onIdTokenChanged(user => {
         subscriber.next(user)
       })
     }).pipe(
       combineLatestWith(this._userSettingsChanged),
-      switchMap(([user]) => user ? this.getMe(user as User) : of(null))
+      switchMap(([user]) => user ? this.getMe(user as User) : of(null)),
+      distinctUntilChanged((prev, current) => JSON.stringify(prev) === JSON.stringify(current)),
     ).subscribe(user => this.user$.next(user))
-
   }
 
   /**
@@ -49,8 +49,7 @@ export class AuthService {
         ...appstropher,
         ...user,
         photoURL: appstropher.photoURL ?? url ?? 'assets/img/empty_user.png'
-      })),
-      distinctUntilChanged((prev, current) => JSON.stringify(prev) === JSON.stringify(current))
+      }))
     );
   }
 
@@ -70,7 +69,7 @@ export class AuthService {
    * @returns {null} or a {AppStropher}
    */
   getConnectedUser(): Observable<AppStropher | null> {
-    return this.user$;
+    return this.user$.asObservable();
   }
 
   /**
