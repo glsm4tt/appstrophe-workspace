@@ -7,7 +7,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faThumbsUp, faEllipsisV, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { BehaviorSubject, interval, map, Observable, scan, startWith, switchMap, take, tap, timer } from 'rxjs';
 
-type CommentDisplay = Omit<Comment, 'date'> & { date: Observable<Timestamp> }; 
+type CommentDisplay = Omit<Comment, 'date'> & { date: Observable<Timestamp> };
 
 @Component({
   selector: 'apps-read-article-comment-card',
@@ -33,7 +33,7 @@ type CommentDisplay = Omit<Comment, 'date'> & { date: Observable<Timestamp> };
       <div class="card_footer">
           <div class="card_footer__start">
               <span class="card_footer__likes">
-                  <fa-icon [ngClass]="{'text-orange-400': internalComment?.liked}" (click)="likeChange.emit()" [appsTooltip]="internalComment?.reactions?.length ? internalComment?.reactions?.length + ' Reactiond' : 'Be the first one liking it !'" class="like__icon" [icon]="faThumbsUp">
+                  <fa-icon [ngClass]="{'text-orange-400': internalComment?.liked}" (click)="likeChange.emit()" [appsTooltip]="internalComment?.reactions?.length ? internalComment?.reactions?.length + ' Reaction' : 'Be the first one to like it !'" class="like__icon" [icon]="faThumbsUp">
                   </fa-icon>
                   <span *ngIf="internalComment?.reactions?.length">{{ internalComment?.reactions?.length }}</span>
               </span>
@@ -111,24 +111,24 @@ type CommentDisplay = Omit<Comment, 'date'> & { date: Observable<Timestamp> };
   `],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ArticleCommentCardComponent{
+export class ArticleCommentCardComponent {
 
   private interval$ = new BehaviorSubject<number[]>([1, 1]);
 
   internalComment!: Partial<CommentDisplay>;
-  @Input() 
+  @Input()
   set comment(value: Partial<Comment>) {
-      this.internalComment = {
-        ...value,
-        date: this.interval$.pipe(
-          switchMap(i => {
-            const currentFibonacciValue = i.at(-1)
-            return currentFibonacciValue === 1 ? timer(0, 1000 * 60 * currentFibonacciValue) : interval(1000 * 60 * currentFibonacciValue)
-          }),
-          map(i => value.date),
-          tap(_ => this.interval$.next(this.calculateNextFibonacciArray(this.interval$.value)))
-        )
-      }
+    this.internalComment = {
+      ...value,
+      date: this.interval$.pipe(
+        switchMap(i => {
+          const currentFibonacciValue = i.at(-1)
+          return currentFibonacciValue === 1 ? timer(0, 1000 * 60 * currentFibonacciValue) : interval(1000 * 60 * currentFibonacciValue)
+        }),
+        map(i => value.date),
+        tap(_ => this.interval$.next(this.calculateNextFibonacciArray(this.interval$.value)))
+      )
+    }
   }
 
   @Output() likeChange = new EventEmitter<void>();
@@ -139,7 +139,7 @@ export class ArticleCommentCardComponent{
   readonly faPen = faPen;
   readonly faTrash = faTrash;
 
-  private calculateNextFibonacciArray (fibonacciArray: number[]) {
+  private calculateNextFibonacciArray(fibonacciArray: number[]) {
     const fibonacciArrayLength = fibonacciArray.length;
     return [
       ...fibonacciArray,

@@ -15,7 +15,7 @@ export const selectFilterArticlesFormState = createSelector(_selectArticle, s =>
 
 export const selectFilteredArticles = createSelector(selectArticles, selectFilterArticlesFormState,
     (articles, filters) => articles
-        .filter(a => (!filters.search || a.title?.includes(filters.search))
+        .filter(a => (!filters.search || a.title.toLocaleUpperCase()?.includes(filters.search.toLocaleUpperCase()))
             && (!filters.tags?.length || filters.tags?.every(tag => a.tags?.includes(tag)))
         )
 );

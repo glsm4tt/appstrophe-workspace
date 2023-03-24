@@ -66,6 +66,42 @@ export const onCommentDelete = firestore
         });
     });
 
+export const onArticleLikeCreate = firestore
+    .document("articles/{articleId}/reactions/{reactionId}")
+    .onCreate(async (snap, context: EventContext<{ articleId: string, reactionId: string }>) => {
+        logger.info(`-- Function called with snap: ${JSON.stringify(snap.data())} --`);
+        logger.info(`-- Function called with context: ${JSON.stringify(context)} --`);
+
+        try {
+            await db.doc(`articles/${context.params.articleId}/reactions/${context.params.reactionId}`).update({
+                date: admin.firestore.Timestamp.now()
+            });
+
+            const reactionsRef = await db.collection(`articles/${context.params.articleId}/reactions`).get();
+            await db.doc(`articles/${context.params.articleId}`).update({
+                likesCount: reactionsRef.size
+            });
+        } catch (err) {
+            logger.error(`An error occured: ${err}`);
+        }
+    });
+
+export const onArticleLikeDelete = firestore
+    .document("articles/{articleId}/reactions/{reactionId}")
+    .onDelete(async (snap, context: EventContext<{ articleId: string, reactionId: string }>) => {
+        logger.info(`-- Function called with snap: ${JSON.stringify(snap.data())} --`);
+        logger.info(`-- Function called with context: ${JSON.stringify(context)} --`);
+
+        try {
+            const reactionsRef = await db.collection(`articles/${context.params.articleId}/reactions`).get();
+            await db.doc(`articles/${context.params.articleId}`).update({
+                likesCount: reactionsRef.size
+            });
+        } catch (err) {
+            logger.error(`An error occured: ${err}`);
+        }
+    });
+
 export const onCommentLikeCreate = firestore
     .document("articles/{articleId}/comments/{commentId}/reactions/{reactionId}")
     .onCreate(async (snap, context: EventContext<{ articleId: string, commentId: string, reactionId: string }>) => {
@@ -75,6 +111,27 @@ export const onCommentLikeCreate = firestore
         try {
             await db.doc(`articles/${context.params.articleId}/comments/${context.params.commentId}/reactions/${context.params.reactionId}`).update({
                 date: admin.firestore.Timestamp.now()
+            });
+
+            const reactionsRef = await db.collection(`articles/${context.params.articleId}/comments/${context.params.commentId}/reactions`).get();
+            await db.doc(`articles/${context.params.articleId}/comments/${context.params.commentId}`).update({
+                likesCount: reactionsRef.size
+            });
+        } catch (err) {
+            logger.error(`An error occured: ${err}`);
+        }
+    });
+
+export const onCommentLikeDelete = firestore
+    .document("articles/{articleId}/comments/{commentId}/reactions/{reactionId}")
+    .onDelete(async (snap, context: EventContext<{ articleId: string, commentId: string, reactionId: string }>) => {
+        logger.info(`-- Function called with snap: ${JSON.stringify(snap.data())} --`);
+        logger.info(`-- Function called with context: ${JSON.stringify(context)} --`);
+
+        try {
+            const reactionsRef = await db.collection(`articles/${context.params.articleId}/comments/${context.params.commentId}/reactions`).get();
+            await db.doc(`articles/${context.params.articleId}/comments/${context.params.commentId}`).update({
+                likesCount: reactionsRef.size
             });
         } catch (err) {
             logger.error(`An error occured: ${err}`);

@@ -21,7 +21,7 @@ export class CommentService {
         map(reactions => ({
           ...c,
           reactions,
-          liked: !!(user?.uid && reactions.find(r => r.id)),
+          liked: !!(user?.uid && reactions.find(r => r.id === user?.uid)),
           owned: user?.uid === c.author.id
         }))
       ))))

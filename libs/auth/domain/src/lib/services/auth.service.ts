@@ -10,7 +10,7 @@ import { AppStropher } from '../entities/AppStropher';
 })
 export class AuthService {
 
-  private user$!: Observable<AppStropher | null>; 
+  private user$: BehaviorSubject<AppStropher | null> = new BehaviorSubject(null); 
   private _firestore = inject(Firestore);
   private _auth = inject(Auth);
   private _storage = inject(Storage);
@@ -20,14 +20,15 @@ export class AuthService {
    * Subscribe to any Auth changes to update the user observable
    */
   constructor() {
-    this.user$ = new Observable(subscriber => {
+    new Observable(subscriber => {
       this._auth.onAuthStateChanged(user => {
         subscriber.next(user)
       })
     }).pipe(
       combineLatestWith(this._userSettingsChanged),
       switchMap(([user]) => user ? this.getMe(user as User) : of(null))
-    );
+    ).subscribe(user => this.user$.next(user))
+
   }
 
   /**

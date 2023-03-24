@@ -15,4 +15,5 @@ export interface ArticleDto extends Id {
 export interface Article extends ArticleDto {
     imageUrl: string;
     author: Author;
+    liked?: boolean;
 }

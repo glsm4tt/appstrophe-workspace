@@ -1,11 +1,11 @@
-import { Id } from "@appstrophe-workspace/shared-lib";
-import { AuthorDto } from "./author";
+import { Article } from "./article";
+import { Author } from "./author";
 import { Comment } from "./comment";
 
-export interface ArticleDetailed extends Id {
+export interface ArticleDetailed extends Article {
     title: string;
     articleUrl: string;
-    author: AuthorDto;
+    author: Author;
     tags: string[];
     time: number;
     comments: number;

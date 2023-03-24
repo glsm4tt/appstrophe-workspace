@@ -7,6 +7,7 @@ import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ModalService, SharedLibModule } from '@appstrophe-workspace/shared-lib';
 import { CommentDeleteConfirmationModalComponent } from '../../../ui/comment-delete-confirmation-modal/comment-delete-confirmation-modal.component';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'apps-read-article-comments-list',
@@ -29,21 +30,16 @@ export class ArticleCommentsListComponent {
   private _router = inject(Router);
   private _modalService = inject(ModalService);
 
-  likeChange(article: Partial<ArticleDetailedWithComments>, comment: Comment): void {
-    this._authService.getConnectedUser().pipe(
-      first()
-    ).subscribe(
-      async user => {
-        if(!user)
-          this._router.navigateByUrl(`/auth/login?previous=${this._router.url}`);
-        else {
-          if(comment.liked)
-            await this._commentService.unlikeComment(article.id as string, comment.id, user.uid);
-          else
-            await this._commentService.likeComment(article.id as string, comment.id, user.uid);
-        }
-      }
-    )
+  async likeChange(article: Partial<ArticleDetailedWithComments>, comment: Comment): Promise<void> {
+    const currentUser = await firstValueFrom(this._authService.getConnectedUser());
+    if(!currentUser)
+      this._router.navigateByUrl(`/auth/login?previous=${this._router.url}`);
+    else {
+      if(comment.liked)
+        await this._commentService.unlikeComment(article.id as string, comment.id, currentUser.uid);
+      else
+        await this._commentService.likeComment(article.id as string, comment.id, currentUser.uid);
+    }
   }
 
   deleteRequest(article: Partial<ArticleDetailedWithComments>, comment: Comment) {
