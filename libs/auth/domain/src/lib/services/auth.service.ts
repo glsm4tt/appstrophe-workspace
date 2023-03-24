@@ -27,7 +27,6 @@ export class AuthService {
     }).pipe(
       combineLatestWith(this._userSettingsChanged),
       switchMap(([user]) => user ? this.getMe(user as User) : of(null)),
-      distinctUntilChanged((prev, current) => JSON.stringify(prev) === JSON.stringify(current)),
     ).subscribe(user => this.user$.next(user))
   }
 
