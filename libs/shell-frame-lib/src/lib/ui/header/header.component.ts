@@ -70,7 +70,7 @@ export class HeaderComponent implements OnInit {
   public isSettingsOpen = false;
   public routerLinks: { label: string, route: string }[] = [
     { label: 'Blog', route: '/blog' },
-    { label: 'Who we are', route: '/who-we-are' },
+    { label: 'About', route: '/about' },
     { label: 'Contact', route: '/contact' }
   ];
   public user$: Observable<User | null> = EMPTY;

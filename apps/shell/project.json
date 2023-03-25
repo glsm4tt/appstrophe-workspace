@@ -26,6 +26,11 @@
             "glob": "**",
             "input": "libs/reading/feature-article/src/assets/",
             "output": "/assets/"
+          },
+          {
+            "glob": "**",
+            "input": "libs/shell-frame-lib/src/assets",
+            "output": "/assets/"
           }
         ],
         "styles": [

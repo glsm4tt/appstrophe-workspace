@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { HeaderComponent, ShellFrameLibModule } from '@appstrophe-workspace/shell-frame-lib';
+import { ShellFrameLibModule } from '@appstrophe-workspace/shell-frame-lib';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'apps-shell-root',
