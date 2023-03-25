@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app/app.component';
 import { environment } from './environments/environment';
 import { provideFirebaseApp, initializeApp, getApp } from '@angular/fire/app';
-import { provideFirestore, connectFirestoreEmulator, initializeFirestore } from '@angular/fire/firestore';
+import { provideFirestore, connectFirestoreEmulator, initializeFirestore, enableIndexedDbPersistence } from '@angular/fire/firestore';
 import { provideAuth, browserPopupRedirectResolver, browserSessionPersistence, connectAuthEmulator, indexedDBLocalPersistence, initializeAuth } from '@angular/fire/auth';
 import { connectStorageEmulator, getStorage, provideStorage } from '@angular/fire/storage';
 import { StoreModule } from '@ngrx/store';
@@ -36,6 +36,8 @@ bootstrapApplication(AppComponent, {
         if (isDev) {
           connectFirestoreEmulator(firestore, 'localhost', 8080);
         }
+
+        enableIndexedDbPersistence(firestore);
   
         return firestore;
       }),
