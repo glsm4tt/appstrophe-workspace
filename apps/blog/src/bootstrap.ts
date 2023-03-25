@@ -20,7 +20,7 @@ if (environment.production) {
   enableProdMode();
 }
 
-const isDev = !environment.production;
+const isDev = true//!environment.production;
 
 bootstrapApplication(AppComponent, {
   providers: [
