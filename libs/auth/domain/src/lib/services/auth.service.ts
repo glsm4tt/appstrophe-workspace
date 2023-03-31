@@ -193,4 +193,14 @@ export class AuthService {
     const user = this._auth.currentUser;
     return updateEmail(user, email);
   }
+
+  /**
+   * Get the terms and conditions PDF file
+   * 
+   * @returns {Promise<string>} 
+   */
+  getTermsAndConditions(): Promise<string> {
+    const termsAndConditionsUrlRef = ref(this._storage, `global/terms-and-conditions`)
+    return getDownloadURL(termsAndConditionsUrlRef);
+  }
 }
