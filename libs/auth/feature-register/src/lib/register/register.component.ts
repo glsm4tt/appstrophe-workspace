@@ -77,7 +77,7 @@ import { aliasValidator, passwordValidator } from '../validators/auth-validators
               <div class="form-group-content">
                 <input data-cy="input-terms-and-conditions" type="checkbox" class="form-group__control" formControlName="termsAndConditions" id="termsAndConditions"
                   aria-errormessage="termsAndConditionsError" [attr.aria-invalid]="registerForm.controls['termsAndConditions'].invalid">
-                <label for="termsAndConditions" class="form-group__label required">I agree to the <a [href]="termsAndConditions$ | async">terms and conditions</a></label>        
+                <label for="termsAndConditions" class="form-group__label required">I agree to the <a data-cy="input-terms-and-conditions-link" [href]="termsAndConditions$ | async">terms and conditions</a></label>        
               </div>
               <small id="termsAndConditionsError" class="form-group__error" *ngIf="termsAndConditionsError">
                 <span>You have to accept the terms and conditions to continue</span>

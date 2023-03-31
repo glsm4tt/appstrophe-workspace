@@ -7,6 +7,7 @@ import {
   getSubmit,
   getInputAlias,
   getToaster,
+  getTermsAndConditionsFileLink,
 } from '../support/register.po';
 
 describe('auth/register', () => {
@@ -333,6 +334,11 @@ describe('auth/register', () => {
           .should('have.text', 'You have to accept the terms and conditions to continue')
           .should('have.css', 'color', 'rgb(249, 115, 22)')
       })
+
+    // The label should contains a link to the terms and conditions PDF file
+    getTermsAndConditionsFileLink().click();
+    cy.url().should('include', 'terms-and-conditions.pdf');
+    cy.go('back');
 
     // Check the input validate the form
     getInputTermsAndConditions().check();

@@ -200,7 +200,7 @@ export class AuthService {
    * @returns {Promise<string>} 
    */
   getTermsAndConditions(): Promise<string> {
-    const termsAndConditionsUrlRef = ref(this._storage, `global/terms-and-conditions`)
+    const termsAndConditionsUrlRef = ref(this._storage, `globals/terms-and-conditions.pdf`)
     return getDownloadURL(termsAndConditionsUrlRef);
   }
 }
