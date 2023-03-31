@@ -1,7 +1,7 @@
 import { enableProdMode, importProvidersFrom } from '@angular/core';
 import { provideFirebaseApp, initializeApp, getApp } from '@angular/fire/app';
 import { provideAuth, initializeAuth, browserSessionPersistence, indexedDBLocalPersistence, browserPopupRedirectResolver, connectAuthEmulator, browserLocalPersistence } from '@angular/fire/auth';
-import { provideFirestore, initializeFirestore, connectFirestoreEmulator } from '@angular/fire/firestore';
+import { provideFirestore, initializeFirestore, connectFirestoreEmulator, enableIndexedDbPersistence } from '@angular/fire/firestore';
 import { connectFunctionsEmulator, getFunctions, provideFunctions } from '@angular/fire/functions';
 import { provideStorage, getStorage, connectStorageEmulator } from '@angular/fire/storage';
 import { bootstrapApplication } from '@angular/platform-browser';
@@ -35,6 +35,8 @@ bootstrapApplication(AppComponent, {
         if (isDev) {
           connectFirestoreEmulator(firestore, 'localhost', 8080);
         }
+
+        enableIndexedDbPersistence(firestore);
   
         return firestore;
       }),

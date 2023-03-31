@@ -47,7 +47,6 @@ function signInProgrammatically({
     password
   )
   .catch((e) => {
-    cy.log(`User could not sign in programmatically!`);
     console.error(e);
   });
 
