@@ -47,9 +47,9 @@ export class UserProfileEmailComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
       const user = changes['user'].currentValue;
-      if(user) {
-        this.emailForm.get('email').patchValue(user.email)
-        this.emailForm.get('email').addValidators([diffrentEntryConfirmValidator(user?.email)])
+      if(user && this.emailForm.get('email')?.value !== user.email) {
+        this.emailForm.get('email').patchValue(user.email);
+        this.emailForm.get('email').addValidators([diffrentEntryConfirmValidator(user?.email)]);
       }
   }
 
