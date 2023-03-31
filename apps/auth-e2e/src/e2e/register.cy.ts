@@ -216,7 +216,7 @@ describe('auth/register', () => {
 
   });
 
-  it('should have a form input password and a form input paswword confirmation both required for validation', () => {
+  it('should have a form input password and a form input pasword confirmation both required for validation', () => {
     const tooShortPassword = '123';
     const dummyPassword = '123456';
     const validEmail = 'test@test.abc';
@@ -339,6 +339,13 @@ describe('auth/register', () => {
     getTermsAndConditionsFileLink().click();
     cy.url().should('include', 'terms-and-conditions.pdf');
     cy.go('back');
+
+    // Fill inputs so every parts of the form but the passwords are ok
+    // so we can focus on this particular behaviour
+    getInputEmail().type(validEmail);
+    getInputAlias().type(validAlias);
+    getInputPassword().type(dummyPassword);
+    getInputPasswordConfirm().type(dummyPassword);
 
     // Check the input validate the form
     getInputTermsAndConditions().check();

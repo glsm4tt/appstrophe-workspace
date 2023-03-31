@@ -77,7 +77,7 @@ describe('auth/user-settings email update', () => {
     // it should not update the user email address when the update your email button is clicked but not confirmed
     getUpdateUserEmailInput()
       .clear()
-      .type('test_user_read2@fake-domain.net');
+      .type(validEmail);
     getUpdateUserEmailSection()
       .find('button')
       .contains('Change your email')

@@ -10,5 +10,10 @@ service firebase.storage {
       allow read: if true;
       allow write: if userId == request.auth.uid;
     }
+
+    match /globals/{docId} {
+      allow read: if true;
+      allow write: if false;
+    }
   }
 }
