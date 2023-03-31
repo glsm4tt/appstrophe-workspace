@@ -78,7 +78,7 @@ jobs:
           name: "functions/serviceAccountKey.json"
           json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
       - name: Build
-        run: npm run build:all && npm --prefix functions run build
+        run: npm run build && npm --prefix functions run build
 #      - name: CURL TEST
 #        run: >
 #          firebase emulators:exec --import='./test/ressources' 'curl -H "Authorization: Bearer owner" -H "Content-Type: application/json" -X POST -d "{}" http://localhost:9099/identitytoolkit.googleapis.com/v1/projects/appstrophe-test/accounts:query'
@@ -86,9 +86,9 @@ jobs:
 #        run: >
 #          firebase emulators:exec --import='./test/ressources' 'curl -v -X GET "http://localhost:8080/v1/projects/appstrophe-test/databases/(default)/documents/articles"'
 #      - name: E2e tests
-#        run: npm run test:e2e:all -- --token ${{ secrets.FIREBASE_TOKEN }}
+#        run: npm run e2e -- --token ${{ secrets.FIREBASE_TOKEN }}
       - name: Unit tests
-        run: npm run test:all
+        run: npm run test
       - name: Cloud functions tests
         run: npm --prefix functions run test -- --token ${{ secrets.FIREBASE_TOKEN }}
       - name: Deployment
