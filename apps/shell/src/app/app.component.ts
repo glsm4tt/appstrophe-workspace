@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
         <div class="flex-grow">
             <router-outlet class="h-full"></router-outlet>
         </div>
-        <div class="h-32 bg-gray-100"></div>
+       <!-- <div class="h-32 bg-gray-100"></div> -->
     </div>
   `,
  standalone: true,
