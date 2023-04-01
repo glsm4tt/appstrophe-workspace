@@ -21,9 +21,22 @@ export default defineConfig({
     ...nxE2EPreset(__filename),
     ...cypressJsonConfig,
     setupNodeEvents(on, config): any {
+      // inside config.browsers array each object has information like
+      // {
+      //   name: 'chrome',
+      //   channel: 'canary',
+      //   family: 'chromium',
+      //   displayName: 'Canary',
+      //   version: '80.0.3966.0',
+      //   path:
+      //    '/Applications/Canary.app/Contents/MacOS/Canary',
+      //   majorVersion: 80
+      // }
       return {
-        browser: "chrome",
-      };
+        browsers: config.browsers.filter(
+          (b) => b.family === 'chromium' && b.name !== 'electron'
+        ),
+      }
     },
     /**
     * TODO(@nrwl/cypress): In Cypress v12,the testIsolation option is turned on by default. 
