@@ -91,6 +91,7 @@ jobs:
           command: npm run e2e -- --token ${{ secrets.FIREBASE_TOKEN }}
           install: false
           browser: chrome
+          headed: false
       - name: Unit tests
         run: npm run test
       - name: Cloud functions tests
