@@ -34,7 +34,7 @@ export default defineConfig({
       // }
       return {
         browsers: config.browsers.filter(
-          (b) => b.family === 'chromium' && b.name !== 'electron'
+          (b) => b.family === 'chromium' && b.name === 'chrome'
         ),
       }
     },
