@@ -15,6 +15,12 @@ const cypressJsonConfig = {
     'src/e2e/article-details.cy.ts',
   ],
   supportFile: 'src/support/e2e.ts',
+  browser: {
+    name: 'chrome',
+    channel: 'stable',
+    family: 'chromium',
+    displayName: 'Chrome',
+  }
 };
 export default defineConfig({
   e2e: {
