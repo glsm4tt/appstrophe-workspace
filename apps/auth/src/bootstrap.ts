@@ -35,7 +35,7 @@ bootstrapApplication(AppComponent, {
           connectFirestoreEmulator(firestore, 'localhost', 8080);
         }
 
-        // enableIndexedDbPersistence(firestore);
+        enableIndexedDbPersistence(firestore);
 
         return firestore;
       }),
