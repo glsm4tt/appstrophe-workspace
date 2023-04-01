@@ -89,6 +89,7 @@ jobs:
         uses: cypress-io/github-action@v5.x.x
         with:
           command: npm run e2e -- --token ${{ secrets.FIREBASE_TOKEN }}
+          install: false
           browser: chrome
       - name: Unit tests
         run: npm run test
