@@ -14,18 +14,17 @@ const cypressJsonConfig = {
     'src/e2e/article-list.cy.ts',
     'src/e2e/article-details.cy.ts',
   ],
-  supportFile: 'src/support/e2e.ts',
-  browser: {
-    name: 'chrome',
-    channel: 'stable',
-    family: 'chromium',
-    displayName: 'Chrome',
-  }
+  supportFile: 'src/support/e2e.ts'
 };
 export default defineConfig({
   e2e: {
     ...nxE2EPreset(__filename),
     ...cypressJsonConfig,
+    setupNodeEvents(on, config): any {
+      return {
+        browser: "chrome",
+      };
+    },
     /**
     * TODO(@nrwl/cypress): In Cypress v12,the testIsolation option is turned on by default. 
     * This can cause tests to start breaking where not indended.
