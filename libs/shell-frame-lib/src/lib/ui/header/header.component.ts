@@ -9,7 +9,7 @@ import { PopoverDirective } from '@appstrophe-workspace/shared-lib';
 @Component({
   selector: 'apps-shell-header',
   template: `
-    <header class="z-50 bg-zinc-50 dark:bg-zinc-800 shadow px-0 py-2 text-gray-700 dark:text-gray-300 sticky top-0 md:flex md:items-center md:space-x-4 md:px-3" 
+    <header class="z-50 bg-zinc-50 dark:bg-zinc-800 shadow px-0 py-1 text-gray-700 dark:text-gray-300 sticky top-0 md:flex md:items-center md:space-x-4 md:px-3" 
       (outsideClick)="isOpen = false" appstropheWorkspaceOutsideClick #menu>
       <div class="px-4 flex items-center cursor-pointer md:px-0"
       [class.text-orange-500]="isOpen"
@@ -70,7 +70,7 @@ export class HeaderComponent implements OnInit {
   public isSettingsOpen = false;
   public routerLinks: { label: string, route: string }[] = [
     { label: 'Blog', route: '/blog' },
-    { label: 'Who we are', route: '/who-we-are' },
+    { label: 'About', route: '/about' },
     { label: 'Contact', route: '/contact' }
   ];
   public user$: Observable<User | null> = EMPTY;

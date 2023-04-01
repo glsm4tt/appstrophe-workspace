@@ -26,7 +26,7 @@ import { EMPTY, filter, map, Observable, tap } from 'rxjs';
         </ng-container>
     
         <ng-template #not_connected>
-            <li [routerLink]="['/auth']" routerLinkActive="active">
+            <li [routerLink]="['/auth']" routerLinkActive="active" class="py-2 px-4 transform duration-300 ease-in-out cursor-pointer md:px-8 md:border-b-2 border-transparent">
                 <fa-icon [icon]="faUser"></fa-icon>
             </li>
         </ng-template>
