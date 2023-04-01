@@ -1,2 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
+
+npm --prefix=functions run build && npm run e2e

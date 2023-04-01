@@ -1,5 +1,5 @@
-import { JsonPipe, NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { AsyncPipe, JsonPipe, NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@appstrophe-workspace/auth/domain';
@@ -12,6 +12,7 @@ import { aliasValidator, passwordValidator } from '../validators/auth-validators
   selector: 'apps-register-page',
   standalone: true,
   imports: [
+    AsyncPipe,
     ReactiveFormsModule,
     FormsModule,
     FontAwesomeModule,
@@ -72,6 +73,16 @@ import { aliasValidator, passwordValidator } from '../validators/auth-validators
                   <span>Password and confirmation does not match</span>
                 </small>
             </div>
+            <div class="form-group inline">
+              <div class="form-group-content">
+                <input data-cy="input-terms-and-conditions" type="checkbox" class="form-group__control" formControlName="termsAndConditions" id="termsAndConditions"
+                  aria-errormessage="termsAndConditionsError" [attr.aria-invalid]="registerForm.controls['termsAndConditions'].invalid">
+                <label for="termsAndConditions" class="form-group__label required">I agree to the <a data-cy="input-terms-and-conditions-link" [href]="termsAndConditions$ | async">terms and conditions</a></label>        
+              </div>
+              <small id="termsAndConditionsError" class="form-group__error" *ngIf="termsAndConditionsError">
+                <span>You have to accept the terms and conditions to continue</span>
+              </small>
+            </div>        
             <button data-cy="submit" [disabled]="registerForm.invalid" type="submit" class="btn register_form__btn">Register</button>
         </form>
       </div>
@@ -94,12 +105,18 @@ import { aliasValidator, passwordValidator } from '../validators/auth-validators
       @apply flex flex-col items-center justify-center bg-zinc-100 dark:bg-zinc-900 shadow-xl rounded-md border-solid border-gray-200 px-12 py-8
     }
 
+    div.register-page > div.register-container > form.register_form a {
+      @apply text-orange-500 underline
+    }
+
     div.register-page > div.register-container > form.register_form button.register_form__btn {
       @apply px-8 mt-4 self-stretch
     }
   `]
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
+
+  termsAndConditions$: Promise<string>;
 
   readonly registerForm: FormGroup;
   readonly faAt = faAt;
@@ -124,6 +141,11 @@ export class RegisterComponent {
     return passwordConfirmation.touched && this.registerForm.errors && this.registerForm.errors['passwordsNotMatch']
   }
 
+  get termsAndConditionsError() {
+    const termsAndConditions = this.registerForm.get('termsAndConditions');
+    return termsAndConditions.touched && termsAndConditions.errors && Object.keys(termsAndConditions.errors)?.at(0)
+  }
+
   private _authService = inject(AuthService)
   private _route = inject(ActivatedRoute)
   private _router = inject(Router)
@@ -134,12 +156,16 @@ export class RegisterComponent {
       email: new FormControl('', [Validators.required, Validators.email]),
       alias: new FormControl('', [Validators.required, Validators.maxLength(18)], [aliasValidator(this._authService)]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
-      passwordConfirmation: new FormControl('')
+      passwordConfirmation: new FormControl(''),
+      termsAndConditions: new FormControl(false, [Validators.requiredTrue])
     }, { validators: passwordValidator() })
   }
 
+  ngOnInit(): void {
+    this.termsAndConditions$ = this._authService.getTermsAndConditions();
+  }
+
   async register() {
-    if (this.registerForm.valid) {
       try {
         await this._authService.register(this.registerForm.get('alias')?.value, this.registerForm.get('email')?.value, this.registerForm.get('password')?.value);
         const previous = this._route.snapshot.queryParams['previous'];
@@ -153,8 +179,5 @@ export class RegisterComponent {
         this._toasterService.open('Oups... User creation failed', 'danger');
         throw err;
       }
-    } else {
-      // Manage form errors
-    }
   }
 }

@@ -3,9 +3,11 @@ import {
   getInputEmail,
   getInputPassword,
   getInputPasswordConfirm,
+  getInputTermsAndConditions,
   getSubmit,
   getInputAlias,
   getToaster,
+  getTermsAndConditionsFileLink,
 } from '../support/register.po';
 
 describe('auth/register', () => {
@@ -37,11 +39,12 @@ describe('auth/register', () => {
     const notAnEmail = '123';
     const validEmail = 'test@test.abc';
 
-    // Fill the password, password confirm and the alias inputs so the password and alias validation part are ok
-    // and we can focus on the email input behaviour
+    // Fill inputs so every parts of the form but the email are ok
+    // so we can focus on this particular behaviour
     getInputPassword().type(dummyPassword);
     getInputPasswordConfirm().type(dummyPassword);
     getInputAlias().type(validAlias);
+    getInputTermsAndConditions().check();
 
     // the page should have the input text 'email' visible and empty
     getInputEmail().should('have.value', '');
@@ -112,11 +115,12 @@ describe('auth/register', () => {
     const wayTooLongAlias = 'test_user_really_way_too_long_alias';
     const validAlias = 'test_alias';
 
-    // Fill the email and the passwords inputs so the email and password part validation are ok
-    // and we can focus on the password input behaviour
+    // Fill inputs so every parts of the form but the alias are ok
+    // so we can focus on this particular behaviour
     getInputEmail().type(validEmail);
     getInputPassword().type(dummyPassword);
     getInputPasswordConfirm().type(dummyPassword);
+    getInputTermsAndConditions().check();
 
     // the page should have the input text 'alias' visible and empty
     getInputAlias().should('have.value', '');
@@ -212,16 +216,17 @@ describe('auth/register', () => {
 
   });
 
-  it('should have a form input password and a form input paswword confirmation both required for validation', () => {
+  it('should have a form input password and a form input pasword confirmation both required for validation', () => {
     const tooShortPassword = '123';
     const dummyPassword = '123456';
     const validEmail = 'test@test.abc';
     const validAlias = 'test_alias';
 
-    // Fill both the email and the alias inputs so the email and alias part validation are ok
-    // and we can focus on the password input behaviour
+    // Fill inputs so every parts of the form but the passwords are ok
+    // so we can focus on this particular behaviour
     getInputEmail().type(validEmail);
     getInputAlias().type(validAlias);
+    getInputTermsAndConditions().check();
 
     // the page should have the input text 'password' visible and empty
     getInputPassword().should('have.value', '');
@@ -298,6 +303,58 @@ describe('auth/register', () => {
     getSubmit().should('not.be.disabled');
   });
 
+  it('should have a required form input checkbox for the terms and conditions', () => {
+    const dummyPassword = '123456';
+    const validEmail = 'test@test.abc';
+    const validAlias = 'test_alias';
+
+    // Fill inputs so every parts of the form but the passwords are ok
+    // so we can focus on this particular behaviour
+    getInputEmail().type(validEmail);
+    getInputAlias().type(validAlias);
+    getInputPassword().type(dummyPassword);
+    getInputPasswordConfirm().type(dummyPassword);
+
+    // the page should have the input text 'terms and conditions' visible and empty
+    getInputTermsAndConditions().should('not.be.checked');
+
+    // the page should have the submit button visible and disabled
+    getSubmit().should('be.disabled');
+    
+    // Check and uncheck the input to display an error message
+    getInputTermsAndConditions().check().uncheck().blur();
+    getInputTermsAndConditions().should('not.be.checked');
+
+    // An error indication should be displayed
+    getInputTermsAndConditions().should('have.attr', 'aria-errormessage').then(
+      id => {
+        cy.get(`#${id}`)
+          .find('span')
+          .should('be.visible')
+          .should('have.text', 'You have to accept the terms and conditions to continue')
+          .should('have.css', 'color', 'rgb(249, 115, 22)')
+      })
+
+    // The label should contains a link to the terms and conditions PDF file
+    getTermsAndConditionsFileLink().click();
+    cy.url().should('include', 'terms-and-conditions.pdf');
+    cy.go('back');
+
+    // Fill inputs so every parts of the form but the passwords are ok
+    // so we can focus on this particular behaviour
+    getInputEmail().type(validEmail);
+    getInputAlias().type(validAlias);
+    getInputPassword().type(dummyPassword);
+    getInputPasswordConfirm().type(dummyPassword);
+
+    // Check the input validate the form
+    getInputTermsAndConditions().check();
+    getInputTermsAndConditions().should('be.checked');
+
+    // the submit button should not be disabled
+    getSubmit().should('not.be.disabled');
+  });
+
   it('should register a new user and navigate to the login page when form is submitted', () => {
     const dummyPassword = '123456';
     const validEmail = 'test@test.abc';
@@ -308,6 +365,7 @@ describe('auth/register', () => {
     getInputAlias().type(validAlias);
     getInputPassword().type(dummyPassword)
     getInputPasswordConfirm().type(dummyPassword)
+    getInputTermsAndConditions().check()
 
     // the submit button should not be disabled
     getSubmit().should('not.be.disabled').click();

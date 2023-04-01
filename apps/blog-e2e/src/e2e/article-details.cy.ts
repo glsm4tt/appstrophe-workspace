@@ -155,7 +155,7 @@ describe('/blog/article:articleId', () => {
         })
     });
 
-    it('should be possible add a comment', () => {
+    it('should be possible to add a comment', () => {
       getArticleInputNewComment()
         .type('Another comment')
         .blur()

@@ -10,7 +10,7 @@ const cypressJsonConfig = {
   screenshotsFolder: '../../dist/cypress/apps/auth-e2e/screenshots',
   chromeWebSecurity: false,
   specPattern: 'src/e2e/**/*.cy.{js,jsx,ts,tsx}',
-  supportFile: 'src/support/e2e.ts',
+  supportFile: 'src/support/e2e.ts'
 };
 export default defineConfig({
   e2e: {

@@ -9,24 +9,20 @@
 // **********************
 
 import { initializeApp, getApp } from "firebase/app";
-import { signInWithEmailAndPassword, getAuth, connectAuthEmulator, initializeAuth, signOut, browserLocalPersistence } from "firebase/auth";
+import { signInWithEmailAndPassword, getAuth, connectAuthEmulator, initializeAuth, signOut, browserLocalPersistence, browserPopupRedirectResolver, } from "firebase/auth";
 import firebaseConfig from '../../firebase.config.json';
 
 initializeApp(firebaseConfig);
 const auth = initializeAuth(getApp(), {
   persistence: browserLocalPersistence,
-  popupRedirectResolver: undefined,
+  popupRedirectResolver: browserPopupRedirectResolver,
 })
 connectAuthEmulator(auth, 'http://localhost:9099')
 
 //
 // -- This is a parent command --
 Cypress.Commands.add('login', (email, password, redirectPath = '/') => {
-  cy.session([email, password],
-    () => {
-      signInProgrammatically({email, password});
-    }
-  );
+  signInProgrammatically({ email, password });
 
   cy.visit(redirectPath);
 });
@@ -41,19 +37,16 @@ function signInProgrammatically({
   const auth = getAuth();
 
   const signIn = signInWithEmailAndPassword(
-    auth, 
-    email, 
+    auth,
+    email,
     password
-  )
-  .catch((e) => {
-    console.error(e);
-  });
+  );
 
   return cy.wrap(signIn);
 };
 
-Cypress.Commands.add('logout', () => 
- signOut(auth)
+Cypress.Commands.add('logout', () =>
+  signOut(auth)
 )
 //
 // -- This is a child command --

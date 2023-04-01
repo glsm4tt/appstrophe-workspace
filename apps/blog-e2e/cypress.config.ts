@@ -14,7 +14,7 @@ const cypressJsonConfig = {
     'src/e2e/article-list.cy.ts',
     'src/e2e/article-details.cy.ts',
   ],
-  supportFile: 'src/support/e2e.ts',
+  supportFile: 'src/support/e2e.ts'
 };
 export default defineConfig({
   e2e: {

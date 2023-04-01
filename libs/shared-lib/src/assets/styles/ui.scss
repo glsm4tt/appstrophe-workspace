@@ -134,6 +134,10 @@ div.form-group textarea.form-group__control:autofill {
     }
 }
 
+div.form-group input.form-group__control[type='checkbox'] {
+    @apply accent-orange-600
+}
+
 div.form-group > small.form-group__help {
     @apply block mt-1 text-xs text-gray-600 dark:text-gray-400;
 }
@@ -148,6 +152,18 @@ div.form-group.danger > small.form-group__error > span {
 
 div.form-group.warning > small.form-group__error > span {
     @apply text-yellow-600;
+}
+
+div.form-group.inline > div.form-group-content {
+    @apply flex items-center
+}
+
+div.form-group.inline > div.form-group-content > label.form-group__label {
+    @apply flex-grow mb-0
+}
+
+div.form-group.inline > div.form-group-content > input.form-group__control {
+    @apply w-auto flex-initial mx-4
 }
 
 button.btn {

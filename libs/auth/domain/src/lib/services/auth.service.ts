@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { firstValueFrom, map, Observable, switchMap, of, tap, combineLatestWith, from, catchError, BehaviorSubject, mergeMap, distinctUntilChanged, distinctUntilKeyChanged } from 'rxjs';
+import { firstValueFrom, map, Observable, switchMap, of, tap, combineLatestWith, from, catchError, BehaviorSubject, mergeMap, distinctUntilChanged, distinctUntilKeyChanged, filter } from 'rxjs';
 import { getAuth, Auth, User, createUserWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, UserCredential, deleteUser, updateEmail } from '@angular/fire/auth';
 import { collection, collectionData, docData, DocumentReference, Firestore, query, CollectionReference, doc, setDoc, where } from '@angular/fire/firestore';
 import { Storage, ref, getDownloadURL} from '@angular/fire/storage';
@@ -10,7 +10,7 @@ import { AppStropher } from '../entities/AppStropher';
 })
 export class AuthService {
 
-  private user$: BehaviorSubject<AppStropher | null> = new BehaviorSubject(null); 
+  private user$: BehaviorSubject<AppStropher | null | undefined> = new BehaviorSubject(undefined); 
   private _firestore = inject(Firestore);
   private _auth = inject(Auth);
   private _storage = inject(Storage);
@@ -47,7 +47,7 @@ export class AuthService {
       map(([appstropher, url]) => ({
         ...appstropher,
         ...user,
-        photoURL: appstropher.photoURL ?? url ?? 'assets/img/empty_user.png'
+        photoURL: appstropher?.photoURL ?? url ?? 'assets/img/empty_user.png'
       }))
     );
   }
@@ -68,7 +68,7 @@ export class AuthService {
    * @returns {null} or a {AppStropher}
    */
   getConnectedUser(): Observable<AppStropher | null> {
-    return this.user$.asObservable();
+    return this.user$.asObservable().pipe(filter(user => user !== undefined));
   }
 
   /**
@@ -192,5 +192,15 @@ export class AuthService {
   changeEmail(email: string): Promise<void> {
     const user = this._auth.currentUser;
     return updateEmail(user, email);
+  }
+
+  /**
+   * Get the terms and conditions PDF file
+   * 
+   * @returns {Promise<string>} 
+   */
+  getTermsAndConditions(): Promise<string> {
+    const termsAndConditionsUrlRef = ref(this._storage, `globals/terms-and-conditions.pdf`)
+    return getDownloadURL(termsAndConditionsUrlRef);
   }
 }
