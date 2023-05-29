@@ -13,8 +13,11 @@ export class LocalstorageService {
    * @param key {string} the key to retrieve the value
    * @param value {unknown} the value to store
    * @param expiration {Date} the date of the cache expiration
+   * @param updateIfExist {boolean} update the value if key already exists in storage
    */
-  set<T>(key: string, value: T, expiration?: Date): void {
+  set<T>(key: string, value: T, expiration?: Date, updateIfExist: boolean = true): void {
+    const stored = localStorage.getItem(key);
+    if(!updateIfExist && !stored) return;
     const expirationDate = expiration?.getTime() ?? value ? new Date().addHours(0.25).getTime() : undefined;
     const toStore: StoredData<T> = { value, expirationDate  };
     localStorage.setItem(key, JSON.stringify(toStore))

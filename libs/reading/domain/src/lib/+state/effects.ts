@@ -54,7 +54,7 @@ export class ArticleEffects {
           this._articleService.view(articleId)
       }),
       mergeMap(({articleId}) => (this._articleService.getOne(articleId).pipe(
-            tap(article => this._localStorage.set<Partial<ArticleDetailed>>(`${ARTICLE_STORAGE_KEY}${articleId}`, article)),
+            tap(article => this._localStorage.set<Partial<ArticleDetailed>>(`${ARTICLE_STORAGE_KEY}${articleId}`, article, new Date().addHours(24), false)),
           )).pipe(
           map((article: Partial<ArticleDetailed>) => ArticleActions.articleLoaded({ article })),
           catchError(_ => of(ArticleActions.loadArticleFailure()))
