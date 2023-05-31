@@ -6,7 +6,7 @@
   "prefix": "apps-shell",
   "targets": {
     "build": {
-      "executor": "@nrwl/angular:webpack-browser",
+      "executor": "@nx/angular:webpack-browser",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/shell",
@@ -80,7 +80,7 @@
       "defaultConfiguration": "production"
     },
     "serve": {
-      "executor": "@nrwl/angular:webpack-dev-server",
+      "executor": "@nx/angular:webpack-dev-server",
       "configurations": {
         "production": {
           "browserTarget": "shell:build:production"
@@ -110,13 +110,13 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": ["apps/shell/**/*.ts", "apps/shell/**/*.html"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/apps/shell"],
       "options": {
         "jestConfig": "apps/shell/jest.config.ts",

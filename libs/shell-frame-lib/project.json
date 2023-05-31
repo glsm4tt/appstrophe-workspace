@@ -6,7 +6,7 @@
   "prefix": "appstroph-shell-frame-lib",
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/shell-frame-lib"],
       "options": {
         "jestConfig": "libs/shell-frame-lib/jest.config.ts",
@@ -14,7 +14,7 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "libs/shell-frame-lib/**/*.ts",
