@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, switchMap, tap, filter, mergeMap } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { catchError, map, switchMap, tap, filter, mergeMap, distinctUntilKeyChanged } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 import * as ArticleActions from './actions';
 import { ArticleService } from '../services/article.service';
@@ -26,6 +26,7 @@ export class ArticleEffects {
   routerListener$ = createEffect(() => 
     this._actions$.pipe(
       ofType(ROUTER_NAVIGATED),
+      distinctUntilKeyChanged('payload.routerState.url'),
       map(r => r.payload.routerState.url.split('/').filter((url: string) => !!url)),
       filter(urls => urls[1] && ['article', 'articles'].includes(urls[1])),
       map(urls => urls[1] === 'articles' 

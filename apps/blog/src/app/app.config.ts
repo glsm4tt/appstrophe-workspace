@@ -10,7 +10,7 @@ import { environment } from '../environments/environment';
 import {
   provideFirestore,
   initializeFirestore,
-  connectFirestoreEmulator,
+  connectFirestoreEmulator
 } from '@angular/fire/firestore';
 import {
   provideAuth,
@@ -49,9 +49,10 @@ export const appConfig: ApplicationConfig = {
       provideFirebaseApp(() => initializeApp(environment.firebase)),
       provideFirestore(() => {
         const firestore = initializeFirestore(getApp(), {
-          experimentalForceLongPolling: isDev ? true : false
+          experimentalAutoDetectLongPolling: isDev ? true : false,
+          ignoreUndefinedProperties: true
         });
-
+        
         if (isDev) {
           connectFirestoreEmulator(firestore, 'localhost', 8080);
         }

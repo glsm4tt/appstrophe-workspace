@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormStateDirective } from './directives/form-state/form-state.directive';
 import { TooltipDirective } from './tooltip/tooltip.directive';
-import { CopyCurrentUrlDirective } from './directives/copy-current-url/copy-current-url.directive'
+import { CopyCurrentUrlDirective } from './directives/copy-current-url/copy-current-url.directive';
 import { PopoverContainerComponent } from './popover/popover.component';
 import { OutsideClickDirective } from './directives/click-outside/click-outside.directive';
 import { OverlayModule } from '@angular/cdk/overlay';
@@ -12,6 +12,7 @@ import { ModalDirective } from './modal/modal.directive';
 import { PopoverDirective } from './popover';
 import { ToasterComponent, ToasterDirective, ToasterService } from './toaster';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   imports: [CommonModule, OverlayModule, FontAwesomeModule],
@@ -25,7 +26,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ModalDirective,
     ModalContainerComponent,
     ToasterComponent,
-    ToasterDirective
+    ToasterDirective,
   ],
   exports: [
     FormStateDirective,
@@ -35,8 +36,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     OutsideClickDirective,
     PopoverContainerComponent,
     ModalDirective,
-    ModalContainerComponent
+    ModalContainerComponent,
   ],
-  providers: [ModalService, ToasterService]
+  providers: [ModalService, ToasterService],
 })
-export class SharedLibModule { }
+export class SharedLibModule {}
