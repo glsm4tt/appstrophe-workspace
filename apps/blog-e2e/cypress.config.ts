@@ -15,6 +15,22 @@ const cypressJsonConfig = {
     'src/e2e/article-details.cy.ts',
   ],
   supportFile: 'src/support/e2e.ts',
+  setupNodeEvents(on: any, config: unknown) {
+    on('before:browser:launch', (browser: unknown = {}, launchOptions: any) => {
+        // Add localhost:8080, the Firestore emulator host:port when running locally, to the Chrome proxy bypass
+        // So Cypress doesn't jack with it
+        launchOptions.args.push('--proxy-bypass-list=<-loopback>,localhost:8080,localhost:9099,localhost:9199,localhost:5001');
+        /*
+        // Options that provide marginal memory improvement in Chrome, but seem to break headed mode
+        // Leaving them out for now as I don't fully understand them and the improvement is marginal
+        launchOptions.args.push('--ChromeOSMemoryPressureHandling');
+        launchOptions.args.push('--renderer-process-limit=1');
+        launchOptions.args.push('--single-process');
+        launchOptions.args.push('--disable-dev-shm-usage');
+        */
+      return launchOptions;
+    });
+  },
 };
 export default defineConfig({
   e2e: {
